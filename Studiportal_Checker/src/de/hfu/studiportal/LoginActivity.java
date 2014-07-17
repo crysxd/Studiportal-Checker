@@ -81,9 +81,14 @@ public class LoginActivity extends Activity implements DialogHost {
 		sp.apply();
 		
 		//Start the new activity if available
-		Intent startOnSuccess = (Intent) getIntent().getExtras().get(getResources().getString(R.string.extra_start_on_success));
-		if(startOnSuccess != null)
-			this.startActivity(startOnSuccess);
+		Bundle extras = (Bundle) getIntent().getExtras();
+		
+		if(extras != null) {
+			Intent startOnSuccess = (Intent) extras.get(getResources().getString(R.string.extra_start_on_success));
+			if(startOnSuccess != null)
+				this.startActivity(startOnSuccess);
+		}
+		
 
 		//finish this
 		this.finish();

@@ -115,5 +115,10 @@ public class DialogHostImplementation extends Handler implements DialogHost {
 		this.PROGRESS_DIALOG.hide();
 
 	}
+	
+	public void dismiss() {
+		this.PROGRESS_DIALOG.dismiss();
+		
+	}
 
 }

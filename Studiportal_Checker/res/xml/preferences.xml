@@ -3,20 +3,12 @@
 
     <PreferenceCategory
         android:key="login_data"
+        android:summary="@string/preferences_login_data_summary"
         android:title="@string/preferences_login_data_title" >
         <Preference
-            android:enabled="false"
-            android:selectable="false"
-            android:summary="@string/preferences_login_data_summary" />
-
-        <EditTextPreference
             android:inputType="text"
-            android:key="@string/preference_user"
-            android:title="@string/preferences_login_data_user" />
-        <EditTextPreference
-            android:inputType="textPassword"
-            android:key="@string/preference_password"
-            android:title="@string/preferences_login_data_password" />
+            android:key="@string/preference_login"
+            android:title="@string/text_activity_login_title" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="@string/preference_refresh_settings"

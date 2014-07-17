@@ -114,7 +114,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 		Context c = this.getContext();
 		if(c instanceof DialogHost) {
-			((MainActivity) c).cancelProgressDialog();
+			((DialogHost) c).cancelProgressDialog();
 
 			if(result instanceof NoChangeException || result instanceof LoginException) {
 				((DialogHost) c).showErrorDialog(result);
@@ -194,7 +194,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		return PreferenceManager.getDefaultSharedPreferences(this.getContext());
 	}
 
-	private Context getContext() {
+	public Context getContext() {
 		return this.CONTEXT;
 
 	}

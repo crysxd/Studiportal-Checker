@@ -3,7 +3,6 @@ package de.hfu.studiportal;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -25,7 +24,7 @@ public class MainActivity extends PreferenceActivity implements DialogHost {
 
 		//Create DialogHost
 		this.dialogHost = new DialogHostImplementation(this);
-		
+
 		// Load the preferences from an XML resource
 		getFragmentManager().beginTransaction().replace(android.R.id.content, 
 				new PreferencesFragment()).commit();
@@ -33,7 +32,7 @@ public class MainActivity extends PreferenceActivity implements DialogHost {
 
 		//Start Background Service
 		RefreshServiceStarter.startRefreshTask(this);
-		
+
 	}
 
 	@Override
@@ -66,9 +65,8 @@ public class MainActivity extends PreferenceActivity implements DialogHost {
 
 	@Override
 	public synchronized void showIndeterminateProgressDialog(final String title, final String text) {
-		Log.i(this.getClass().getSimpleName(), "Show progerss");
 		this.dialogHost.showIndeterminateProgressDialog(title, text);
-		
+
 	}
 
 	@Override

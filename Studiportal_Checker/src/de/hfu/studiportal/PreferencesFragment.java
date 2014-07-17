@@ -3,10 +3,12 @@ package de.hfu.studiportal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -27,6 +29,18 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 
 		updateSummaries();
 		PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
+		
+		Preference login = this.findPreference(getResources().getString(R.string.preference_login));
+		login.setOnPreferenceClickListener (new OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				Intent i = new Intent(getActivity(), LoginActivity.class);
+				getActivity().startActivity(i);
+				return true;
+				
+			}
+		});
 
 	}
 
@@ -69,7 +83,7 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 		//Display username
 		key = getResources().getString(R.string.preference_user);
 		String username = PreferenceManager.getDefaultSharedPreferences(this.getActivity()).getString(key, "");
-		p = this.findPreference(getResources().getString(R.string.preference_user));
+		p = this.findPreference(getResources().getString(R.string.preference_login));
 		p.setSummary(username);
 	}
 

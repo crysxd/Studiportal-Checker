@@ -1,56 +1,79 @@
 package de.hfu.studiportal;
 
-import de.hfu.funfpunktnull.R;
+import java.util.concurrent.TimeUnit;
+
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningServiceInfo;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
+import de.hfu.funfpunktnull.R;
 
 public class RefreshServiceStarter extends BroadcastReceiver {
 
+	private static final String CHECK_FOR_UPDATES = "de.hfu.studiportal.CHECK_FOR_UPDATES";
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		startRefreshTask(context);
+
+		if (intent.getAction().equals(CHECK_FOR_UPDATES)) {
+			if(getWifiManager(context).isWifiEnabled() || 
+					getSharedPreferences(context).getBoolean(context.getResources().getString(R.string.preference_use_mobile), false)) {
+				new RefreshTask(context).execute();
+
+			}
+		} else {
+			startRefreshTask(context);
+
+		}
 	}
 
 	static void startRefreshTask(Context context) {
-		if(isMyServiceRunning(RefreshService.class, context))
-			return;
-		
 		//Check if user and password is available, if not start Login
-		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		SharedPreferences sp = getSharedPreferences(context);
 		String user = sp.getString(context.getResources().getString(R.string.preference_user), "");
 		String password = sp.getString(context.getResources().getString(R.string.preference_password), "");
 		if(user.length() == 0 || password.length() == 0) {
 			Intent i = new Intent(context, LoginActivity.class);
 			i.putExtra(context.getResources().getString(R.string.extra_start_on_success), new Intent(context, MainActivity.class));
 			context.startActivity(i);
-			
+
 			//Quit the old Activity to prevent going back
 			if(context instanceof Activity)
 				((Activity) context).finish();
-			
+
 			return;
-			
+
 		}
-		
+
 		//Everything ok, start service
-		Intent i = new Intent(context, RefreshService.class);
-		context.startService(i);
+		Intent i = new Intent();
+		i.setAction(CHECK_FOR_UPDATES);		
+		PendingIntent update = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+		//Set new
+		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), getPauseTime(context), update);
 
 	}
 
-	private static boolean isMyServiceRunning(Class<?> serviceClass, Context context) {
-		ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-		for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-			if (serviceClass.getName().equals(service.service.getClassName())) {
-				return true;
-			}
-		}
-		return false;
+	private static long getPauseTime(Context con) {
+		int minutes = Integer.valueOf(getSharedPreferences(con).getString(con.getResources().getString(R.string.preference_refresh_rate), "60"));
+
+		return TimeUnit.MILLISECONDS.convert(minutes, TimeUnit.MINUTES);
 	}
+
+	private WifiManager getWifiManager(Context con) {
+		return (WifiManager) con.getSystemService(Context.WIFI_SERVICE);
+
+	}
+	
+	private static SharedPreferences getSharedPreferences(Context con) {
+		return PreferenceManager.getDefaultSharedPreferences(con);
+	}
+
 }

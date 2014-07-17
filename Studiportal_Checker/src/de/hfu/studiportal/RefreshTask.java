@@ -92,7 +92,8 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 		// Add your data
 		String password = sp.getString(this.getStringResource(R.string.preference_user), "");
 		String user = sp.getString(this.getStringResource(R.string.preference_password), "");
-
+		user = user.replace(" ", "");
+		
 		if(password.length() == 0 || user.length() == 0)
 			throw new LoginException(this.getStringResource(R.string.exception_no_user_password));
 

@@ -6,7 +6,7 @@
     <string name="preference_refresh_rate">refersh</string>
     <string name="preference_user">user</string>
     <string name="preference_use_mobile">use_mobile_network</string>
-    <string name="preference_login">use_mobile_network</string>
+    <string name="preference_login">login</string>
     <string name="preference_password">password</string>
     <string name="preference_last_hash">last_hash</string>
     <string name="preference_refresh_settings">refresh_settings</string>
@@ -39,7 +39,8 @@
     <string name="preferences_refresh_title">Aktualisierung</string>
     <string name="preferences_about">Über</string>
     <string name="preferences_about_text">Copyright Christian Würthner 2014\nSourcecode auf GitHub: https://github.com/crysxd/Studiportal-Checker</string>
-
+    <string name="preferences_other_title">Sonstiges</string>
+    
     <string-array name="array_refresh_time">
         <item>1 Minuten</item>
         <item>5 Minuten</item>

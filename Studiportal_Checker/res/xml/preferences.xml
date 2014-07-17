@@ -2,7 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <PreferenceCategory
-        android:key="login_data"
         android:summary="@string/preferences_login_data_summary"
         android:title="@string/preferences_login_data_title" >
         <Preference
@@ -11,7 +10,6 @@
             android:title="@string/text_activity_login_title" />
     </PreferenceCategory>
     <PreferenceCategory
-        android:key="@string/preference_refresh_settings"
         android:title="@string/preferences_refresh_title" >
         <ListPreference
             android:defaultValue="60"
@@ -26,11 +24,13 @@
             android:summary="@string/preferences_refresh_on_mobile_summary"
             android:title="@string/preferences_refresh_on_mobile" />
     </PreferenceCategory>
-
-    <PreferenceScreen android:title="@string/preferences_about" >
-        <Preference
-            android:summary="@string/preferences_about_text"
-            android:title="@string/app_name" />
-    </PreferenceScreen>
+    <PreferenceCategory
+        android:title="@string/preferences_other_title" >
+        <PreferenceScreen android:title="@string/preferences_about" >
+            <Preference
+                android:summary="@string/preferences_about_text"
+                android:title="@string/app_name" />
+        </PreferenceScreen>
+    </PreferenceCategory>
 
 </PreferenceScreen>

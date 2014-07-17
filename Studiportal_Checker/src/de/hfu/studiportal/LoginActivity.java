@@ -48,6 +48,11 @@ public class LoginActivity extends Activity implements DialogHost {
 		
 	}
 	
+	public void cancel(View v) {
+		this.finish();
+		
+	}
+	
 	public void checkEnteredData(View v) {
 		if(this.getEnteredPassword().length() == 0 || this.getEnteredUsername().length() == 0) {
 			this.showDialog(getResources().getString(R.string.text_error), getResources().getString(R.string.text_enter_user_password));

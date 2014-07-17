@@ -13,8 +13,6 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import de.hfu.funfpunktnull.R;
-
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -28,17 +26,33 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import de.hfu.funfpunktnull.R;
 
 public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
-	private final Context CONTEXT;
 	private final String URL_BASE = "https://studi-portal.hs-furtwangen.de/";
 	private final String URL_LOGIN = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal";
 	private final String URL_LOGOUT = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=4&re=last&category=auth.logout&breadCrumbSource=portal";
 	private final String URL_OBSERVE = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=htmlbesch&moduleParameter=Student&menuid=notenspiegel&breadcrumb=notenspiegel&breadCrumbSource=menu&asi=%s";
 	
+	private final String USER_NAME;
+	private final String PASSWORD;
+	private final Context CONTEXT;
+
+	public RefreshTask(Context c, String userName, String password) {
+		this.CONTEXT = c;
+		this.USER_NAME = userName;
+		this.PASSWORD = password;
+		
+	}
+	
 	public RefreshTask(Context c) {
 		this.CONTEXT = c;
+		
+		SharedPreferences sp = this.getSharedPreferences();
+		this.USER_NAME = sp.getString(this.getStringResource(R.string.preference_user), "");
+		this.PASSWORD = sp.getString(this.getStringResource(R.string.preference_password), "");
+		
 	}
 	
 	@Override
@@ -109,20 +123,13 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 	private String login(HttpClient client) throws Exception {
 
-		//Get Preferences
-		SharedPreferences sp = this.getSharedPreferences();
-
-		// Add your data
-		String password = sp.getString(this.getStringResource(R.string.preference_user), "");
-		String user = sp.getString(this.getStringResource(R.string.preference_password), "");
-		user = user.replace(" ", "");
-
-		if(password.length() == 0 || user.length() == 0)
+		//Check Preference
+		if(this.PASSWORD.length() == 0 || this.USER_NAME.length() == 0)
 			throw new LoginException(this.getStringResource(R.string.exception_no_user_password));
 
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-		nameValuePairs.add(new BasicNameValuePair("asdf", password));
-		nameValuePairs.add(new BasicNameValuePair("fdsa", user));
+		nameValuePairs.add(new BasicNameValuePair("asdf", this.PASSWORD));
+		nameValuePairs.add(new BasicNameValuePair("fdsa", this.USER_NAME));
 		nameValuePairs.add(new BasicNameValuePair("submit", "Anmelden"));
 
 		//Load page (aka log in)

@@ -1,11 +1,9 @@
 package de.hfu.studiportal;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -17,14 +15,17 @@ import de.hfu.funfpunktnull.R;
  * @since 1.0
  * @version 1.0
  */
-public class MainActivity extends PreferenceActivity {
+public class MainActivity extends PreferenceActivity implements DialogHost {
 
-	private ProgressDialog progressDialog;
+	private DialogHostImplementation dialogHost;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		//Create DialogHost
+		this.dialogHost = new DialogHostImplementation(this);
+		
 		// Load the preferences from an XML resource
 		getFragmentManager().beginTransaction().replace(android.R.id.content, 
 				new PreferencesFragment()).commit();
@@ -32,6 +33,7 @@ public class MainActivity extends PreferenceActivity {
 
 		//Start Background Service
 		RefreshServiceStarter.startRefreshTask(this);
+		
 	}
 
 	@Override
@@ -45,8 +47,8 @@ public class MainActivity extends PreferenceActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		this.cancelProgressDialog();
 
-		hideProgressDialog(null);
 	}
 
 	@Override
@@ -54,8 +56,6 @@ public class MainActivity extends PreferenceActivity {
 
 		if(item.getItemId() == R.id.action_refresh) {
 			new RefreshTask(this).execute();
-			this.progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.text_start_refresh));
-			this.progressDialog.show();
 
 			return true;
 		}
@@ -63,35 +63,39 @@ public class MainActivity extends PreferenceActivity {
 		return super.onOptionsItemSelected(item);
 
 	}
-	public void hideProgressDialog(Exception e) {
-		//Hide dialog
-		if(this.progressDialog != null)
-			this.progressDialog.hide();
+
+	@Override
+	public synchronized void showIndeterminateProgressDialog(final String title, final String text) {
+		Log.i(this.getClass().getSimpleName(), "Show progerss");
+		this.dialogHost.showIndeterminateProgressDialog(title, text);
 		
-		//Cancel if no exception
-		if(e == null)
-			return;
-		
+	}
+
+	@Override
+	public void showDialog(final String title, final String text) {
+		this.dialogHost.showDialog(title, text);
+	}
+
+	@Override
+	public void showErrorDialog(final Exception e) {
+
 		if(e instanceof NoChangeException) {
 			//No change
-			Toast.makeText(this, getResources().getString(R.string.text_no_change), Toast.LENGTH_SHORT).show();
-			
-		}
-		
-		if(e instanceof LoginException) {
-			//Login is wrong
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	        builder.setMessage(R.string.exception_wrong_user_password_long)
-	               .setPositiveButton(R.string.text_close, new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int id) {
-	                       // FIRE ZE MISSILES!
-	                   }
-	               });
-	
-	        // Create the AlertDialog object and return it
-	        builder.create().show();
+			Toast.makeText(MainActivity.this, getResources().getString(R.string.text_no_change), Toast.LENGTH_SHORT).show();
 
 		}
+
+		if(e instanceof LoginException) {
+			this.showDialog(
+					getResources().getString(R.string.text_error), 
+					getResources().getString(R.string.exception_wrong_user_password_long));
+
+		}
+	}
+
+	@Override
+	public void cancelProgressDialog() {
+		this.dialogHost.cancelProgressDialog();
 
 	}
 }

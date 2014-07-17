@@ -34,7 +34,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	private final String URL_LOGIN = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal";
 	private final String URL_LOGOUT = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=4&re=last&category=auth.logout&breadCrumbSource=portal";
 	private final String URL_OBSERVE = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=htmlbesch&moduleParameter=Student&menuid=notenspiegel&breadcrumb=notenspiegel&breadCrumbSource=menu&asi=%s";
-	
+
 	private final String USER_NAME;
 	private final String PASSWORD;
 	private final Context CONTEXT;
@@ -43,25 +43,24 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		this.CONTEXT = c;
 		this.USER_NAME = userName;
 		this.PASSWORD = password;
-		
+
 	}
-	
+
 	public RefreshTask(Context c) {
 		this.CONTEXT = c;
-		
+
 		SharedPreferences sp = this.getSharedPreferences();
 		this.USER_NAME = sp.getString(this.getStringResource(R.string.preference_user), "");
 		this.PASSWORD = sp.getString(this.getStringResource(R.string.preference_password), "");
-		
+
 	}
-	
+
 	@Override
 	protected Exception doInBackground(Void... params) {
-		
 		//Declare Client and occuredException
 		HttpClient client = null;
 		Exception occuredException = null;
-		
+
 		//Try 3 times
 		for(int i=0; i<3; i++) {
 			try {
@@ -69,18 +68,20 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 				client = new DefaultHttpClient();
 
 				//Login
+				this.showProgressDialog(this.getStringResource(R.string.text_logging_in));
+				Log.i(this.getClass().getSimpleName(), this.getStringResource(R.string.text_logging_in));
 				String asi = this.login(client);
-				Log.i(this.getClass().getSimpleName(), "Logged in.");
 
 				//Check for change
+				this.showProgressDialog(this.getStringResource(R.string.text_checking_update));
+				Log.i(this.getClass().getSimpleName(),this.getStringResource(R.string.text_checking_update));
 				boolean changed = this.checkDataChange(client, asi);
-				Log.i(this.getClass().getSimpleName(), "Checked for updates.");
 
 				//If no change -> save a NoChnageException in occuredException
 				if(!changed) {
 					occuredException = new NoChangeException();
 				}
-				
+
 				//No error -> cancel (no further trys)
 				break;
 
@@ -92,16 +93,17 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 			} finally {
 				//try to Log out
 				try {
+					this.showProgressDialog(this.getStringResource(R.string.text_logging_out));
+					Log.i(this.getClass().getSimpleName(),this.getStringResource(R.string.text_logging_out));
 					this.logout(client);
-					Log.i(this.getClass().getSimpleName(), "Logged out.");
-					
+
 				} catch(Exception e) {
 					e.printStackTrace();
-					
+
 				}
 			}
 		}
-		
+
 		//Return exception (should be null or NoChangeException)
 		return occuredException;
 	}
@@ -111,12 +113,17 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		super.onPostExecute(result);
 
 		Context c = this.getContext();
-		if(c instanceof MainActivity) {
-			((MainActivity) c).hideProgressDialog(result);
+		if(c instanceof DialogHost) {
+			((MainActivity) c).cancelProgressDialog();
 
-		} else 	if(result instanceof LoginException){
+			if(result instanceof NoChangeException || result instanceof LoginException) {
+				((DialogHost) c).showErrorDialog(result);
+
+			}
+		} else if(result instanceof LoginException){
 			this.notifyAboutError(result);
-			
+
+
 		}
 	}
 
@@ -128,8 +135,8 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 			throw new LoginException(this.getStringResource(R.string.exception_no_user_password));
 
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-		nameValuePairs.add(new BasicNameValuePair("asdf", this.PASSWORD));
-		nameValuePairs.add(new BasicNameValuePair("fdsa", this.USER_NAME));
+		nameValuePairs.add(new BasicNameValuePair("asdf", this.USER_NAME));
+		nameValuePairs.add(new BasicNameValuePair("fdsa", this.PASSWORD));
 		nameValuePairs.add(new BasicNameValuePair("submit", "Anmelden"));
 
 		//Load page (aka log in)
@@ -271,4 +278,10 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 	}
 
+	private void showProgressDialog(String text) {
+		if(this.CONTEXT instanceof DialogHost) {
+			((DialogHost) this.CONTEXT).showIndeterminateProgressDialog(this.getStringResource(R.string.text_refresh), text);
+
+		}
+	}
 }

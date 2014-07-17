@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="login_data"
+        android:title="@string/preferences_login_data_title" >
+        <Preference
+            android:enabled="false"
+            android:selectable="false"
+            android:summary="@string/preferences_login_data_summary" />
+
+        <EditTextPreference
+            android:inputType="text"
+            android:key="@string/preference_user"
+            android:title="@string/preferences_login_data_user" />
+        <EditTextPreference
+            android:inputType="textPassword"
+            android:key="@string/preference_password"
+            android:title="@string/preferences_login_data_password" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/preference_refresh_settings"
+        android:title="@string/preferences_refresh_title" >
+        <ListPreference
+            android:defaultValue="60"
+            android:entries="@array/array_refresh_time"
+            android:entryValues="@array/array_refresh_time_key"
+            android:key="@string/preference_refresh_rate"
+            android:title="@string/preferences_refresh_time" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/preference_use_mobile"
+            android:summary="@string/preferences_refresh_on_mobile_summary"
+            android:title="@string/preferences_refresh_on_mobile" />
+    </PreferenceCategory>
+
+    <PreferenceScreen android:title="@string/preferences_about" >
+        <Preference
+            android:summary="@string/preferences_about_text"
+            android:title="@string/app_name" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

@@ -26,12 +26,15 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 		addPreferencesFromResource(R.xml.preferences);
 
 		updateSummaries();
+		PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
 
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		
+		  PreferenceManager.getDefaultSharedPreferences(this.getActivity()).unregisterOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override

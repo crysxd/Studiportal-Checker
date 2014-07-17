@@ -78,6 +78,11 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	private String login(HttpClient client) throws Exception {
+		return this.login(client, 0);
+		
+	}
+	
+	private String login(HttpClient client, int counter) throws Exception {
 
 		//Get Preferences
 		SharedPreferences sp = this.getSharedPreferences();
@@ -97,8 +102,19 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 		//Load page (aka log in)
 		String response = this.sendPost(client, this.URL_LOGIN, nameValuePairs);
 
+		//Login failed
 		if(response.contains("Anmeldung fehlgeschlagen")) {
-			throw new LoginException(getStringResource(R.string.exception_wrong_user_password));
+			Log.i(this.getClass().getSimpleName(), "Login failed.");
+
+			//Already 3 trys? Cancel!
+			if(counter >= 2) {
+				throw new LoginException(getStringResource(R.string.exception_wrong_user_password));
+			
+			//Try it again, maybe studiportal failed again...
+			} else {
+				Thread.sleep(1000);
+				return this.login(client, counter+1);
+			}
 
 		}
 

@@ -24,6 +24,7 @@ public class DialogHostImplementation extends Handler implements DialogHost {
 	public DialogHostImplementation(Context c) {
 		this.CONTEXT = c;
 		PROGRESS_DIALOG = new ProgressDialog(c);
+		PROGRESS_DIALOG.setCancelable(false);
 
 	}
 

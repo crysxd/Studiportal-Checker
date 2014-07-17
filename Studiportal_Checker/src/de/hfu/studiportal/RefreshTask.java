@@ -29,7 +29,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-public class RefreshTask extends AsyncTask<Void, Void, Void> {
+public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 	private final Context CONTEXT;
 	private final String URL_BASE = "https://studi-portal.hs-furtwangen.de/";
@@ -42,7 +42,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
+	protected Exception doInBackground(Void... params) {
 		//Login
 		try {
 			HttpClient client = new DefaultHttpClient();
@@ -56,12 +56,9 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 			this.logout(client);
 			Log.i(this.getClass().getSimpleName(), "Logged out.");
 
-		} catch (LoginException e1) {
+		}  catch (Exception e1) {
 			e1.printStackTrace();
-			this.notifyAboutError(e1);
-
-		} catch (Exception e1) {
-			e1.printStackTrace();
+			return e1;
 
 		}
 
@@ -69,7 +66,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected void onPostExecute(Void result) {
+	protected void onPostExecute(Exception result) {
 		super.onPostExecute(result);
 
 		Context c = this.getContext();
@@ -79,12 +76,8 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 		}
 	}
 
+
 	private String login(HttpClient client) throws Exception {
-		return this.login(client, 0);
-		
-	}
-	
-	private String login(HttpClient client, int counter) throws Exception {
 
 		//Get Preferences
 		SharedPreferences sp = this.getSharedPreferences();
@@ -93,7 +86,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 		String password = sp.getString(this.getStringResource(R.string.preference_user), "");
 		String user = sp.getString(this.getStringResource(R.string.preference_password), "");
 		user = user.replace(" ", "");
-		
+
 		if(password.length() == 0 || user.length() == 0)
 			throw new LoginException(this.getStringResource(R.string.exception_no_user_password));
 
@@ -109,15 +102,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 		if(response.contains("Anmeldung fehlgeschlagen")) {
 			Log.i(this.getClass().getSimpleName(), "Login failed.");
 
-			//Already 3 trys? Cancel!
-			if(counter >= 2) {
-				throw new LoginException(getStringResource(R.string.exception_wrong_user_password));
-			
-			//Try it again, maybe studiportal failed again...
-			} else {
-				Thread.sleep(1000);
-				return this.login(client, counter+1);
-			}
+			throw new LoginException(getStringResource(R.string.exception_wrong_user_password));
 
 		}
 
@@ -243,7 +228,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Void> {
 
 	}
 
-	private void notifyAboutError(Exception e) {
+	public void notifyAboutError(Exception e) {
 		this.showNotification(this.getStringResource(R.string.text_error), e.getMessage(), 1, new Intent(this.getContext(), MainActivity.class));
 
 	}

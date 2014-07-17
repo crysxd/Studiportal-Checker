@@ -28,7 +28,7 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 		updateSummaries();
 
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -63,6 +63,11 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 		Preference p = this.findPreference(getResources().getString(R.string.preference_refresh_rate));
 		p.setSummary(dateString);
 
+		//Display username
+		key = getResources().getString(R.string.preference_user);
+		String username = PreferenceManager.getDefaultSharedPreferences(this.getActivity()).getString(key, "");
+		p = this.findPreference(getResources().getString(R.string.preference_user));
+		p.setSummary(username);
 	}
 
 	@Override
@@ -70,6 +75,6 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 			String key) {
 
 		updateSummaries();
-		
+
 	}
 }

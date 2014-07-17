@@ -64,9 +64,5 @@ public class MainActivity extends PreferenceActivity {
 		if(this.progressDialog != null)
 			this.progressDialog.hide();
 
-		//		Date last = new Date(PreferenceManager.getDefaultSharedPreferences(this).getLong(getResources().getString(R.string.preference_last_check), 0));
-		//		String summary = getResources().getString(R.string.text_last_updated) + new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss 'Uhr'").format(last);
-		//		getPreferenceScreen().findPreference(getResources().getString(R.string.preference_refresh_settings)).setSummary(summary);
-
 	}
 }

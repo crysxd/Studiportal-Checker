@@ -1,12 +1,15 @@
 package de.hfu.studiportal;
 
-import de.hfu.funfpunktnull.R;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+import de.hfu.funfpunktnull.R;
 
 /**
  * Empty Activity to hold the {@link PreferencesFragment}
@@ -43,7 +46,7 @@ public class MainActivity extends PreferenceActivity {
 	protected void onResume() {
 		super.onResume();
 
-		hideProgressDialog();
+		hideProgressDialog(null);
 	}
 
 	@Override
@@ -60,9 +63,35 @@ public class MainActivity extends PreferenceActivity {
 		return super.onOptionsItemSelected(item);
 
 	}
-	public void hideProgressDialog() {
+	public void hideProgressDialog(Exception e) {
+		//Hide dialog
 		if(this.progressDialog != null)
 			this.progressDialog.hide();
+		
+		//Cancel if no exception
+		if(e == null)
+			return;
+		
+		if(e instanceof NoChangeException) {
+			//No change
+			Toast.makeText(this, getResources().getString(R.string.text_no_change), Toast.LENGTH_SHORT).show();
+			
+		}
+		
+		if(e instanceof LoginException) {
+			//Login is wrong
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setMessage(R.string.exception_wrong_user_password_long)
+	               .setPositiveButton(R.string.text_close, new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                       // FIRE ZE MISSILES!
+	                   }
+	               });
+	
+	        // Create the AlertDialog object and return it
+	        builder.create().show();
+
+		}
 
 	}
 }

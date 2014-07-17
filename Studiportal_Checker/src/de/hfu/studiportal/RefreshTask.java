@@ -36,33 +36,60 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	private final String URL_LOGIN = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal";
 	private final String URL_LOGOUT = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=4&re=last&category=auth.logout&breadCrumbSource=portal";
 	private final String URL_OBSERVE = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=htmlbesch&moduleParameter=Student&menuid=notenspiegel&breadcrumb=notenspiegel&breadCrumbSource=menu&asi=%s";
-
+	
 	public RefreshTask(Context c) {
 		this.CONTEXT = c;
 	}
-
+	
 	@Override
 	protected Exception doInBackground(Void... params) {
-		//Login
-		try {
-			HttpClient client = new DefaultHttpClient();
+		
+		//Declare Client and occuredException
+		HttpClient client = null;
+		Exception occuredException = null;
+		
+		//Try 3 times
+		for(int i=0; i<3; i++) {
+			try {
+				//Create client
+				client = new DefaultHttpClient();
 
-			String asi = this.login(client);
-			Log.i(this.getClass().getSimpleName(), "Logged in.");
+				//Login
+				String asi = this.login(client);
+				Log.i(this.getClass().getSimpleName(), "Logged in.");
 
-			this.checkDataChange(client, asi);
-			Log.i(this.getClass().getSimpleName(), "Checked for updates.");
+				//Check for change
+				boolean changed = this.checkDataChange(client, asi);
+				Log.i(this.getClass().getSimpleName(), "Checked for updates.");
 
-			this.logout(client);
-			Log.i(this.getClass().getSimpleName(), "Logged out.");
+				//If no change -> save a NoChnageException in occuredException
+				if(!changed) {
+					occuredException = new NoChangeException();
+				}
+				
+				//No error -> cancel (no further trys)
+				break;
 
-		}  catch (Exception e1) {
-			e1.printStackTrace();
-			return e1;
+			}  catch (Exception e) {
+				//Something went wrong. Print stack trace and save
+				e.printStackTrace();
+				occuredException = e;
 
+			} finally {
+				//try to Log out
+				try {
+					this.logout(client);
+					Log.i(this.getClass().getSimpleName(), "Logged out.");
+					
+				} catch(Exception e) {
+					e.printStackTrace();
+					
+				}
+			}
 		}
-
-		return null;
+		
+		//Return exception (should be null or NoChangeException)
+		return occuredException;
 	}
 
 	@Override
@@ -71,8 +98,11 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 		Context c = this.getContext();
 		if(c instanceof MainActivity) {
-			((MainActivity) c).hideProgressDialog();
+			((MainActivity) c).hideProgressDialog(result);
 
+		} else 	if(result instanceof LoginException){
+			this.notifyAboutError(result);
+			
 		}
 	}
 
@@ -113,23 +143,24 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		return response.substring(start, end);
 	}
 
-	private void checkDataChange(HttpClient client, String asi) throws Exception {
+	private boolean checkDataChange(HttpClient client, String asi) throws Exception {
 		//Load new Hash
 		int newHash = this.calculateHashFromOnline(client, asi);
 
 		//Load old Hash
 		int oldHash = getSharedPreferences().getInt(this.getStringResource(R.string.preference_last_hash), newHash);
 
-		Log.i(this.getClass().getSimpleName(), String.format("%d <> %d", oldHash, newHash));
+		//Save new to be used as old next time
+		getSharedPreferences().edit().putInt(this.getStringResource(R.string.preference_last_hash), newHash).apply();
+		getSharedPreferences().edit().putLong(this.getStringResource(R.string.preference_last_check), System.currentTimeMillis()).apply();		
 
 		//Compare
-		if(oldHash != newHash) {
+		boolean changed = oldHash != newHash;
+		if(changed) {
 			this.notifyAboutChange();
 		}
 
-		//Save new to be used as old next time
-		getSharedPreferences().edit().putInt(this.getStringResource(R.string.preference_last_hash), newHash).apply();
-		getSharedPreferences().edit().putLong(this.getStringResource(R.string.preference_last_check), System.currentTimeMillis()).apply();
+		return changed;
 	}
 
 	private void logout(HttpClient client) throws Exception {
@@ -228,7 +259,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 	}
 
-	public void notifyAboutError(Exception e) {
+	private void notifyAboutError(Exception e) {
 		this.showNotification(this.getStringResource(R.string.text_error), e.getMessage(), 1, new Intent(this.getContext(), MainActivity.class));
 
 	}

@@ -30,6 +30,7 @@ public final class R {
         public static final int app_name=0x7f040000;
         public static final int exception_no_user_password=0x7f04000a;
         public static final int exception_wrong_user_password=0x7f04000b;
+        public static final int exception_wrong_user_password_long=0x7f04000c;
         public static final int menu_check_now=0x7f040002;
         public static final int preference_last_check=0x7f040009;
         public static final int preference_last_hash=0x7f040007;
@@ -38,22 +39,24 @@ public final class R {
         public static final int preference_refresh_settings=0x7f040008;
         public static final int preference_use_mobile=0x7f040005;
         public static final int preference_user=0x7f040004;
-        public static final int preferences_about=0x7f040019;
-        public static final int preferences_about_text=0x7f04001a;
-        public static final int preferences_login_data_password=0x7f040014;
-        public static final int preferences_login_data_summary=0x7f040011;
-        public static final int preferences_login_data_title=0x7f040012;
-        public static final int preferences_login_data_user=0x7f040013;
-        public static final int preferences_refresh_on_mobile=0x7f040016;
-        public static final int preferences_refresh_on_mobile_summary=0x7f040017;
-        public static final int preferences_refresh_time=0x7f040015;
-        public static final int preferences_refresh_title=0x7f040018;
-        public static final int shared_preferences_name=0x7f04000c;
-        public static final int text_error=0x7f04000f;
+        public static final int preferences_about=0x7f04001c;
+        public static final int preferences_about_text=0x7f04001d;
+        public static final int preferences_login_data_password=0x7f040017;
+        public static final int preferences_login_data_summary=0x7f040014;
+        public static final int preferences_login_data_title=0x7f040015;
+        public static final int preferences_login_data_user=0x7f040016;
+        public static final int preferences_refresh_on_mobile=0x7f040019;
+        public static final int preferences_refresh_on_mobile_summary=0x7f04001a;
+        public static final int preferences_refresh_time=0x7f040018;
+        public static final int preferences_refresh_title=0x7f04001b;
+        public static final int shared_preferences_name=0x7f04000d;
+        public static final int text_close=0x7f040010;
+        public static final int text_error=0x7f040011;
         public static final int text_last_updated=0x7f040001;
-        public static final int text_new_data_detail=0x7f04000e;
-        public static final int text_new_data_title=0x7f04000d;
-        public static final int text_start_refresh=0x7f040010;
+        public static final int text_new_data_detail=0x7f04000f;
+        public static final int text_new_data_title=0x7f04000e;
+        public static final int text_no_change=0x7f040013;
+        public static final int text_start_refresh=0x7f040012;
     }
     public static final class style {
         /** 

@@ -21,7 +21,7 @@
     <string name="preferences_login_data_title">Login Daten</string>
     <string name="preferences_login_data_user">Benutzername</string>
     <string name="preferences_login_data_password">Passwort</string>
-    <string name="preferences_refresh_time">Aktualisierungsrate</string>
+    <string name="preferences_refresh_time">Aktualisierungsintervall</string>
     <string name="preferences_refresh_on_mobile">Über Mobilfunknetz aktualisieren</string>
     <string name="preferences_refresh_on_mobile_summary">Für die Aktualisierung über Mobilfunk können Gebühren anfallen</string>
     <string name="preferences_refresh_title">Aktualisierung</string>

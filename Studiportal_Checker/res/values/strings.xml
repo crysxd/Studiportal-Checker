@@ -68,7 +68,7 @@
         <item>360</item>
         <item>720</item>
         <item>1480</item>
-        <item>315569260000000000</item>
+        <item>525948766</item>
     </string-array>
 
     <dimen name="gap_default">10dp</dimen>

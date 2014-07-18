@@ -15,7 +15,6 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -240,27 +239,20 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		// started Activity.
 		// This ensures that navigating backward from the Activity leads out of
 		// your application to the Home screen.
-		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this.getContext());
-		// Adds the back stack for the Intent (but not the Intent itself)
-		stackBuilder.addParentStack(MainActivity.class);
-		// Adds the Intent that starts the Activity to the top of the stack
-		stackBuilder.addNextIntent(resultIntent);
-		PendingIntent resultPendingIntent =
-				stackBuilder.getPendingIntent(
-						0,
-						PendingIntent.FLAG_UPDATE_CURRENT
-						);
-		mBuilder.setContentIntent(resultPendingIntent);
+
+		PendingIntent pendingIntent = PendingIntent.getActivity(this.getContext(), id, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(pendingIntent);
 		mBuilder.setAutoCancel(true);
 		mBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
 
 		//LED
 		mBuilder.setLights(Color.GREEN, 3000, 3000);
-
+ 
 		//Ton
 		mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 		NotificationManager mNotificationManager =
 				(NotificationManager) this.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+		
 		// mId allows you to update the notification later on.
 		mNotificationManager.notify(id, mBuilder.build());
 

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 import de.hfu.funfpunktnull.R;
 
 public class RefreshTaskStarter extends BroadcastReceiver {
@@ -26,7 +27,9 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 				new RefreshTask(context).execute();
 
 			}
-		} else {
+		} 
+		
+		if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) { 
 			startRefreshTask(context);
 
 		}

@@ -41,7 +41,7 @@
     <string name="preferences_refresh_on_mobile_summary">Für die Aktualisierung über Mobilfunk können Gebühren anfallen</string>
     <string name="preferences_refresh_title">Aktualisierung</string>
     <string name="preferences_about">Über</string>
-    <string name="preferences_about_text">Copyright Christian Würthner 2014\nSourcecode auf GitHub: https://github.com/crysxd/Studiportal-Checker</string>
+    <string name="preferences_about_text">&#169; Christian Würthner (2014)\nAllgemeine Informatik\nHochschule Furtwangen University\n\nSourcecode auf GitHub:\nhttps://github.com/crysxd/Studiportal-Checker</string>
     <string name="preferences_other_title">Sonstiges</string>
 
     <string-array name="array_refresh_time">

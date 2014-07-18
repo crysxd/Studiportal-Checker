@@ -23,9 +23,6 @@ public class MainActivity extends DialogHostActivity {
 		getFragmentManager().beginTransaction().replace(android.R.id.content, 
 				new PreferencesFragment()).commit();
 
-		//Start Background Service
-		RefreshTaskStarter.startRefreshTask(this);
-
 	}
 
 	@Override

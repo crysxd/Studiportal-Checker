@@ -30,7 +30,7 @@
             android:label="@string/text_activity_login_title" >
         </activity>
 
-        <receiver android:name="de.hfu.studiportal.RefreshServiceStarter" >
+        <receiver android:name="de.hfu.studiportal.RefreshTaskStarter" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

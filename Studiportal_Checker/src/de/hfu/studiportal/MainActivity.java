@@ -24,7 +24,7 @@ public class MainActivity extends DialogHostActivity {
 				new PreferencesFragment()).commit();
 
 		//Start Background Service
-		RefreshServiceStarter.startRefreshTask(this);
+		RefreshTaskStarter.startRefreshTask(this);
 
 	}
 

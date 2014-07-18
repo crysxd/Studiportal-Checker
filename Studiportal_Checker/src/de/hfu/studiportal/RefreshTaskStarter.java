@@ -13,7 +13,7 @@ import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import de.hfu.funfpunktnull.R;
 
-public class RefreshServiceStarter extends BroadcastReceiver {
+public class RefreshTaskStarter extends BroadcastReceiver {
 
 	private static final String CHECK_FOR_UPDATES = "de.hfu.studiportal.CHECK_FOR_UPDATES";
 

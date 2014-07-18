@@ -1,11 +1,14 @@
 package de.hfu.studiportal;
 
-import android.content.Context;
 
 public class LoginVerifactionTask extends RefreshTask {
 	
-	public LoginVerifactionTask(Context c, String userName, String password) {
-		super(c, userName, password);
+	private final LoginActivity LOGIN_ACTIVITY;
+	
+	public LoginVerifactionTask(LoginActivity logAct, String userName, String password) {
+		super(logAct, userName, password);
+		this.LOGIN_ACTIVITY = logAct;
+		
 	}
 
 	@Override
@@ -13,8 +16,7 @@ public class LoginVerifactionTask extends RefreshTask {
 		super.onPostExecute(result);
 		
 		if(result == null || result instanceof NoChangeException) {
-			if(this.getContext() instanceof LoginActivity)
-				((LoginActivity) this.getContext()).saveEnteredData();
+			this.LOGIN_ACTIVITY.saveEnteredData();
 		}
 	}
 

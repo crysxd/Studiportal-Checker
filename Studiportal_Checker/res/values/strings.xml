@@ -55,6 +55,7 @@
         <item>6 Stunden</item>
         <item>12 Stunden</item>
         <item>24 Stunden</item>
+        <item>Keine Aktualisierung</item>
     </string-array>
     <string-array name="array_refresh_time_key">
         <item>1</item>
@@ -67,6 +68,7 @@
         <item>360</item>
         <item>720</item>
         <item>1480</item>
+        <item>315569260000000000</item>
     </string-array>
 
     <dimen name="gap_default">10dp</dimen>

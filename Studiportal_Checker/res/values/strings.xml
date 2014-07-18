@@ -7,6 +7,7 @@
     <string name="preference_user">user</string>
     <string name="preference_use_mobile">use_mobile_network</string>
     <string name="preference_login">login</string>
+    <string name="preference_logout">logout</string>
     <string name="preference_password">password</string>
     <string name="preference_last_hash">last_hash</string>
     <string name="preference_refresh_settings">refresh_settings</string>
@@ -23,6 +24,7 @@
     <string name="text_user_name">HFU Benutzername</string>
     <string name="text_password">Passwort</string>
     <string name="text_login">Einloggen</string>
+    <string name="text_logout_dialog">Willst du dich wirklich ausloggen?</string>
     <string name="text_cancel">Abbrechen</string>
     <string name="text_check_login">Überprüfe Login-Daten</string>
     <string name="text_refresh">Überprüfe Studiportal</string>
@@ -31,6 +33,7 @@
     <string name="text_checking_update">Nach Änderungen suchen&#8230;</string>
     <string name="text_no_change">Keine Änderung</string>
     <string name="text_activity_login_title">Studiportal Login</string>
+    <string name="preferences_logout_title">Ausloggen</string>
     <string name="preferences_login_data_summary">Trage hier deine HFU-Login Daten ein</string>
     <string name="preferences_login_data_title">Login Daten</string>
     <string name="preferences_refresh_time">Aktualisierungsintervall</string>
@@ -40,7 +43,7 @@
     <string name="preferences_about">Über</string>
     <string name="preferences_about_text">Copyright Christian Würthner 2014\nSourcecode auf GitHub: https://github.com/crysxd/Studiportal-Checker</string>
     <string name="preferences_other_title">Sonstiges</string>
-    
+
     <string-array name="array_refresh_time">
         <item>1 Minuten</item>
         <item>5 Minuten</item>

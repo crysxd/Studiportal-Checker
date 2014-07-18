@@ -8,9 +8,12 @@
             android:inputType="text"
             android:key="@string/preference_login"
             android:title="@string/text_activity_login_title" />
+        <Preference
+            android:inputType="text"
+            android:key="@string/preference_logout"
+            android:title="@string/preferences_logout_title" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/preferences_refresh_title" >
+    <PreferenceCategory android:title="@string/preferences_refresh_title" >
         <ListPreference
             android:defaultValue="60"
             android:entries="@array/array_refresh_time"
@@ -24,8 +27,7 @@
             android:summary="@string/preferences_refresh_on_mobile_summary"
             android:title="@string/preferences_refresh_on_mobile" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/preferences_other_title" >
+    <PreferenceCategory android:title="@string/preferences_other_title" >
         <PreferenceScreen android:title="@string/preferences_about" >
             <Preference
                 android:summary="@string/preferences_about_text"

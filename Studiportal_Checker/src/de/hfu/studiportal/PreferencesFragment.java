@@ -28,6 +28,7 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 		addPreferencesFromResource(R.xml.preferences);
 
 		updateSummaries();
+		PreferenceManager.setDefaultValues(this.getActivity(), R.xml.preferences, false);
 		PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
 		
 		Preference login = this.findPreference(getResources().getString(R.string.preference_login));

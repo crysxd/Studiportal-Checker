@@ -1,8 +1,6 @@
 package de.hfu.studiportal;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -14,21 +12,16 @@ import de.hfu.funfpunktnull.R;
  * @since 1.0
  * @version 1.0
  */
-public class MainActivity extends PreferenceActivity implements DialogHost {
+public class MainActivity extends DialogHostActivity {
 
-	private DialogHostImplementation dialogHost;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//Create DialogHost
-		this.dialogHost = new DialogHostImplementation(this);
-
 		// Load the preferences from an XML resource
 		getFragmentManager().beginTransaction().replace(android.R.id.content, 
 				new PreferencesFragment()).commit();
-		PreferenceManager.setDefaultValues(MainActivity.this, R.xml.preferences, false);
 
 		//Start Background Service
 		RefreshServiceStarter.startRefreshTask(this);
@@ -64,36 +57,15 @@ public class MainActivity extends PreferenceActivity implements DialogHost {
 	}
 
 	@Override
-	public synchronized void showIndeterminateProgressDialog(final String title, final String text) {
-		this.dialogHost.showIndeterminateProgressDialog(title, text);
-
-	}
-
-	@Override
-	public void showDialog(final String title, final String text) {
-		this.dialogHost.showDialog(title, text);
-	}
-
-	@Override
 	public void showErrorDialog(final Exception e) {
 
 		if(e instanceof NoChangeException) {
 			//No change
 			Toast.makeText(MainActivity.this, getResources().getString(R.string.text_no_change), Toast.LENGTH_SHORT).show();
 
-		}
-
-		if(e instanceof LoginException) {
-			this.showDialog(
-					getResources().getString(R.string.text_error), 
-					getResources().getString(R.string.exception_wrong_user_password_long));
+		}else {
+			super.showErrorDialog(e);
 
 		}
-	}
-
-	@Override
-	public void cancelProgressDialog() {
-		this.dialogHost.cancelProgressDialog();
-
 	}
 }

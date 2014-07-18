@@ -33,6 +33,22 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 
 		}
 	}
+	
+	static PendingIntent createPendingIntent(Context context) {
+		Intent i = new Intent();
+		i.setAction(CHECK_FOR_UPDATES);		
+		PendingIntent update = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+		
+		return update;
+	}
+	
+	static void cancelRefreshTask(Context context) {
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		PendingIntent toCancel = createPendingIntent(context);
+		toCancel.cancel();
+		alarmManager.cancel(toCancel);
+		
+	}
 
 	static void startRefreshTask(Context context) {
 		//Check if user and password is available, if not start Login
@@ -53,13 +69,8 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 		}
 
 		//Everything ok, start service
-		Intent i = new Intent();
-		i.setAction(CHECK_FOR_UPDATES);		
-		PendingIntent update = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-		//Set new
-		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), getPauseTime(context), update);
+		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), getPauseTime(context), createPendingIntent(context));
 
 	}
 

@@ -1,6 +1,5 @@
 package de.hfu.studiportal;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -12,9 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import de.hfu.funfpunktnull.R;
 
-public class LoginActivity extends Activity implements DialogHost {
-	
-	private DialogHostImplementation dialogHost;
+public class LoginActivity extends DialogHostActivity implements DialogHost {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +19,6 @@ public class LoginActivity extends Activity implements DialogHost {
 		
 		//inflate Layout
 		this.setContentView(R.layout.activity_login);
-		
-		//Create Dialoghost
-		this.dialogHost = new DialogHostImplementation(this);
 		
 		//Get SharedPrefs
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -44,7 +38,7 @@ public class LoginActivity extends Activity implements DialogHost {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();	
-		this.dialogHost.dismiss();
+		this.dismiss();
 		
 	}
 	
@@ -93,33 +87,4 @@ public class LoginActivity extends Activity implements DialogHost {
 		//finish this
 		this.finish();
 	}
-
-	@Override
-	public synchronized void showIndeterminateProgressDialog(final String title, final String text) {
-		this.dialogHost.showIndeterminateProgressDialog(getResources().getString(R.string.text_check_login), text);
-
-	}
-
-	@Override
-	public void showDialog(final String title, final String text) {
-		this.dialogHost.showDialog(title, text);
-		
-	}
-
-	@Override
-	public void showErrorDialog(final Exception e) {
-		if(e instanceof LoginException) {
-			this.showDialog(
-					getResources().getString(R.string.text_error), 
-					getResources().getString(R.string.exception_wrong_user_password_long));
-
-		}
-	}
-
-	@Override
-	public void cancelProgressDialog() {
-		this.dialogHost.cancelProgressDialog();
-
-	}
-
 }

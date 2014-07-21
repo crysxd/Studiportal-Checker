@@ -10,8 +10,11 @@ public class Exam implements Serializable {
 	private String name;
 	private String bonus;
 	private String malus;
+	private String ects;
+	private String sws;
 	private String semester;
 	private String kind;
+	private String tryCount;
 	private String grade;
 	private String state;
 	private String comment;
@@ -42,6 +45,16 @@ public class Exam implements Serializable {
 		return bonus;
 
 	}
+	
+	public String getECTS() {
+		return ects;
+
+	}
+	
+	public String getSWS() {
+		return sws;
+
+	}
 
 	public String getMalus() {
 		return malus;
@@ -55,6 +68,11 @@ public class Exam implements Serializable {
 
 	public String getKind() {
 		return kind;
+
+	}
+	
+	public String getTryCount() {
+		return tryCount;
 
 	}
 
@@ -107,6 +125,18 @@ public class Exam implements Serializable {
 		return this;
 
 	}
+	
+	public Exam setECTS(String ects) {
+		this.ects = ects;
+		return this;
+
+	}
+	
+	public Exam setSWS(String sws) {
+		this.sws = sws;
+		return this;
+
+	}
 
 	public Exam setSemester(String semester) {
 		this.semester = semester;
@@ -119,7 +149,13 @@ public class Exam implements Serializable {
 		return this;
 
 	}
+	
+	public Exam setTryCount(String tryCount) {
+		this.tryCount = tryCount;
+		return this;
 
+	}
+	
 	public Exam setGrade(String grade) {
 		this.grade = grade;
 		return this;

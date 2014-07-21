@@ -46,8 +46,13 @@ public class StudiportalData implements Serializable {
 	}
 	
 	public List<Exam> findChangedExams(SharedPreferences sp, String key) throws Exception {
-		return this.findChangedExams(StudiportalData.loadFromSharedPreferences(sp, key));
-		
+		try {
+			return this.findChangedExams(StudiportalData.loadFromSharedPreferences(sp, key));
+
+		} catch(Exception e) {
+			return new ArrayList<Exam>();
+			
+		}
 	}
 	
 	public List<Exam> findChangedExams(StudiportalData otherInstance) {
@@ -65,7 +70,8 @@ public class StudiportalData implements Serializable {
 				Exam other = otherInstance.findExam(e.getId());
 				
 				//If there is a other one and it was changed, add it
-				if(other != null && other.getGrade() != null && !other.getGrade().equals(e.getGrade())) {
+				if(other != null && other.getGrade() != null && 
+						!other.getGrade().equals(e.getGrade()) && !doesListContainSubject(e.getName(), changed)) {
 					changed.add(e);
 				}
 			}
@@ -73,6 +79,17 @@ public class StudiportalData implements Serializable {
 		
 		//return all changed
 		return changed;
+	}
+	
+	private boolean doesListContainSubject(String examName, List<Exam> list) {
+		for(Exam e : list) {
+			if(e.getName().equals(examName)) {
+				return true;
+			}
+		}
+		
+		return false;
+		
 	}
 	
 	public void save(SharedPreferences sp, String key) throws IOException {
@@ -116,13 +133,17 @@ public class StudiportalData implements Serializable {
 			}
 		}
 	}
+	
+	private String trimString(String s) {
+		return s.replace(String.valueOf((char) 160), " ").trim();
+	}
 
 	private Exam createExam(Element row, ExamCategory category) {
 		//Get all columns
 		Elements cols = row.getElementsByTag("td");
 		
 		//Create Exam
-		Exam e = new Exam(cols.get(0).text());
+		Exam e = new Exam(this.trimString(cols.get(0).text()));
 		
 		//Extract data
 		int offset = 0;
@@ -140,21 +161,24 @@ public class StudiportalData implements Serializable {
 				
 			}
 			
+			//Get text and remove leading and trailing whitespaces and espacially the #160
+			String text = this.trimString(col.text());
+			
 			//Swicth case for every col
 			switch(i+offset) {
-			case 1: e.setName(col.text()); break;
-			case 2: e.setBonus(col.text()); break;
-			case 3: e.setMalus(col.text()); break;
-			case 4: e.setECTS(col.text()); break;
-			case 5: e.setSWS(col.text()); break;
-			case 6: e.setSemester(col.text()); break;
-			case 7: e.setKind(col.text()); break;
-			case 8: e.setTryCount(col.text()); break;
-			case 9: e.setGrade(col.text()); break;
-			case 10: e.setState(col.text()); break;
-			case 11: e.setComment(col.text()); break;
-			case 12: e.setResignation(col.text()); break;
-			case 13: e.setNote(col.text()); break;
+			case 1: e.setName(text); break;
+			case 2: e.setBonus(text); break;
+			case 3: e.setMalus(text); break;
+			case 4: e.setECTS(text); break;
+			case 5: e.setSWS(text); break;
+			case 6: e.setSemester(text); break;
+			case 7: e.setKind(text); break;
+			case 8: e.setTryCount(text); break;
+			case 9: e.setGrade(text); break;
+			case 10: e.setState(text); break;
+			case 11: e.setComment(text); break;
+			case 12: e.setResignation(text); break;
+			case 13: e.setNote(text); break;
 			}
 		}
 		

@@ -29,6 +29,7 @@ import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.Exam;
 import de.hfu.studiportal.data.StudiportalData;
 import de.hfu.studiportal.view.DialogHost;
+import de.hfu.studiportal.view.MainActivity;
 
 public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 

@@ -13,6 +13,7 @@ import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.view.LoginActivity;
+import de.hfu.studiportal.view.MainActivity;
 
 public class RefreshTaskStarter extends BroadcastReceiver {
 

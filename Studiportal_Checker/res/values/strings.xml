@@ -2,6 +2,7 @@
 
     <string name="app_name">Studiportal Checker</string>
     <string name="menu_check_now">Jetzt überprüfen</string>
+    <string name="menu_preferences">Jetzt überprüfen</string>
     <string name="preference_refresh_rate">refersh</string>
     <string name="preference_user">user</string>
     <string name="preference_use_mobile">use_mobile_network</string>

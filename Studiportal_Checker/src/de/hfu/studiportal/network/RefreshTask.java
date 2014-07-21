@@ -26,6 +26,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import de.hfu.funfpunktnull.R;
+import de.hfu.studiportal.data.Exam;
+import de.hfu.studiportal.data.StudiportalData;
 import de.hfu.studiportal.view.DialogHost;
 
 public class RefreshTask extends AsyncTask<Void, Void, Exception> {
@@ -158,36 +160,28 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	}
 
 	private boolean checkDataChange(HttpClient client, String asi) throws Exception {
-		//Load new Hash
-		int newHash = this.calculateHashFromOnline(client, asi);
-
-		//Load old Hash
-		int oldHash = getSharedPreferences().getInt(this.getStringResource(R.string.preference_last_hash), newHash);
-
-		//Save new to be used as old next time
-		getSharedPreferences().edit().putInt(this.getStringResource(R.string.preference_last_hash), newHash).apply();
-		getSharedPreferences().edit().putLong(this.getStringResource(R.string.preference_last_check), System.currentTimeMillis()).apply();		
+		String response = this.sendGet(client, String.format(this.URL_OBSERVE, asi));
+		int start = response.indexOf("<table cellspacing=\"0\" cellpadding=\"5\" border=\"0\" align=\"center\" width=\"100%\">");
+		int end = response.indexOf("</table>", start);
+		String table = response.substring(start, end);
+		
+		//Create StudiportalData, Compare to saved one and savethe new one
+		StudiportalData sd = new StudiportalData(table);
+		List<Exam> changed = sd.findChangedExams(this.getSharedPreferences(), "test123");
+		sd.save(this.getSharedPreferences(), "test123");
 
 		//Compare
-		boolean changed = oldHash != newHash;
-		if(changed) {
-			this.notifyAboutChange();
+		boolean isChanged = changed.size() > 0;
+		if(isChanged) {
+			this.notifyAboutChange(changed);
 		}
 
-		return changed;
+		return isChanged;
 	}
 
 	private void logout(HttpClient client) throws Exception {
 		this.sendGet(client, this.URL_LOGOUT);
 
-	}
-
-	private int calculateHashFromOnline(HttpClient client, String asi) throws Exception {
-		String response = this.sendGet(client, String.format(this.URL_OBSERVE, asi));
-		int start = response.indexOf("<table cellspacing=\"0\" cellpadding=\"5\" border=\"0\" align=\"center\" width=\"100%\">");
-		int end = response.indexOf("</table>", start);
-
-		return response.substring(start, end).hashCode();
 	}
 
 	private SharedPreferences getSharedPreferences() {
@@ -259,11 +253,14 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 	}
 
-	private void notifyAboutChange() {
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(this.URL_BASE));
-		this.showNotification(this.getStringResource(R.string.text_new_data_title), this.getStringResource(R.string.text_new_data_detail), 0, i);
+	private void notifyAboutChange(List<Exam> changed) {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(this.URL_BASE));
+		
+		for(Exam e: changed) {
+			this.showNotification(e.getName(), String.format("%s - %s", e.getGrade(), e.getState()), e.getId(), intent);
 
+		}
 	}
 
 	private void notifyAboutError(Exception e) {

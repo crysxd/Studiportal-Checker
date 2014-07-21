@@ -22,7 +22,11 @@ public class ExamCategory implements Serializable {
 	}
 	
 	public void setCategoryName(String newName) {
-		this.categoryName = newName.replace(":", "").replace("*", "");
+		//Replace long terms with short ones to keep the titles short.
+		//Replacing only parts of the title will reserve the meaning (even with unknown titles)
+		this.categoryName = newName.replace(":", "").replace("*", "")
+				.replace("Module/Teilmodule", "Module").replace("(ECTS) ", "")
+				.replace("Bestandene Module", "Bestanden").trim();
 		
 	}
 	

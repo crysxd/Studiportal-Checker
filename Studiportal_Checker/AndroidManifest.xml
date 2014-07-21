@@ -31,7 +31,7 @@
             android:label="@string/text_activity_login_title" >
         </activity>
 
-        <receiver android:name="de.hfu.studiportal.network.RefreshTaskStarterkStarter" >
+        <receiver android:name="de.hfu.studiportal.network.RefreshTaskStarter" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

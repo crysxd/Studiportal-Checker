@@ -11,7 +11,7 @@ public class ExamCategory implements Serializable {
 	private String categoryName;
 	
 	public ExamCategory(String categoryName) {
-		this.categoryName = categoryName;
+		this.setCategoryName(categoryName);
 		this.examList = new ArrayList<>();
 		
 	}
@@ -22,7 +22,7 @@ public class ExamCategory implements Serializable {
 	}
 	
 	public void setCategoryName(String newName) {
-		this.categoryName = newName;
+		this.categoryName = newName.replace(":", "");
 		
 	}
 	

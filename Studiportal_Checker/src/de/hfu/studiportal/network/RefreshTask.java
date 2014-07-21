@@ -84,6 +84,9 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 					occuredException = new NoChangeException();
 				}
 
+				//Update last_check
+				getSharedPreferences().edit().putLong(getStringResource(R.string.preference_last_check), System.currentTimeMillis()).apply();
+				
 				//No error -> cancel (no further trys)
 				break;
 
@@ -94,7 +97,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 			} finally {
 				//try to Log out
-				try {
+				try {					
 					this.showProgressDialog(this.getStringResource(R.string.text_logging_out));
 					Log.i(this.getClass().getSimpleName(),this.getStringResource(R.string.text_logging_out));
 					this.logout(client);
@@ -114,8 +117,6 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	protected void onPostExecute(Exception result) {
 		super.onPostExecute(result);
 		
-		getSharedPreferences().edit().putLong(getStringResource(R.string.preference_last_check), System.currentTimeMillis()).apply();
-
 		Context c = this.getContext();
 		if(c instanceof DialogHost) {
 			((DialogHost) c).cancelProgressDialog();

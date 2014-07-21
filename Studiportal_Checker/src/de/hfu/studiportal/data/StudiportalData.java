@@ -45,6 +45,36 @@ public class StudiportalData implements Serializable {
 
 	}
 	
+	public List<Exam> findChangedExams(SharedPreferences sp, String key) throws Exception {
+		return this.findChangedExams(StudiportalData.loadFromSharedPreferences(sp, key));
+		
+	}
+	
+	public List<Exam> findChangedExams(StudiportalData otherInstance) {
+		//create empty list
+		List<Exam> changed = new ArrayList<>();
+		
+		//Get all my exams
+		List<Exam> myExams = this.getAllExams();
+		
+		//Iterate over myexasm and compare to same ids
+		for(Exam e : myExams) {
+			//If the Exam is nota seperator
+			if(!(e instanceof Seperator)) {
+				//Find the equivalent exam
+				Exam other = otherInstance.findExam(e.getId());
+				
+				//If there is a other one and it was changed, add it
+				if(other != null && other.getGrade() != null && !other.getGrade().equals(e.getGrade())) {
+					changed.add(e);
+				}
+			}
+		}
+		
+		//return all changed
+		return changed;
+	}
+	
 	public void save(SharedPreferences sp, String key) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -145,6 +175,31 @@ public class StudiportalData implements Serializable {
 		//Create ExamCategory
 		return new ExamCategory(name);
 		
+	}
+	
+	public Exam findExam(int id) {
+		for(ExamCategory c : this.categoryList) {
+			for(Exam e : c.getAllExams()) {
+				if(e.getId() == id)
+					return e;
+				
+			}
+		}
+		
+		return null;
+	}
+	
+	public List<Exam> getAllExams() {
+		///create empty list
+		List<Exam> exams = new ArrayList<>();
+		
+		//Iterate over all categories
+		for(ExamCategory c : this.categoryList) {
+			exams.addAll(c.getAllExams());
+			
+		}
+		
+		return exams;
 	}
 
 	public void addCategory(ExamCategory e) {

@@ -1,4 +1,6 @@
-package de.hfu.studiportal;
+package de.hfu.studiportal.network;
+
+import de.hfu.studiportal.view.LoginActivity;
 
 
 public class LoginVerifactionTask extends RefreshTask {

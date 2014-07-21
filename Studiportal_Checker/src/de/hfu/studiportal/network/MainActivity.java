@@ -1,10 +1,12 @@
-package de.hfu.studiportal;
+package de.hfu.studiportal.network;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import de.hfu.funfpunktnull.R;
+import de.hfu.studiportal.view.DialogHostActivity;
+import de.hfu.studiportal.view.PreferencesFragment;
 
 /**
  * Empty Activity to hold the {@link PreferencesFragment}

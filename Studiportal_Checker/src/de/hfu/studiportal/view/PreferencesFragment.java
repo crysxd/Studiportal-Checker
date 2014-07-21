@@ -1,4 +1,4 @@
-package de.hfu.studiportal;
+package de.hfu.studiportal.view;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +16,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import de.hfu.funfpunktnull.R;
+import de.hfu.studiportal.network.RefreshTaskStarter;
 
 /**
  * Fragment to display the settings.xml

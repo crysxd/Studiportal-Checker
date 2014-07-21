@@ -1,4 +1,4 @@
-package de.hfu.studiportal;
+package de.hfu.studiportal.network;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import de.hfu.funfpunktnull.R;
+import de.hfu.studiportal.view.DialogHost;
 
 public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 

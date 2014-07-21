@@ -1,4 +1,4 @@
-package de.hfu.studiportal;
+package de.hfu.studiportal.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;

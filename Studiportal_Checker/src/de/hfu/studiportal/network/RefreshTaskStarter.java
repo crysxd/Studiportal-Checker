@@ -1,4 +1,4 @@
-package de.hfu.studiportal;
+package de.hfu.studiportal.network;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import de.hfu.funfpunktnull.R;
+import de.hfu.studiportal.view.LoginActivity;
 
 public class RefreshTaskStarter extends BroadcastReceiver {
 
@@ -34,7 +35,7 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 		}
 	}
 	
-	static PendingIntent createPendingIntent(Context context) {
+	public static PendingIntent createPendingIntent(Context context) {
 		Intent i = new Intent();
 		i.setAction(CHECK_FOR_UPDATES);		
 		PendingIntent update = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -42,7 +43,7 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 		return update;
 	}
 	
-	static void cancelRefreshTask(Context context) {
+	public static void cancelRefreshTask(Context context) {
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent toCancel = createPendingIntent(context);
 		toCancel.cancel();
@@ -50,7 +51,7 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 		
 	}
 
-	static void startRefreshTask(Context context) {
+	public static void startRefreshTask(Context context) {
 		//Check if user and password is available, if not start Login
 		SharedPreferences sp = getSharedPreferences(context);
 		String user = sp.getString(context.getResources().getString(R.string.preference_user), "");

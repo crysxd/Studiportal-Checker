@@ -29,11 +29,9 @@
             android:title="@string/preferences_refresh_on_mobile" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_other_title" >
-        <PreferenceScreen android:title="@string/preferences_about" >
-            <Preference
-                android:summary="@string/preferences_about_text"
-                android:title="@string/app_name" />
-        </PreferenceScreen>
+        <Preference
+            android:summary="@string/preferences_about_text"
+            android:title="@string/preferences_about" />
     </PreferenceCategory>
 
 </PreferenceScreen>

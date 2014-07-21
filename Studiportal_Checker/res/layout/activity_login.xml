@@ -2,21 +2,22 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_stripes"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" 
-        android:layout_margin="@dimen/gap_default">
+        android:layout_margin="@dimen/gap_default"
+        android:orientation="vertical" >
 
         <EditText
             android:id="@+id/editTextUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" 
-            android:inputType="text"
-            android:hint="@string/text_user_name">
+            android:ems="10"
+            android:hint="@string/text_user_name"
+            android:inputType="text" >
 
             <requestFocus />
         </EditText>
@@ -26,15 +27,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword" 
-            android:hint="@string/text_password"/>
+            android:hint="@string/text_password"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="checkEnteredData"
             android:layout_marginTop="@dimen/gap_default"
+            android:onClick="checkEnteredData"
             android:text="@string/text_login" />
 
         <Button
@@ -43,7 +44,6 @@
             android:layout_height="wrap_content"
             android:onClick="cancel"
             android:text="@string/text_cancel" />
-        
     </LinearLayout>
 
 </ScrollView>

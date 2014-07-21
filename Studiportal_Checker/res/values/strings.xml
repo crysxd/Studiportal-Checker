@@ -8,7 +8,7 @@
     <string name="preference_login">login</string>
     <string name="preference_logout">logout</string>
     <string name="preference_password">password</string>
-    <string name="preference_last_hash">last_hash</string>
+    <string name="preference_last_studiportal_data">last_studiportal_data</string>
     <string name="preference_refresh_settings">refresh_settings</string>
     <string name="preference_last_check">last_check</string>
     <string name="extra_start_on_success">start_on_success</string>

@@ -167,8 +167,8 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		
 		//Create StudiportalData, Compare to saved one and savethe new one
 		StudiportalData sd = new StudiportalData(table);
-		List<Exam> changed = sd.findChangedExams(this.getSharedPreferences(), "test123");
-		sd.save(this.getSharedPreferences(), "test123");
+		List<Exam> changed = sd.findChangedExams(this.getSharedPreferences(), getStringResource(R.string.preference_last_studiportal_data));
+		sd.save(this.getSharedPreferences(), getStringResource(R.string.preference_last_studiportal_data));
 
 		//Compare
 		boolean isChanged = changed.size() > 0;

@@ -28,8 +28,9 @@ public class MainActivity extends DialogHostActivity {
 
 		//Set Up ViewPager
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		pagerAdapter = new ExamCategoryPagerAdapter(getSupportFragmentManager());
+		pagerAdapter = new ExamCategoryPagerAdapter(getSupportFragmentManager(), this);
 		viewPager.setAdapter(pagerAdapter);
+		
 	}
 
 	@Override

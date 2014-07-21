@@ -19,7 +19,7 @@
     <string name="text_new_data_detail">Berühren, um Studiportal zu öffnen</string>
     <string name="text_close">Schließen</string>
     <string name="text_error">Fehler</string>
-    <string name="text_last_updated">Letzte Aktualisierung: </string>
+    <string name="text_last_updated">Letzte Aktualisierung:&#x00A0;</string>
     <string name="text_enter_user_password">Du musst deinen Login-Daten eingeben, bevor du dich anmelden kannst.</string>
     <string name="text_user_name">HFU Benutzername</string>
     <string name="text_password">Passwort</string>

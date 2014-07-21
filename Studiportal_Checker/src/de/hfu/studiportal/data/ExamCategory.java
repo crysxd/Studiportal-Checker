@@ -7,12 +7,12 @@ import java.util.List;
 public class ExamCategory implements Serializable {
 	
 	private static final long serialVersionUID = -5178814560848378523L;
-	private List<Exam> mensaList;
+	private List<Exam> examList;
 	private String categoryName;
 	
 	public ExamCategory(String categoryName) {
 		this.categoryName = categoryName;
-		this.mensaList = new ArrayList<>();
+		this.examList = new ArrayList<>();
 		
 	}
 	
@@ -27,27 +27,27 @@ public class ExamCategory implements Serializable {
 	}
 	
 	public void addExam(Exam e) {
-		this.mensaList.add(e);
+		this.examList.add(e);
 		
 	}
 	
 	public void removeExam(Exam e) {
-		this.mensaList.remove(e);
+		this.examList.remove(e);
 		
 	}
 	
 	public void removeExam(int index) {
-		this.mensaList.remove(index);
+		this.examList.remove(index);
 		
 	}
 	
 	public int getExamCount() {
-		return this.mensaList.size();
+		return this.examList.size();
 		
 	}
 	
 	public Exam getExam(int index) {
-		return this.mensaList.get(index);
+		return this.examList.get(index);
 		
 	}
 }

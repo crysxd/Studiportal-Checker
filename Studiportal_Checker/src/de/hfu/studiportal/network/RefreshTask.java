@@ -113,6 +113,8 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	@Override
 	protected void onPostExecute(Exception result) {
 		super.onPostExecute(result);
+		
+		getSharedPreferences().edit().putLong(getStringResource(R.string.preference_last_check), System.currentTimeMillis()).apply();
 
 		Context c = this.getContext();
 		if(c instanceof DialogHost) {

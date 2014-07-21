@@ -74,4 +74,6 @@
 
     <dimen name="gap_default">10dp</dimen>
 
+    <color name="color_main_style">#83B81A</color>
+
 </resources>

@@ -1,15 +1,15 @@
 package de.hfu.studiportal.view;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentActivity;
 import de.hfu.funfpunktnull.R;
 
-public class DialogHostActivity extends Activity implements DialogHost {
+public class DialogHostActivity extends FragmentActivity implements DialogHost {
 
 	private ProgressDialog progressDialog;
 	private MessageHandler handler;

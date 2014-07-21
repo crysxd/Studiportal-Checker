@@ -15,6 +15,9 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.network.RefreshTaskStarter;
 
@@ -82,7 +85,15 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 
 			}
 		});
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	    View view = super.onCreateView(inflater, container, savedInstanceState);
+	    view.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_stripes));
 
+	    return view;
 	}
 
 	@Override

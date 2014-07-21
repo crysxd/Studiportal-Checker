@@ -2,6 +2,7 @@ package de.hfu.studiportal.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -12,12 +13,23 @@ import de.hfu.studiportal.network.RefreshTaskStarter;
 
 public class MainActivity extends DialogHostActivity {
 	
+	private ExamCategoryPagerAdapter pagerAdapter;
+	private ViewPager viewPager;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		//Start Background Service
 		RefreshTaskStarter.startRefreshTask(this);
+		
+		//Build View
+		setContentView(R.layout.activity_main);
+
+		//Set Up ViewPager
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		pagerAdapter = new ExamCategoryPagerAdapter(getSupportFragmentManager());
+		viewPager.setAdapter(pagerAdapter);
 	}
 
 	@Override

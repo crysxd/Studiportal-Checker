@@ -19,6 +19,5 @@ public class PreferencesActivity extends DialogHostActivity {
 		getFragmentManager().beginTransaction().replace(android.R.id.content, 
 				new PreferencesFragment()).commit();
 
-
 	}
 }

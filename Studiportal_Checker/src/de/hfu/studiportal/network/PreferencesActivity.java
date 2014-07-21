@@ -14,7 +14,7 @@ import de.hfu.studiportal.view.PreferencesFragment;
  * @since 1.0
  * @version 1.0
  */
-public class MainActivity extends DialogHostActivity {
+public class PreferencesActivity extends DialogHostActivity {
 
 
 	@Override
@@ -63,7 +63,7 @@ public class MainActivity extends DialogHostActivity {
 
 		if(e instanceof NoChangeException) {
 			//No change
-			Toast.makeText(MainActivity.this, getResources().getString(R.string.text_no_change), Toast.LENGTH_SHORT).show();
+			Toast.makeText(PreferencesActivity.this, getResources().getString(R.string.text_no_change), Toast.LENGTH_SHORT).show();
 
 		}else {
 			super.showErrorDialog(e);

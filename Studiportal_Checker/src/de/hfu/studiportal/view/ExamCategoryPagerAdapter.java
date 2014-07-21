@@ -1,5 +1,7 @@
 package de.hfu.studiportal.view;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -42,7 +44,7 @@ public class ExamCategoryPagerAdapter extends FragmentStatePagerAdapter implemen
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return data.getCategory(position).getCategoryName();
+		return data.getCategory(position).getCategoryName().toUpperCase(Locale.getDefault());
 	}
 	
 	private void loadDataAndRefresh(SharedPreferences prefs) {

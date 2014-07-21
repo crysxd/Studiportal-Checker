@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:left="0dp"
+        android:top="0dp">
+        <bitmap
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:antialias="true"
+            android:src="@drawable/ic_stripe_background"
+            android:tileMode="repeat" />
+    </item>
+    <item
+        android:left="0dp"
+        android:top="0dp">
+        <shape android:shape="rectangle" >
+            <gradient
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:angle="315"
+                android:endColor="#CCCCCC"
+                android:startColor="#99FFFFFF" />
+        </shape>
+    </item>
+
+</layer-list>

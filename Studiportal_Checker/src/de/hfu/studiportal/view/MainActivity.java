@@ -1,5 +1,6 @@
 package de.hfu.studiportal.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,13 @@ public class MainActivity extends DialogHostActivity {
 
 		if(item.getItemId() == R.id.action_refresh) {
 			new RefreshTask(this).execute();
+
+			return true;
+		}
+		
+		if(item.getItemId() == R.id.action_preferences) {
+			Intent i = new Intent(this, PreferencesActivity.class);
+			this.startActivity(i);
 
 			return true;
 		}

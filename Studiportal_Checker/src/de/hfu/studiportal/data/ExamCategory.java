@@ -22,7 +22,7 @@ public class ExamCategory implements Serializable {
 	}
 	
 	public void setCategoryName(String newName) {
-		this.categoryName = newName.replace(":", "");
+		this.categoryName = newName.replace(":", "").replace("*", "");
 		
 	}
 	

@@ -50,4 +50,9 @@ public class ExamCategory implements Serializable {
 		return this.examList.get(index);
 		
 	}
+	
+	public List<Exam> getAllExams() {
+		return new ArrayList<>(this.examList);
+		
+	}
 }

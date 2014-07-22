@@ -77,40 +77,44 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 			usedViews = 5;
 			break;
 
-		case G: 
-			textViews.get(1).setText(e.getExamNo() + " (Generiert)");
-			
 		case PL: 
 		case P: 
+		case G: 
 			if(e.isResignated()) {
 				textViews.get(2).setText("Status: Zurückgetreten");
 				textViews.get(3).setText("Vermerk: " + e.getNote());
-				textViews.get(4).setText("Versuch: " + e.getTryCount());
 				usedViews = 5;
 				
 			} else {
 				if(e.getStateEnum() == Exam.State.AN) {
 					textViews.get(2).setText("Status: " + e.getStateName());
 					textViews.get(3).setText("ECTS: " + e.getECTS());
-					textViews.get(4).setText("Versuch: " + e.getTryCount());
 					usedViews = 5;	
 					
 				} else {
 					textViews.get(2).setText("Note: " + e.getGrade());
 					textViews.get(3).setText("Status: " + e.getStateName());
-					textViews.get(4).setText("Versuch: " + e.getTryCount());
 					usedViews = 5;
 					
 				}
 			}
+			
+			if(e.getKindEnum() == Exam.Kind.G) {
+				textViews.get(1).setText(e.getExamNo() + " (Generiert)");
+				textViews.get(4).setText("Semester: " + e.getSemester());
 
+			} else {
+				textViews.get(4).setText("Versuch: " + e.getTryCount() + " (" + e.getSemester() + ")");
+
+			}
+			
 			break;
-
+			
 		case VL: 
-			textViews.get(1).setText(e.getExamNo() + " (Vorleistung / Praktikum)");
+			textViews.get(1).setText(e.getExamNo() + " (Praktikum / Vorleistung)");
 			textViews.get(2).setText("Status: " + e.getState());
 			textViews.get(3).setText("ECTS: " + e.getECTS());
-			textViews.get(3).setText("Semester: " + e.getSemester());
+			textViews.get(4).setText("Versuch: " + e.getTryCount() + " (" + e.getSemester() + ")");
 			usedViews = 5;
 
 

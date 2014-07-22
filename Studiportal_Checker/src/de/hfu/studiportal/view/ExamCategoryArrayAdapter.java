@@ -112,7 +112,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 			
 		case VL: 
 			textViews.get(1).setText(e.getExamNo() + " (Praktikum / Vorleistung)");
-			textViews.get(2).setText("Status: " + e.getState());
+			textViews.get(2).setText("Status: " + e.getStateName());
 			textViews.get(3).setText("ECTS: " + e.getECTS());
 			textViews.get(4).setText("Versuch: " + e.getTryCount() + " (" + e.getSemester() + ")");
 			usedViews = 5;

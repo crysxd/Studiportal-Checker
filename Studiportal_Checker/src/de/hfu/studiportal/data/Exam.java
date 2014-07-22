@@ -4,26 +4,90 @@ import java.io.Serializable;
 
 public class Exam implements Serializable {
 
+	public enum Kind {
+		PL, VL, P, G, KO, UNDEFINED
+	}
+
+	public enum State {
+		AN, BE, NB, EN, UNDEFINED
+	}
+
+	public enum Note {
+		GR, K, SA, U, VF, UNDEFINED
+	}
+
 	private static final long serialVersionUID = -4473350889205404637L;
 	private int id;
 	private String examNo;
-	private String name;
-	private String bonus;
-	private String malus;
-	private String ects;
-	private String sws;
-	private String semester;
-	private String kind;
-	private String tryCount;
-	private String grade;
-	private String state;
-	private String comment;
-	private String resignation;
-	private String note;
+	private String name = "-";
+	private String bonus = "-";
+	private String malus = "-";
+	private String ects = "-";
+	private String sws = "-";
+	private String semester = "-";
+	private String kind = "-";
+	private String tryCount = "-";
+	private String grade = "-";
+	private String state = "-";
+	private String comment = "-";
+	private String resignation = "-";
+	private String note = "-";
 
 	public Exam(String examNo) {
 		this.setExamNo(examNo);
 
+	}
+
+	public boolean isResignated() {
+		try {
+			return this.getResignation().equals("RT");
+			
+		} catch(Exception e) {
+			return false;
+
+		}
+	}
+
+	public Kind getKindEnum() {
+		try {
+			return Kind.valueOf(this.getKind());
+
+		} catch(Exception e) {
+			return Kind.UNDEFINED;
+
+		}
+	}
+
+	public State getStateEnum() {
+		try {
+			return State.valueOf(this.getState());
+
+		} catch(Exception e) {
+			return State.UNDEFINED;
+
+		}
+	}
+
+	public String getStateName() {
+		switch(this.getStateEnum()) {
+		case BE: return "Bestanden";
+		case AN: return "Angemeldet";
+		case NB: return "Nicht bestanden";
+		case EN: return "Endgültig nicht bestanden";
+		case UNDEFINED: return "Undefined";
+		}
+
+		return null;
+	}
+
+	public Note getNoteEnum() {
+		try {
+			return Note.valueOf(this.getNote());
+
+		} catch(Exception e) {
+			return Note.UNDEFINED;
+
+		}
 	}
 
 	public int getId() {
@@ -45,12 +109,12 @@ public class Exam implements Serializable {
 		return bonus;
 
 	}
-	
+
 	public String getECTS() {
 		return ects;
 
 	}
-	
+
 	public String getSWS() {
 		return sws;
 
@@ -70,7 +134,7 @@ public class Exam implements Serializable {
 		return kind;
 
 	}
-	
+
 	public String getTryCount() {
 		return tryCount;
 
@@ -125,13 +189,13 @@ public class Exam implements Serializable {
 		return this;
 
 	}
-	
+
 	public Exam setECTS(String ects) {
 		this.ects = ects;
 		return this;
 
 	}
-	
+
 	public Exam setSWS(String sws) {
 		this.sws = sws;
 		return this;
@@ -149,13 +213,13 @@ public class Exam implements Serializable {
 		return this;
 
 	}
-	
+
 	public Exam setTryCount(String tryCount) {
 		this.tryCount = tryCount;
 		return this;
 
 	}
-	
+
 	public Exam setGrade(String grade) {
 		this.grade = grade;
 		return this;

@@ -5,7 +5,6 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.ExamCategory;
 
@@ -25,7 +24,7 @@ public class ExamCategoryFragment extends ListFragment {
 		ExamCategory c = (ExamCategory) getArguments().get(ARG_CATEGORY);
 		
 		//Set Adapter
-		this.setListAdapter(new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1, c.getAllExams()));
+		this.setListAdapter(new ExamCategoryArrayAdapter(this.getActivity(), c.getAllExams()));
 
 		return rootView;
 	}

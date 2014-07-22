@@ -26,6 +26,7 @@
     <string name="text_password">Passwort</string>
     <string name="text_login">Einloggen</string>
     <string name="text_logout_dialog">Willst du dich wirklich ausloggen?</string>
+    <string name="text_placeholder">Lorem ipsum</string>
     <string name="text_cancel">Abbrechen</string>
     <string name="text_check_login">Überprüfe Login-Daten</string>
     <string name="text_refresh">Überprüfe Studiportal</string>

@@ -102,7 +102,7 @@ public class Exam implements Serializable {
 	}
 
 	public Exam setExamNo(String examNo) {
-		this.examNo = examNo;
+		this.examNo = examNo.replaceAll(" +", " ");
 		this.id = examNo.hashCode();
 		return this;
 

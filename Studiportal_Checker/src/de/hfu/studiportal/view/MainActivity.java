@@ -1,6 +1,7 @@
 package de.hfu.studiportal.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -64,6 +65,15 @@ public class MainActivity extends DialogHostActivity {
 			return true;
 		}
 
+		if(item.getItemId() == R.id.action_open_online) {
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setData(Uri.parse("https://studi-portal.hs-furtwangen.de/"));
+			this.startActivity(i);
+
+			return true;
+		}
+
+		
 		return super.onOptionsItemSelected(item);
 
 	}

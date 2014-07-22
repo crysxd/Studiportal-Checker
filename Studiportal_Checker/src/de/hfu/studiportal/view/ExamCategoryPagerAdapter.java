@@ -32,7 +32,7 @@ public class ExamCategoryPagerAdapter extends FragmentStatePagerAdapter implemen
 		Fragment fragment = new ExamCategoryFragment();
 		Bundle args = new Bundle();
 		// Our object is just an integer :-P
-		args.putInt(ExamCategoryFragment.ARG_OBJECT, i + 1);
+		args.putSerializable(ExamCategoryFragment.ARG_CATEGORY, data.getCategory(i));
 		fragment.setArguments(args);
 		return fragment;
 	}

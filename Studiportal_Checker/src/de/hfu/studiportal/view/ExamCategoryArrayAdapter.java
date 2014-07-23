@@ -96,18 +96,15 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		textViews.get(0).setText(e.getName());
 		textViews.get(1).setText(e.getExamNo());
 
-		int usedViews = 2;
-
 		//Fill Views with data
 		switch(kind) {
 		case KO: 
 			textViews.get(1).setText(String.format("%s (%s)", e.getExamNo(), this.ACCOUNT));
 			textViews.get(3).setText(String.format("%s: %s %s", this.BONUS, e.getBonus(), this.ECTS));
 			textViews.get(4).setText(String.format("%s: %s %s", this.MALUS, e.getMalus(), this.ECTS));
-			
+
 			//Hide the highlighted field....there is nothing to highlight
 			textViews.get(2).setVisibility(View.GONE);
-			usedViews = 5;
 			break;
 
 		case PL: 
@@ -116,18 +113,15 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 			if(e.isResignated()) {
 				textViews.get(2).setText(String.format("%s: %s", this.STATE, this.STATE_RESIGNATED));
 				textViews.get(3).setText(String.format("%s: %s", this.NOTE, e.getNoteName(this.getContext())));
-				usedViews = 5;
 
 			} else {
 				if(e.getStateEnum() == Exam.State.AN) {
 					textViews.get(2).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
 					textViews.get(3).setText(String.format("%s: %s", this.ECTS, e.getECTS()));
-					usedViews = 5;	
 
 				} else {
 					textViews.get(2).setText(String.format("%s: %s", this.GRADE, e.getGrade()));
 					textViews.get(3).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
-					usedViews = 5;
 
 				}
 			}
@@ -145,14 +139,9 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 
 		case VL: 
 			textViews.get(1).setText(String.format("%s (%s)", e.getExamNo(), this.PRACTICAL_WORK));
-			textViews.get(2).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
-			textViews.get(3).setText(String.format("%s: %s", this.ECTS, e.getECTS()));
-			textViews.get(4).setText(String.format("%s: %s (%s)", this.ATTEMPT, e.getTryCount(), e.getSemester()));
-			usedViews = 5;
-
-			break;
 
 		case UNDEFINED:
+		default:
 			textViews.get(2).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
 			textViews.get(3).setText(String.format("%s: %s", this.ECTS, e.getECTS()));
 			textViews.get(4).setText(String.format("%s: %s (%s)", this.ATTEMPT, e.getTryCount(), e.getSemester()));
@@ -175,12 +164,6 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 			imageView.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_re));
 
 		} 
-
-		//hide unused textviews
-		for(int i=usedViews; i<textViews.size(); i++) {
-			textViews.get(i).setVisibility(View.GONE);
-
-		}
 
 		return convertView;
 	}

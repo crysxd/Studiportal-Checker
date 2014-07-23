@@ -2,9 +2,8 @@ package de.hfu.studiportal.data;
 
 import java.io.Serializable;
 
-import de.hfu.funfpunktnull.R;
-
 import android.content.Context;
+import de.hfu.funfpunktnull.R;
 
 public class Exam implements Serializable {
 
@@ -226,6 +225,7 @@ public class Exam implements Serializable {
 
 	public Exam setSemester(String semester) {
 		this.semester = semester;
+		this.id = (examNo + this.semester).hashCode();
 		return this;
 
 	}

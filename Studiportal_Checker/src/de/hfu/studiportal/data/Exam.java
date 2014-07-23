@@ -2,6 +2,10 @@ package de.hfu.studiportal.data;
 
 import java.io.Serializable;
 
+import de.hfu.funfpunktnull.R;
+
+import android.content.Context;
+
 public class Exam implements Serializable {
 
 	public enum Kind {
@@ -68,16 +72,21 @@ public class Exam implements Serializable {
 		}
 	}
 
-	public String getStateName() {
+	public String getStateName(Context c) {
 		switch(this.getStateEnum()) {
-		case BE: return "Bestanden";
-		case AN: return "Angemeldet";
-		case NB: return "Nicht bestanden";
-		case EN: return "Endgültig nicht bestanden";
+		case BE: return this.getStringResource(c, R.string.text_be);
+		case AN: return this.getStringResource(c, R.string.text_an);
+		case NB: return this.getStringResource(c, R.string.text_nb);
+		case EN: return this.getStringResource(c, R.string.text_en);
 		case UNDEFINED: return "Undefined";
 		}
 
 		return null;
+	}
+	
+	private String getStringResource(Context c, int id) {
+		return c.getResources().getString(id);
+		
 	}
 
 	public Note getNoteEnum() {

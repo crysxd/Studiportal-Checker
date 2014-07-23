@@ -20,6 +20,10 @@
     <string name="text_new_data_title">Neue Noten eingetragen</string>
     <string name="text_new_data_detail">Berühren, um Studiportal zu öffnen</string>
     <string name="text_close">Schließen</string>
+    <string name="text_be">Bestanden</string>
+    <string name="text_an">Angemeldet</string>
+    <string name="text_nb">Nicht bestanden</string>
+    <string name="text_en">Endgültig nciht bestanden</string>
     <string name="text_error">Fehler</string>
     <string name="text_last_updated">Letzte Aktualisierung:&#x00A0;</string>
     <string name="text_enter_user_password">Du musst deinen Login-Daten eingeben, bevor du dich anmelden kannst.</string>

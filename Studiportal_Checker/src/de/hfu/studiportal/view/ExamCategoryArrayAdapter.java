@@ -87,13 +87,13 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 				
 			} else {
 				if(e.getStateEnum() == Exam.State.AN) {
-					textViews.get(2).setText("Status: " + e.getStateName());
+					textViews.get(2).setText("Status: " + e.getStateName(this.getContext()));
 					textViews.get(3).setText("ECTS: " + e.getECTS());
 					usedViews = 5;	
 					
 				} else {
 					textViews.get(2).setText("Note: " + e.getGrade());
-					textViews.get(3).setText("Status: " + e.getStateName());
+					textViews.get(3).setText("Status: " + e.getStateName(this.getContext()));
 					usedViews = 5;
 					
 				}
@@ -112,7 +112,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 			
 		case VL: 
 			textViews.get(1).setText(e.getExamNo() + " (Praktikum / Vorleistung)");
-			textViews.get(2).setText("Status: " + e.getStateName());
+			textViews.get(2).setText("Status: " + e.getStateName(this.getContext()));
 			textViews.get(3).setText("ECTS: " + e.getECTS());
 			textViews.get(4).setText("Versuch: " + e.getTryCount() + " (" + e.getSemester() + ")");
 			usedViews = 5;

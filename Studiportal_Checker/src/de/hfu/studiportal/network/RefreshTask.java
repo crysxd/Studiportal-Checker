@@ -262,7 +262,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		intent.setData(Uri.parse(this.URL_BASE));
 		
 		for(Exam e: changed) {
-			this.showNotification(e.getName(), String.format("%s - %s", e.getGrade(), e.getStateName()), e.getId(), intent);
+			this.showNotification(e.getName(), String.format("%s - %s", e.getGrade(), e.getStateName(this.getContext())), e.getId(), intent);
 
 		}
 	}

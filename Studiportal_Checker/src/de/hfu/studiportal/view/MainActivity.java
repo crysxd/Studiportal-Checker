@@ -13,17 +13,17 @@ import de.hfu.studiportal.network.RefreshTask;
 import de.hfu.studiportal.network.RefreshTaskStarter;
 
 public class MainActivity extends DialogHostActivity {
-	
+
 	private ExamCategoryPagerAdapter pagerAdapter;
 	private ViewPager viewPager;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		//Start Background Service
 		RefreshTaskStarter.startRefreshTask(this);
-		
+
 		//Build View
 		setContentView(R.layout.activity_main);
 
@@ -36,10 +36,9 @@ public class MainActivity extends DialogHostActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
 		getMenuInflater().inflate(R.menu.activity_main, menu);
-
 		return super.onCreateOptionsMenu(menu);
+	
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class MainActivity extends DialogHostActivity {
 
 			return true;
 		}
-		
+
 		if(item.getItemId() == R.id.action_preferences) {
 			Intent i = new Intent(this, PreferencesActivity.class);
 			this.startActivity(i);
@@ -72,8 +71,14 @@ public class MainActivity extends DialogHostActivity {
 
 			return true;
 		}
-
 		
+		if(item.getItemId() == R.id.action_search) {
+			Intent i = new Intent(this, ExamSearchActivity.class);
+			this.startActivity(i);
+			
+		}
+
+
 		return super.onOptionsItemSelected(item);
 
 	}

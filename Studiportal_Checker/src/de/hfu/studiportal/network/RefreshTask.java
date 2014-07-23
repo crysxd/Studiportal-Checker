@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -122,7 +123,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		if(c instanceof DialogHost) {
 			((DialogHost) c).cancelProgressDialog();
 
-			if(result instanceof NoChangeException || result instanceof LoginException) {
+			if(result instanceof NoChangeException || result instanceof LoginException || result instanceof HttpResponseException) {
 				((DialogHost) c).showErrorDialog(result);
 
 			}

@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -79,6 +80,22 @@ public class StudiportalData implements Serializable {
 		
 		//return all changed
 		return changed;
+	}
+	
+	public ExamCategory searchExams(String query) {
+		List<Exam> all = this.getAllExams();
+		ExamCategory result = new ExamCategory("Result");
+		
+		query = query.toLowerCase(Locale.getDefault());
+		
+		for(Exam e : all) {
+			if(e.getName().toLowerCase(Locale.getDefault()).contains(query))
+				result.addExam(e);
+			
+		}
+		
+		return result;
+		
 	}
 	
 	private boolean doesListContainSubject(String examName, List<Exam> list) {

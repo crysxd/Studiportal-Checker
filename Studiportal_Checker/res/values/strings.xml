@@ -35,7 +35,12 @@
     <string name="text_be">Bestanden</string>
     <string name="text_an">Angemeldet</string>
     <string name="text_nb">Nicht bestanden</string>
-    <string name="text_en">Endgültig nciht bestanden</string>
+    <string name="text_en">Endgültig nicht bestanden</string>
+    <string name="text_gr">Genehmigter Rücktritt</string>
+    <string name="text_u">Unentschuldigter Rücktritt</string>
+    <string name="text_vf">Prüfungsvorleistung fehlt</string>
+    <string name="text_k">Krankheit</string>
+    <string name="text_sa">Studium abgebrochen</string>
     <string name="text_error">Fehler</string>
     <string name="text_last_updated">Letzte Aktualisierung:&#x00A0;</string>
     <string name="text_enter_user_password">Du musst deinen Login-Daten eingeben, bevor du dich anmelden kannst.</string>

@@ -99,6 +99,19 @@ public class Exam implements Serializable {
 		}
 	}
 
+	public String getNoteName(Context c) {
+		switch(this.getNoteEnum()) {
+		case GR: return this.getStringResource(c, R.string.text_gr);
+		case U: return this.getStringResource(c, R.string.text_u);
+		case VF: return this.getStringResource(c, R.string.text_vf);
+		case K: return this.getStringResource(c, R.string.text_k);
+		case SA: return this.getStringResource(c, R.string.text_sa);
+		case UNDEFINED: return "Undefined";
+		}
+
+		return null;
+	}
+	
 	public int getId() {
 		return id;
 

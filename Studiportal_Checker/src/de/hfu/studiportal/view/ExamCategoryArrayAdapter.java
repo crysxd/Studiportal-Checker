@@ -115,7 +115,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		case G: 
 			if(e.isResignated()) {
 				textViews.get(2).setText(String.format("%s: %s", this.STATE, this.STATE_RESIGNATED));
-				textViews.get(3).setText(String.format("%s: %s", this.NOTE, e.getNote()));
+				textViews.get(3).setText(String.format("%s: %s", this.NOTE, e.getNoteName(this.getContext())));
 				usedViews = 5;
 
 			} else {

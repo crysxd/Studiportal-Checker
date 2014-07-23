@@ -44,7 +44,7 @@ public class Exam implements Serializable {
 
 	public boolean isResignated() {
 		try {
-			return this.getResignation().equals("RT");
+			return this.getResignation().equals("1");
 			
 		} catch(Exception e) {
 			return false;

@@ -58,6 +58,14 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		this.PASSWORD = sp.getString(this.getStringResource(R.string.preference_password), "");
 
 	}
+	
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+		
+		this.showProgressDialog(this.getStringResource(R.string.text_connecting));
+
+	}
 
 	@Override
 	protected Exception doInBackground(Void... params) {

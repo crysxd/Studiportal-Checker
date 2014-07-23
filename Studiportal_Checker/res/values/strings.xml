@@ -53,6 +53,7 @@
     <string name="text_check_login">Überprüfe Login-Daten</string>
     <string name="text_refresh">Überprüfe Studiportal</string>
     <string name="text_logging_in">Einloggen&#8230;</string>
+    <string name="text_connecting">Verbinden&#8230;</string>
     <string name="text_logging_out">Ausloggen&#8230;</string>
     <string name="text_checking_update">Nach Änderungen suchen&#8230;</string>
     <string name="text_no_change">Keine Änderung</string>

@@ -150,10 +150,13 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 			textViews.get(4).setText(String.format("%s: %s (%s)", this.ATTEMPT, e.getTryCount(), e.getSemester()));
 			usedViews = 5;
 
-
 			break;
 
 		case UNDEFINED:
+			textViews.get(2).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
+			textViews.get(3).setText(String.format("%s: %s", this.ECTS, e.getECTS()));
+			textViews.get(4).setText(String.format("%s: %s (%s)", this.ATTEMPT, e.getTryCount(), e.getSemester()));
+
 			break;
 
 		}

@@ -86,6 +86,9 @@ public class StudiportalData implements Serializable {
 		List<Exam> all = this.getAllExams();
 		ExamCategory result = new ExamCategory("Result");
 		
+		if(query.length() == 0)
+			return result;
+		
 		query = query.toLowerCase(Locale.getDefault());
 		
 		for(Exam e : all) {

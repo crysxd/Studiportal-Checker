@@ -10,6 +10,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import de.hfu.funfpunktnull.R;
+import de.hfu.studiportal.network.LoginException;
 import de.hfu.studiportal.network.LoginVerifactionTask;
 import de.hfu.studiportal.network.RefreshTask;
 
@@ -88,5 +89,16 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 
 		//finish this
 		this.finish();
+	}
+	
+	@Override
+	public void showErrorDialog(Exception e) {
+		if(e instanceof LoginException) {
+			this.showDialog(getString(R.string.text_error), getString(R.string.exception_wrong_user_password_long));
+
+		} else {
+			super.showErrorDialog(e);
+
+		}
 	}
 }

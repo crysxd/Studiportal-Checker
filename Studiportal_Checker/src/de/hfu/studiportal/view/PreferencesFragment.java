@@ -70,6 +70,7 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 						
 						//Delete login-info
 						Editor sp = PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+						sp.putString(getResources().getString(R.string.preference_last_studiportal_data), "");
 						sp.putString(getResources().getString(R.string.preference_password), "");
 						sp.apply();		
 

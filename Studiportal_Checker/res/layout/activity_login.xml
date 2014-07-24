@@ -30,6 +30,13 @@
             android:hint="@string/text_password"
             android:inputType="textPassword" />
 
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toggleShowPassword"
+            android:text="@string/text_show_password" />
+
         <Button
             android:id="@+id/button1"
             android:layout_width="match_parent"

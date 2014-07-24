@@ -26,7 +26,7 @@
     <string name="text_malus">Malus</string>
     <string name="text_ects">ECTS</string>
     <string name="text_account">Konto</string>
-    <string name="text_new_data">Neue Daten geladen</string>
+    <string name="text_show_password">Passwort anzeigen</string>
     <string name="text_state_resignated">Zurückgetreten</string>
     <string name="text_state">Status</string>
     <string name="text_generated">Generiert</string>

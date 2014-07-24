@@ -6,8 +6,9 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.method.PasswordTransformationMethod;
+import android.text.InputType;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.network.LoginException;
@@ -28,10 +29,10 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 		
 		//Set editTextPassword font and content
 		EditText password = (EditText) findViewById(R.id.editTextPassword);
-		password.setTypeface(Typeface.DEFAULT);
 		password.setText(sp.getString(getResources().getString(R.string.preference_password), ""));
-		password.setTransformationMethod(new PasswordTransformationMethod());
-		
+		password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		password.setTypeface(Typeface.DEFAULT);
+
 		//Set editTextUser content
 		EditText user = (EditText) findViewById(R.id.editTextUser);
 		user.setText(sp.getString(getResources().getString(R.string.preference_user), ""));
@@ -100,5 +101,21 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 			super.showErrorDialog(e);
 
 		}
+	}
+	
+	public void toggleShowPassword(View v) {
+		CheckBox b = (CheckBox) v;
+		EditText et = (EditText) findViewById(R.id.editTextPassword);
+		
+		if(b.isChecked()) {
+			et.setInputType(InputType.TYPE_CLASS_TEXT);
+			
+		} else {
+			et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+		}
+		
+		et.setTypeface(Typeface.DEFAULT);
+
 	}
 }

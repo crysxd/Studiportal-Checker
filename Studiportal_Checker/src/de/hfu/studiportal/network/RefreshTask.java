@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -58,11 +57,11 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		this.PASSWORD = sp.getString(this.getStringResource(R.string.preference_password), "");
 
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		
+
 		this.showProgressDialog(this.getStringResource(R.string.text_connecting));
 
 	}
@@ -96,7 +95,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 				//Update last_check
 				getSharedPreferences().edit().putLong(getStringResource(R.string.preference_last_check), System.currentTimeMillis()).apply();
-				
+
 				//No error -> cancel (no further trys)
 				break;
 
@@ -104,7 +103,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 				//Something went wrong. Print stack trace and save
 				e.printStackTrace();
 				occuredException = e;
-				
+
 				//Try again, but show error
 				this.showProgressDialog(getStringResource(R.string.exception_general));
 				try {
@@ -133,15 +132,11 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	@Override
 	protected void onPostExecute(Exception result) {
 		super.onPostExecute(result);
-		
+
 		Context c = this.getContext();
 		if(c instanceof DialogHost) {
 			((DialogHost) c).cancelProgressDialog();
 
-			if(result instanceof NoChangeException || result instanceof LoginException || result instanceof HttpResponseException) {
-				((DialogHost) c).showErrorDialog(result);
-
-			}
 		} else if(result instanceof LoginException){
 			this.notifyAboutError(result);
 
@@ -184,7 +179,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		int start = response.indexOf("<table cellspacing=\"0\" cellpadding=\"5\" border=\"0\" align=\"center\" width=\"100%\">");
 		int end = response.indexOf("</table>", start);
 		String table = response.substring(start, end);
-		
+
 		//Create StudiportalData, Compare to saved one and savethe new one
 		StudiportalData sd = new StudiportalData(table);
 		List<Exam> changed = sd.findChangedExams(this.getSharedPreferences(), getStringResource(R.string.preference_last_studiportal_data));
@@ -262,12 +257,12 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 		//LED
 		mBuilder.setLights(Color.GREEN, 3000, 3000);
- 
+
 		//Ton
 		mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 		NotificationManager mNotificationManager =
 				(NotificationManager) this.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-		
+
 		// mId allows you to update the notification later on.
 		mNotificationManager.notify(id, mBuilder.build());
 
@@ -276,7 +271,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	private void notifyAboutChange(List<Exam> changed) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(this.URL_BASE));
-		
+
 		for(Exam e: changed) {
 			this.showNotification(e.getName(), String.format("%s - %s", e.getGrade(), e.getStateName(this.getContext())), e.getId(), intent);
 

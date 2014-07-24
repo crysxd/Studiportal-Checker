@@ -66,7 +66,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		Exam e = this.getItem(position);
 
 		//Find Views
-		List<TextView> textViews = new ArrayList<>();
+		List<TextView> textViews = new ArrayList<TextView>();
 		textViews.add((TextView) convertView.findViewById(R.id.textViewTitle));
 		textViews.add((TextView) convertView.findViewById(R.id.textViewSubtitle1));
 		textViews.add((TextView) convertView.findViewById(R.id.textViewSubtitle2));

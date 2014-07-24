@@ -21,7 +21,7 @@ import android.util.Base64;
 public class StudiportalData implements Serializable {
 
 	private static final long serialVersionUID = 5635830112259256921L;
-	private List<ExamCategory> categoryList = new ArrayList<>();
+	private List<ExamCategory> categoryList = new ArrayList<ExamCategory>();
 
 	public static StudiportalData loadFromSharedPreferences(SharedPreferences sp, String key) throws Exception {
 		byte[] data = Base64.decode(sp.getString(key, "").getBytes(), Base64.DEFAULT);
@@ -58,7 +58,7 @@ public class StudiportalData implements Serializable {
 	
 	public List<Exam> findChangedExams(StudiportalData otherInstance) {
 		//create empty list
-		List<Exam> changed = new ArrayList<>();
+		List<Exam> changed = new ArrayList<Exam>();
 		
 		//Get all my exams
 		List<Exam> myExams = this.getAllExams();
@@ -201,7 +201,7 @@ public class StudiportalData implements Serializable {
 			case 13: e.setNote(text); break;
 			}
 		}
-		
+
 		return e;
 	}
 
@@ -235,7 +235,7 @@ public class StudiportalData implements Serializable {
 	
 	public List<Exam> getAllExams() {
 		///create empty list
-		List<Exam> exams = new ArrayList<>();
+		List<Exam> exams = new ArrayList<Exam>();
 		
 		//Iterate over all categories
 		for(ExamCategory c : this.categoryList) {

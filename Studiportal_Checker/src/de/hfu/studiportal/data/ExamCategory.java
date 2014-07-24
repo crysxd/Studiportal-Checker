@@ -12,7 +12,7 @@ public class ExamCategory implements Serializable {
 	
 	public ExamCategory(String categoryName) {
 		this.setCategoryName(categoryName);
-		this.examList = new ArrayList<>();
+		this.examList = new ArrayList<Exam>();
 		
 	}
 	
@@ -56,7 +56,7 @@ public class ExamCategory implements Serializable {
 	}
 	
 	public List<Exam> getAllExams() {
-		return new ArrayList<>(this.examList);
+		return new ArrayList<Exam>(this.examList);
 		
 	}
 }

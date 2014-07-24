@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -29,11 +28,11 @@ import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.Exam;
 import de.hfu.studiportal.data.StudiportalData;
 import de.hfu.studiportal.view.DialogHost;
+import de.hfu.studiportal.view.ExamActivity;
 import de.hfu.studiportal.view.MainActivity;
 
 public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
-	private final String URL_BASE = "https://studi-portal.hs-furtwangen.de/";
 	private final String URL_LOGIN = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal";
 	private final String URL_LOGOUT = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=4&re=last&category=auth.logout&breadCrumbSource=portal";
 	private final String URL_OBSERVE = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=htmlbesch&moduleParameter=Student&menuid=notenspiegel&breadcrumb=notenspiegel&breadCrumbSource=menu&asi=%s";
@@ -269,10 +268,9 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	}
 
 	private void notifyAboutChange(List<Exam> changed) {
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(Uri.parse(this.URL_BASE));
-
 		for(Exam e: changed) {
+			Intent intent = new Intent(this.getContext(), ExamActivity.class);
+			intent.putExtra(ExamActivity.ARG_EXAM, e);
 			this.showNotification(e.getName(), String.format("%s - %s", e.getGrade(), e.getStateName(this.getContext())), e.getId(), intent);
 
 		}

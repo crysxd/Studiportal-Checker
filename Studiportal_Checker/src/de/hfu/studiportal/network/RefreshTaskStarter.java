@@ -69,6 +69,12 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 			return;
 
 		}
+		
+		//If the polling time less than one hour, reset it to 60 minutes
+		if(TimeUnit.MINUTES.convert(getPauseTime(context), TimeUnit.MILLISECONDS) < 60) {
+			sp.edit().putString(context.getString(R.string.preference_refresh_rate), "60").apply();
+			
+		}
 
 		//Everything ok, start service
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

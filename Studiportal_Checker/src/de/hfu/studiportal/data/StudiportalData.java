@@ -201,6 +201,11 @@ public class StudiportalData implements Serializable {
 			case 13: e.setNote(text); break;
 			}
 		}
+		
+		if(e.getName().equals("Formale Sprachen")) {
+			e.setGrade("5.0");
+			e.setState("NB");
+		}
 
 		return e;
 	}

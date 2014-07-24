@@ -35,6 +35,10 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name="de.hfu.studiportal.view.ExamActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="de.hfu.studiportal.view.ExamSearchActivity"
             android:label="@string/text_search_result"
             android:launchMode="singleTop" >

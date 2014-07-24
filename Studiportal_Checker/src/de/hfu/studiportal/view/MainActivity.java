@@ -29,7 +29,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
 
 		//Set Up ViewPager
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		this.updateViewPagerAdapter();
+		this.onRefresh();
 		
 	}
 
@@ -97,12 +97,6 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
 
 	@Override
 	public void onRefresh() {
-		Toast.makeText(this, getString(R.string.text_new_data), Toast.LENGTH_SHORT).show();
-		this.updateViewPagerAdapter();
-		
-	}
-	
-	private void updateViewPagerAdapter() {
 		int selectedPage = 0;
 		
 		if(this.viewPager != null)

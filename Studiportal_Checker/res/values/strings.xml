@@ -74,11 +74,6 @@
     <string name="preferences_other_title">Sonstiges</string>
 
     <string-array name="array_refresh_time">
-        <item>1 Minuten</item>
-        <item>5 Minuten</item>
-        <item>10 Minuten</item>
-        <item>15 Minuten</item>
-        <item>30 Minuten</item>
         <item>1 Stunde</item>
         <item>3 Stunden</item>
         <item>6 Stunden</item>
@@ -87,11 +82,6 @@
         <item>Keine Aktualisierung</item>
     </string-array>
     <string-array name="array_refresh_time_key">
-        <item>1</item>
-        <item>5</item>
-        <item>10</item>
-        <item>15</item>
-        <item>30</item>
         <item>60</item>
         <item>180</item>
         <item>360</item>

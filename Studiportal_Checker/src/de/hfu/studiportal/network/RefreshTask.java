@@ -104,6 +104,13 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 				//Something went wrong. Print stack trace and save
 				e.printStackTrace();
 				occuredException = e;
+				
+				//Try again, but show error
+				this.showProgressDialog(getStringResource(R.string.exception_general));
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+				}
 
 			} finally {
 				//try to Log out

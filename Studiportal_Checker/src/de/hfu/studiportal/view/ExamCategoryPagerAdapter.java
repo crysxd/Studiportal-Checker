@@ -17,10 +17,12 @@ public class ExamCategoryPagerAdapter extends FragmentStatePagerAdapter implemen
 	
 	private StudiportalData data;
 	private String studiportalDataKey;
+	private Refreshable refresh;
 
-	public ExamCategoryPagerAdapter(FragmentManager fm, Context c) {
+	public ExamCategoryPagerAdapter(FragmentManager fm, Context c, Refreshable refresh) {
 		super(fm);
 		
+		this.refresh = refresh;
 		this.studiportalDataKey = c.getResources().getString(R.string.preference_last_studiportal_data);
 		PreferenceManager.getDefaultSharedPreferences(c).registerOnSharedPreferenceChangeListener(this);
 		this.loadDataAndRefresh(PreferenceManager.getDefaultSharedPreferences(c));
@@ -68,6 +70,7 @@ public class ExamCategoryPagerAdapter extends FragmentStatePagerAdapter implemen
 		if(!key.equals(studiportalDataKey))
 			return;
 		
+		this.refresh.onRefresh();
 		this.loadDataAndRefresh(sharedPreferences);
 	}
 

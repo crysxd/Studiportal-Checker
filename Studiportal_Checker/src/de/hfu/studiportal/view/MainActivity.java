@@ -12,7 +12,7 @@ import de.hfu.studiportal.network.NoChangeException;
 import de.hfu.studiportal.network.RefreshTask;
 import de.hfu.studiportal.network.RefreshTaskStarter;
 
-public class MainActivity extends DialogHostActivity {
+public class MainActivity extends DialogHostActivity implements Refreshable {
 
 	private ExamCategoryPagerAdapter pagerAdapter;
 	private ViewPager viewPager;
@@ -29,8 +29,7 @@ public class MainActivity extends DialogHostActivity {
 
 		//Set Up ViewPager
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		pagerAdapter = new ExamCategoryPagerAdapter(getSupportFragmentManager(), this);
-		viewPager.setAdapter(pagerAdapter);
+		this.updateViewPagerAdapter();
 		
 	}
 
@@ -94,6 +93,26 @@ public class MainActivity extends DialogHostActivity {
 			super.showErrorDialog(e);
 
 		}
+	}
+
+	@Override
+	public void onRefresh() {
+		Toast.makeText(this, getString(R.string.text_new_data), Toast.LENGTH_SHORT).show();
+		this.updateViewPagerAdapter();
+		
+	}
+	
+	private void updateViewPagerAdapter() {
+		int selectedPage = 0;
+		
+		if(this.viewPager != null)
+			selectedPage = this.viewPager.getCurrentItem();
+			
+		pagerAdapter = new ExamCategoryPagerAdapter(getSupportFragmentManager(), this, this);
+		this.viewPager.setAdapter(this.pagerAdapter);
+		
+		viewPager.setCurrentItem(selectedPage);
+		
 	}
 
 }

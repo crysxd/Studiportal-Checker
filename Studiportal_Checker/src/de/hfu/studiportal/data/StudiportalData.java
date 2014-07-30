@@ -75,6 +75,12 @@ public class StudiportalData implements Serializable {
 						!other.getGrade().equals(e.getGrade()) && !doesListContainSubject(e.getName(), changed)) {
 					changed.add(e);
 				}
+				
+				//If there is a other one and it was changed, add it
+				if(other != null && other.getState() != null && 
+						!other.getState().equals(e.getState()) && !doesListContainSubject(e.getName(), changed)) {
+					changed.add(e);
+				}
 			}
 		}
 		
@@ -203,6 +209,7 @@ public class StudiportalData implements Serializable {
 		}
 		
 		return e;
+		
 	}
 
 	private ExamCategory createExamCategory(Element row, ExamCategory current) throws Exception {

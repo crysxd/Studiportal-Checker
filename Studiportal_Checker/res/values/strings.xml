@@ -6,6 +6,7 @@
     <string name="menu_open_online">Studiportal online öffnen</string>
     <string name="menu_search">Prüfung suchen</string>
     <string name="preference_refresh_rate">refersh</string>
+    <string name="preference_show_grade_in_notification">preference_show_grade_in_notification</string>
     <string name="preference_user">user</string>
     <string name="preference_use_mobile">use_mobile_network</string>
     <string name="preference_login">login</string>
@@ -21,6 +22,7 @@
     <string name="exception_general">Fehler beim Verbinden bei Studiportal</string>
     <string name="text_new_data_title">Neue Noten eingetragen</string>
     <string name="text_new_data_detail">Berühren, um Studiportal zu öffnen</string>
+    <string name="text_touch_to_show_grade">Berühren, um Note zu sehen</string>
     <string name="text_close">Schließen</string>
     <string name="text_bonus">Bonus</string>
     <string name="text_malus">Malus</string>
@@ -71,6 +73,8 @@
     <string name="preferences_about">Über</string>
     <string name="preferences_about_text">&#169; Christian Würthner (2014)\nAllgemeine Informatik\nHochschule Furtwangen University\n\nSourcecode auf GitHub:\nhttps://github.com/crysxd/Studiportal-Checker</string>
     <string name="preferences_other_title">Sonstiges</string>
+    <string name="preferences_show_grade_title">Note in Benachrichtigung</string>
+    <string name="preferences_show_grade_summary">Legt fest, ob neue Noten direkt in der Benachrichtigung angezeigt werden</string>
 
     <string-array name="array_refresh_time">
         <item>1 Stunde</item>

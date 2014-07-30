@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,8 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 	private final String BONUS;
 	private final String MALUS;
 	private final String ECTS;
-	private final String ACCOUNT;
 	private final String STATE_RESIGNATED;
 	private final String STATE;
-	private final String GENRATED;
 	private final String SEMESTER;
 	private final String ATTEMPT;
 	private final String PRACTICAL_WORK;
@@ -36,10 +35,8 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		this.BONUS = getStringResource(R.string.text_bonus);            
 		this.MALUS = getStringResource(R.string.text_malus);         
 		this.ECTS = getStringResource(R.string.text_ects);         
-		this.ACCOUNT = getStringResource(R.string.text_account);         
 		this.STATE_RESIGNATED = getStringResource(R.string.text_state_resignated);         
 		this.STATE = getStringResource(R.string.text_state);         
-		this.GENRATED = getStringResource(R.string.text_generated);         
 		this.SEMESTER = getStringResource(R.string.text_semester);         
 		this.ATTEMPT = getStringResource(R.string.text_attempt);         
 		this.PRACTICAL_WORK = getStringResource(R.string.text_practical_work);         
@@ -70,10 +67,8 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		textViews.add((TextView) convertView.findViewById(R.id.textViewTitle));
 		textViews.add((TextView) convertView.findViewById(R.id.textViewSubtitle1));
 		textViews.add((TextView) convertView.findViewById(R.id.textViewSubtitle2));
-		textViews.add((TextView) convertView.findViewById(R.id.textViewSubtitle3));
-		textViews.add((TextView) convertView.findViewById(R.id.textViewSubtitle4));
 		ImageView imageView = (ImageView) convertView.findViewById(R.id.imageViewState);
-
+		
 		//If e is a seperator hide all views, if not show them all
 		if(e instanceof Seperator) {
 			imageView.setVisibility(View.GONE);
@@ -94,57 +89,52 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 
 		//Set title and exam no
 		textViews.get(0).setText(e.getName());
-		textViews.get(1).setText(e.getExamNo());
 
 		//Fill Views with data
 		switch(kind) {
 		case KO: 
-			textViews.get(1).setText(String.format("%s (%s)", e.getExamNo(), this.ACCOUNT));
-			textViews.get(3).setText(String.format("%s: %s %s", this.BONUS, e.getBonus(), this.ECTS));
-			textViews.get(4).setText(String.format("%s: %s %s", this.MALUS, e.getMalus(), this.ECTS));
-
-			//Hide the highlighted field....there is nothing to highlight
-			textViews.get(2).setVisibility(View.GONE);
+			textViews.get(1).setText(String.format("%s: %s %s", this.BONUS, e.getBonus(), this.ECTS));
+			textViews.get(2).setText(String.format("%s: %s %s", this.MALUS, e.getMalus(), this.ECTS));
+			
 			break;
 
 		case PL: 
 		case P: 
 		case G: 
 			if(e.isResignated()) {
-				textViews.get(2).setText(String.format("%s: %s", this.STATE, this.STATE_RESIGNATED));
-				textViews.get(3).setText(String.format("%s: %s", this.NOTE, e.getNoteName(this.getContext())));
+				textViews.get(1).setText(String.format("%s: %s", this.STATE, this.STATE_RESIGNATED));
+				textViews.get(2).setText(String.format("%s: %s", this.NOTE, e.getNoteName(this.getContext())));
 
 			} else {
 				if(e.getStateEnum() == Exam.State.AN) {
-					textViews.get(2).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
-					textViews.get(3).setText(String.format("%s: %s", this.ECTS, e.getECTS()));
+					textViews.get(1).setText(String.format("%s: %s (%s %s)", this.STATE, e.getStateName(this.getContext()), e.getECTS(), this.ECTS));
 
 				} else {
-					textViews.get(2).setText(String.format("%s: %s", this.GRADE, e.getGrade()));
-					textViews.get(3).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
+					textViews.get(1).setText(String.format("%s: %s (%s %s)", this.GRADE, e.getGrade(), e.getECTS(), this.ECTS));
+
+				}
+				
+				if(e.getKindEnum() == Exam.Kind.G) {
+					textViews.get(2).setText(String.format("%s: %s", this.SEMESTER, e.getSemester()));
+
+				} else {
+					textViews.get(2).setText(String.format("%s: %s (%s)", this.ATTEMPT, e.getTryCount(), e.getSemester()));
 
 				}
 			}
-
-			if(e.getKindEnum() == Exam.Kind.G) {
-				textViews.get(1).setText(String.format("%s (%s)", e.getExamNo() , this.GENRATED));
-				textViews.get(4).setText(String.format("%s: %s", this.SEMESTER, e.getSemester()));
-
-			} else {
-				textViews.get(4).setText(String.format("%s: %s (%s)", this.ATTEMPT, e.getTryCount(), e.getSemester()));
-
-			}
-
+			
 			break;
 
 		case VL: 
-			textViews.get(1).setText(String.format("%s (%s)", e.getExamNo(), this.PRACTICAL_WORK));
+			textViews.get(1).setText(String.format("%s: %s (%s %s)", this.STATE, e.getStateName(this.getContext()), e.getECTS(), this.ECTS));
+			textViews.get(2).setText(this.PRACTICAL_WORK);
 
+			break;
+			
 		case UNDEFINED:
 		default:
-			textViews.get(2).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
-			textViews.get(3).setText(String.format("%s: %s", this.ECTS, e.getECTS()));
-			textViews.get(4).setText(String.format("%s: %s (%s)", this.ATTEMPT, e.getTryCount(), e.getSemester()));
+			textViews.get(1).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
+			textViews.get(2).setText(e.getKind());
 
 			break;
 

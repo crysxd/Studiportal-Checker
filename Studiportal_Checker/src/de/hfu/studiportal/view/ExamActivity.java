@@ -24,8 +24,17 @@ public class ExamActivity extends Activity {
 		this.getActionBar().setTitle(e.getName());
 		
 		//Set other information
-		this.setText(e.getGrade(), R.id.textGrade);
-		this.setText(e.getStateName(this), R.id.textState);
+		//If there is a grade
+		if(e.getGrade() != null && e.getGrade().length() > 0) {
+			this.setText(e.getGrade(), R.id.textGrade);
+			this.setText(e.getStateName(this), R.id.textState);
+			
+		//If there is no grade
+		} else {
+			this.setText(e.getStateName(this), R.id.textGrade);
+			this.setText("", R.id.textState);
+			
+		}
 		
 		//Set icon
 		int d = 0;

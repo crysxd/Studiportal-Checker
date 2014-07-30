@@ -90,6 +90,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 				//If no change -> save a NoChnageException in occuredException
 				if(!changed) {
 					occuredException = new NoChangeException();
+					
 				}
 
 				//Update last_check
@@ -135,10 +136,14 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		Context c = this.getContext();
 		if(c instanceof DialogHost) {
 			((DialogHost) c).cancelProgressDialog();
+			
+			if(result != null) {
+				((DialogHost) c).showErrorDialog(result);
+				
+			}
 
 		} else if(result instanceof LoginException){
 			this.notifyAboutError(result);
-
 
 		}
 	}

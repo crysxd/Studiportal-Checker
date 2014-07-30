@@ -20,9 +20,8 @@ public class ExamActivity extends Activity {
 		//Get arg
 		Exam e = (Exam) getIntent().getExtras().get(ExamActivity.ARG_EXAM);
 		
-		//Set Title + Subtitle
+		//Set Title
 		this.getActionBar().setTitle(e.getName());
-		this.getActionBar().setSubtitle(e.getExamNo());
 		
 		//Set other information
 		this.setText(e.getGrade(), R.id.textGrade);

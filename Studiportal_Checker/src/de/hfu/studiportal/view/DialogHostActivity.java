@@ -73,7 +73,7 @@ public class DialogHostActivity extends FragmentActivity implements DialogHost {
 
 	@Override
 	public void showErrorDialog(Exception e) {
-		this.showDialog(getString(R.string.text_error), e.getLocalizedMessage());
+		this.showDialog(getString(R.string.text_error), getString(R.string.exception_general));
 
 	}
 

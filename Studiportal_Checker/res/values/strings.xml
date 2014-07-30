@@ -19,7 +19,7 @@
     <string name="exception_no_user_password">Benutzer oder Passwort nicht eingetragen</string>
     <string name="exception_wrong_user_password">Benutzer oder Passwort falsch</string>
     <string name="exception_wrong_user_password_long">Der Benutzer oder das Passwort scheint ungültig zu sein.\n\nWenn du sicher bist das alles stimmt probiere es in ein paar Minuten nochmals, leider spinnt das Studiportal gelegentlich&#8230;</string>
-    <string name="exception_general">Fehler beim Verbinden bei Studiportal</string>
+    <string name="exception_general">Fehler beim Verbinden mit Studiportal</string>
     <string name="text_new_data_title">Neue Noten eingetragen</string>
     <string name="text_new_data_detail">Berühren, um Studiportal zu öffnen</string>
     <string name="text_touch_to_show_grade">Berühren, um Note zu sehen</string>

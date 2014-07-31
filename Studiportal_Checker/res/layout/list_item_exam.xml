@@ -20,11 +20,11 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:contentDescription="@string/text_placeholder"
-            android:paddingRight="5dp"
+            android:paddingRight="@dimen/gap_default"
             android:src="@drawable/ic_an" />
 
         <TextView
-            android:id="@+id/textViewSubtitle2"
+            android:id="@+id/textViewSubtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textViewTitle"
@@ -35,12 +35,12 @@
             android:textColor="@color/color_light_text" />
 
         <TextView
-            android:id="@+id/textViewSubtitle1"
+            android:id="@+id/textViewSubtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textViewSubtitle2"
-            android:layout_alignRight="@+id/textViewSubtitle2"
-            android:layout_below="@+id/textViewSubtitle2"
+            android:layout_alignLeft="@+id/textViewSubtitle1"
+            android:layout_alignRight="@+id/textViewSubtitle1"
+            android:layout_below="@+id/textViewSubtitle1"
             android:text="@string/text_placeholder"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/color_light_text" />
@@ -52,7 +52,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/imageViewState"
-            android:ellipsize="marquee"
+            android:ellipsize="end"
             android:lines="1"
             android:scrollHorizontally="true"
             android:text="@string/text_placeholder"

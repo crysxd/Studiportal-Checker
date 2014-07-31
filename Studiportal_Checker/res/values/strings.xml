@@ -97,5 +97,6 @@
 
     <color name="color_main_style">#83B81A</color>
     <color name="color_activity_background">#e5e5e5</color>
-    
+    <color name="color_light_text">#aaa</color>
+
 </resources>

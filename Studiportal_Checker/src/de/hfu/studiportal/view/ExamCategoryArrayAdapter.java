@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		textViews.add((TextView) convertView.findViewById(R.id.textViewSubtitle1));
 		textViews.add((TextView) convertView.findViewById(R.id.textViewSubtitle2));
 		ImageView imageView = (ImageView) convertView.findViewById(R.id.imageViewState);
-		
+
 		//If e is a seperator hide all views, if not show them all
 		if(e instanceof Seperator) {
 			imageView.setVisibility(View.GONE);
@@ -89,12 +90,16 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		//Set title and exam no
 		textViews.get(0).setText(e.getName());
 
+		//Set Thin Typeface
+		Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Light.ttf");
+		textViews.get(0).setTypeface(myTypeface);
+
 		//Fill Views with data
 		switch(kind) {
 		case KO: 
 			textViews.get(1).setText(String.format("%s: %s %s", this.BONUS, e.getBonus(), this.ECTS));
 			textViews.get(2).setText(String.format("%s: %s %s", this.MALUS, e.getMalus(), this.ECTS));
-			
+
 			break;
 
 		case PL: 
@@ -112,7 +117,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 					textViews.get(1).setText(String.format("%s: %s (%s %s)", this.GRADE, e.getGrade(), e.getECTS(), this.ECTS));
 
 				}
-				
+
 				if(e.getKindEnum() == Exam.Kind.G) {
 					textViews.get(2).setText(String.format("%s: %s", this.SEMESTER, e.getSemester()));
 
@@ -121,7 +126,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 
 				}
 			}
-			
+
 			break;
 
 		case VL: 
@@ -129,7 +134,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 			textViews.get(2).setText(this.PRACTICAL_WORK);
 
 			break;
-			
+
 		case UNDEFINED:
 		default:
 			textViews.get(1).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));

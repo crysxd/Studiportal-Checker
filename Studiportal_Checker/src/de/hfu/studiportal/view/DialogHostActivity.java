@@ -1,5 +1,6 @@
 package de.hfu.studiportal.view;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -9,7 +10,8 @@ import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import de.hfu.funfpunktnull.R;
 
-public class DialogHostActivity extends FragmentActivity implements DialogHost {
+@SuppressLint("Registered")
+public abstract class DialogHostActivity extends FragmentActivity implements DialogHost {
 
 	private ProgressDialog progressDialog;
 	private MessageHandler handler;

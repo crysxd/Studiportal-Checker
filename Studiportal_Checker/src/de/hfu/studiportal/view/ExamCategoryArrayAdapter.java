@@ -21,6 +21,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 	private final String BONUS;
 	private final String MALUS;
 	private final String ECTS;
+	private final String NO_ECTS;
 	private final String STATE_RESIGNATED;
 	private final String STATE;
 	private final String SEMESTER;
@@ -36,6 +37,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		this.BONUS = getStringResource(R.string.text_bonus);            
 		this.MALUS = getStringResource(R.string.text_malus);         
 		this.ECTS = getStringResource(R.string.text_ects);         
+		this.NO_ECTS = getStringResource(R.string.text_no_ects);
 		this.STATE_RESIGNATED = getStringResource(R.string.text_state_resignated);         
 		this.STATE = getStringResource(R.string.text_state);         
 		this.SEMESTER = getStringResource(R.string.text_semester);         
@@ -74,7 +76,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		if(e instanceof Seperator) {
 			convertView.setVisibility(View.GONE);
 			convertView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 60));
-			
+
 			return convertView;
 
 		} else {
@@ -100,8 +102,31 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		//Fill Views with data
 		switch(kind) {
 		case KO: 
-			textViews.get(1).setText(String.format("%s: %s %s", this.BONUS, e.getBonus(), this.ECTS));
-			textViews.get(2).setText(String.format("%s: %s %s", this.MALUS, e.getMalus(), this.ECTS));
+			if(e.getBonus().equals("-")) {
+				//If there are no bnous ects -> hide the useless view, else -> show them
+				textViews.get(1).setVisibility(View.GONE);
+
+			} else {
+				textViews.get(1).setText(String.format("%s: %s %s", this.BONUS, e.getBonus(), this.ECTS));
+
+			}
+
+			if(e.getMalus().equals("-")) {
+				//If there are no malus ects -> hide the useless view, else -> show them
+				textViews.get(2).setVisibility(View.GONE);
+
+			} else {
+				textViews.get(2).setText(String.format("%s: %s %s", this.MALUS, e.getBonus(), this.ECTS));
+
+			}
+
+			if(e.getMalus().equals("-") && e.getBonus().equals("-")) {
+				//If both are not set, the View will be empty (both textview are hidden)! Show the first and say no ects
+				textViews.get(1).setVisibility(View.VISIBLE);
+				textViews.get(1).setText(this.NO_ECTS);
+				textViews.get(2).setVisibility(View.GONE);
+
+			}
 
 			break;
 
@@ -109,22 +134,29 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 		case P: 
 		case G: 
 			if(e.isResignated()) {
+				//If e is resignated, shw special info on the topic
 				textViews.get(1).setText(String.format("%s: %s", this.STATE, this.STATE_RESIGNATED));
 				textViews.get(2).setText(String.format("%s: %s", this.NOTE, e.getNoteName(this.getContext())));
 
 			} else {
+				//First field
 				if(e.getStateEnum() == Exam.State.AN) {
+					//If e is only AN, there is no grade to show. Display state: an
 					textViews.get(1).setText(String.format("%s: %s (%s %s)", this.STATE, e.getStateName(this.getContext()), e.getECTS(), this.ECTS));
 
 				} else {
+					//e is not an -> be, nb or en. Show grade and ects
 					textViews.get(1).setText(String.format("%s: %s (%s %s)", this.GRADE, e.getGrade(), e.getECTS(), this.ECTS));
 
 				}
 
+				//Second Field
 				if(e.getKindEnum() == Exam.Kind.G) {
+					//If e is generatde, show only the semester
 					textViews.get(2).setText(String.format("%s: %s", this.SEMESTER, e.getSemester()));
 
 				} else {
+					//Else show attempt and semester
 					textViews.get(2).setText(String.format("%s: %s (%s)", this.ATTEMPT, e.getTryCount(), e.getSemester()));
 
 				}
@@ -133,6 +165,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 			break;
 
 		case VL: 
+			//Show state and sign that e is a vl
 			textViews.get(1).setText(String.format("%s: %s (%s %s)", this.STATE, e.getStateName(this.getContext()), e.getECTS(), this.ECTS));
 			textViews.get(2).setText(this.PRACTICAL_WORK);
 
@@ -140,6 +173,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 
 		case UNDEFINED:
 		default:
+			//This should not happen. show state an Kind
 			textViews.get(1).setText(String.format("%s: %s", this.STATE, e.getStateName(this.getContext())));
 			textViews.get(2).setText(e.getKind());
 

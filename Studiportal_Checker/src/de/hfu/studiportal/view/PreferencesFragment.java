@@ -88,11 +88,10 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 		});
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    View view = super.onCreateView(inflater, container, savedInstanceState);
-	    view.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_stripes));
+	    view.setBackgroundColor(getResources().getColor(R.color.color_activity_background));
 
 	    return view;
 	}

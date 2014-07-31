@@ -116,7 +116,7 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 				textViews.get(2).setVisibility(View.GONE);
 
 			} else {
-				textViews.get(2).setText(String.format("%s: %s %s", this.MALUS, e.getBonus(), this.ECTS));
+				textViews.get(2).setText(String.format("%s: %s %s", this.MALUS, e.getMalus(), this.ECTS));
 
 			}
 

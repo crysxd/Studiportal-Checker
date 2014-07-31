@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AbsListView.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 import de.hfu.funfpunktnull.R;
@@ -71,13 +72,15 @@ public class ExamCategoryArrayAdapter extends ArrayAdapter<Exam> {
 
 		//If e is a seperator hide all views, if not show them all
 		if(e instanceof Seperator) {
-			imageView.setVisibility(View.GONE);
-			for(TextView v : textViews)
-				v.setVisibility(View.GONE);
-
+			convertView.setVisibility(View.GONE);
+			convertView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 60));
+			
 			return convertView;
 
 		} else {
+			convertView.setVisibility(View.VISIBLE);
+			convertView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
 			imageView.setVisibility(View.VISIBLE);
 			for(TextView v : textViews)
 				v.setVisibility(View.VISIBLE);

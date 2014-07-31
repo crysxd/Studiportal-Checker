@@ -142,7 +142,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 				
 			}
 
-		} else if(result instanceof LoginException){
+		} else if(result != null && result instanceof LoginException){
 			this.notifyAboutError(result);
 
 		}

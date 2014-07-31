@@ -1,51 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="2"
-    android:padding="@dimen/gap_default" >
+    android:paddingBottom="2dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingTop="4dp" >
 
-    <TextView
-        android:id="@+id/textViewTitle"
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_columnSpan="2"
-        android:layout_row="0"
-        android:ellipsize="end"
-        android:lines="1"
-        android:scrollHorizontally="true"
-        android:text="@string/text_placeholder"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_card"
+        android:columnCount="2"
+        android:padding="@dimen/gap_default" >
 
-    <ImageView
-        android:id="@+id/imageViewState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="center_vertical"
-        android:layout_row="1"
-        android:layout_rowSpan="2"
-        android:contentDescription="@string/text_placeholder"
-        android:paddingRight="5dp"
-        android:src="@drawable/ic_action_settings" />
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_row="0"
+            android:ellipsize="end"
+            android:lines="1"
+            android:scrollHorizontally="true"
+            android:text="@string/text_placeholder"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textViewSubtitle1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_gravity="fill_horizontal"
-        android:layout_row="1"
-        android:text="@string/text_placeholder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        <ImageView
+            android:id="@+id/imageViewState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_gravity="center_vertical"
+            android:layout_row="1"
+            android:layout_rowSpan="2"
+            android:contentDescription="@string/text_placeholder"
+            android:paddingRight="5dp"
+            android:src="@drawable/ic_action_settings" />
 
-    <TextView
-        android:id="@+id/textViewSubtitle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_row="2"
-        android:text="@string/text_placeholder" />
+        <TextView
+            android:id="@+id/textViewSubtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_row="1"
+            android:text="@string/text_placeholder"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-</GridLayout>
+        <TextView
+            android:id="@+id/textViewSubtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:text="@string/text_placeholder" />
+    </GridLayout>
+
+</FrameLayout>

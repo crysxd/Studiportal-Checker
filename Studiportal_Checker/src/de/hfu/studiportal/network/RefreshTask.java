@@ -275,6 +275,11 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	private void notifyAboutChange(List<Exam> changed) {
 		boolean showGrade = this.getSharedPreferences().getBoolean(
 				this.getStringResource(R.string.preference_show_grade_in_notification), true);
+		boolean notifyAboutChange = this.getSharedPreferences().getBoolean(
+				this.getStringResource(R.string.preference_notify_about_change), true);
+		
+		if(!notifyAboutChange)
+			return;
 		
 		for(Exam e: changed) {
 			Intent intent = new Intent(this.getContext(), ExamActivity.class);

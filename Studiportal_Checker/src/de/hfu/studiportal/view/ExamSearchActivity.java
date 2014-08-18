@@ -95,6 +95,7 @@ public class ExamSearchActivity extends FragmentActivity {
 			ExamCategoryFragment fragment = new ExamCategoryFragment();
 			Bundle args = new Bundle();
 			args.putSerializable(ExamCategoryFragment.ARG_CATEGORY, result);
+//			args.putBoolean(ExamCategoryFragment.ARG_HIDE_SEARCH_BUTTON, true);
 			fragment.setArguments(args);
 
 			//Put the fragment

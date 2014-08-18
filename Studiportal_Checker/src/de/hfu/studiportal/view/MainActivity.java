@@ -70,13 +70,6 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
 
 			return true;
 		}
-		
-		if(item.getItemId() == R.id.action_search) {
-			Intent i = new Intent(this, ExamSearchActivity.class);
-			this.startActivity(i);
-			
-		}
-
 
 		return super.onOptionsItemSelected(item);
 

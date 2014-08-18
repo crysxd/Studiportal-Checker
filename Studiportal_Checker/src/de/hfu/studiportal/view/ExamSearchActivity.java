@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 import de.hfu.funfpunktnull.R;
@@ -32,8 +33,25 @@ public class ExamSearchActivity extends FragmentActivity {
 
 		}
 
+		//Enable home as up
+		this.getActionBar().setHomeButtonEnabled(true);
+		this.getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		handleIntent(getIntent());
 
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			this.finish();
+			return true;
+			
+		}
+		
+		return super.onOptionsItemSelected(item);
+		
 	}
 
 	@Override
@@ -66,7 +84,7 @@ public class ExamSearchActivity extends FragmentActivity {
 				i.putExtra(SearchManager.QUERY, s);
 				i.setAction(Intent.ACTION_SEARCH);
 				ExamSearchActivity.this.handleIntent(i);
-				
+
 				Log.i(getClass().getSimpleName(), "onQueryTextChange()");
 				return false;
 
@@ -95,7 +113,7 @@ public class ExamSearchActivity extends FragmentActivity {
 			ExamCategoryFragment fragment = new ExamCategoryFragment();
 			Bundle args = new Bundle();
 			args.putSerializable(ExamCategoryFragment.ARG_CATEGORY, result);
-//			args.putBoolean(ExamCategoryFragment.ARG_HIDE_SEARCH_BUTTON, true);
+			//			args.putBoolean(ExamCategoryFragment.ARG_HIDE_SEARCH_BUTTON, true);
 			fragment.setArguments(args);
 
 			//Put the fragment

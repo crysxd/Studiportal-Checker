@@ -16,6 +16,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
 
 	private ExamCategoryPagerAdapter pagerAdapter;
 	private ViewPager viewPager;
+	private boolean isDestroyed = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +88,24 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
 
 		}
 	}
+	
+	@Override
+	protected void onDestroy() {
+		synchronized(this) {
+			this.isDestroyed = true;
+		}
+		
+		this.dismiss();
+		
+		super.onDestroy();
+		
+	}
 
 	@Override
-	public void onRefresh() {
+	public synchronized void onRefresh() {
+		if(this.isDestroyed)
+			return;
+		
 		int selectedPage = 0;
 		
 		if(this.viewPager != null)

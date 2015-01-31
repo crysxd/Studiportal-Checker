@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ic_action_search"
+        android:showAsAction="always"
+        android:title="@string/menu_search"/>
+
+</menu><!-- From: file:/Users/wuerthnc/AndroidstudioProjects/Studiportal_Checker/app/src/main/res/menu/activity_exam_search.xml -->

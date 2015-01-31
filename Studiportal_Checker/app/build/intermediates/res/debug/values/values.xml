@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/wuerthnc/AndroidstudioProjects/Studiportal_Checker/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string-array name="array_refresh_time">
+        <item>1 Stunde</item>
+        <item>3 Stunden</item>
+        <item>6 Stunden</item>
+        <item>12 Stunden</item>
+        <item>24 Stunden</item>
+        <item>Keine Aktualisierung</item>
+    </string-array>
+    <string-array name="array_refresh_time_key">
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>720</item>
+        <item>1480</item>
+        <item>525948766</item>
+    </string-array>
+    <color name="color_activity_background">#e5e5e5</color>
+    <color name="color_light_text">#aaa</color>
+    <color name="color_main_style">#83B81A</color>
+    <declare-styleable name="FloatingActionButton"><attr format="color" name="fab_colorPressed"/><attr format="color" name="fab_colorNormal"/><attr format="boolean" name="fab_shadow"/><attr format="enum" name="fab_type"><enum name="normal" value="0"/><enum name="mini" value="1"/></attr></declare-styleable>
+    <!-- From: file:/Users/wuerthnc/AndroidstudioProjects/Studiportal_Checker/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="fab_mini_shadow_size">6dp</dimen>
+    <dimen name="fab_shadow_size">8dp</dimen>
+    <dimen name="fab_size_mini">40dp</dimen>
+    <dimen name="fab_size_normal">56dp</dimen>
+    <!-- From: file:/Users/wuerthnc/AndroidstudioProjects/Studiportal_Checker/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <dimen name="gap_default">10dp</dimen>
+    <string name="app_name">Studiportal</string>
+    <string name="exception_general">Fehler beim Verbinden mit Studiportal</string>
+    <string name="exception_no_user_password">Benutzer oder Passwort nicht eingetragen</string>
+    <string name="exception_wrong_user_password">Benutzer oder Passwort falsch</string>
+    <string name="exception_wrong_user_password_long">Der Benutzer oder das Passwort scheint ungültig zu sein.\n\nWenn du sicher bist das alles stimmt probiere es in ein paar Minuten nochmals, leider spinnt das Studiportal gelegentlich…</string>
+    <string name="extra_start_on_success">start_on_success</string>
+    <string name="menu_check_now">Jetzt überprüfen</string>
+    <string name="menu_open_online">Studiportal online öffnen</string>
+    <string name="menu_preferences">Einstellungen</string>
+    <string name="menu_search">Prüfung suchen</string>
+    <string name="preference_last_check">last_check</string>
+    <string name="preference_last_studiportal_data">last_studiportal_data</string>
+    <string name="preference_login">login</string>
+    <string name="preference_logout">logout</string>
+    <string name="preference_notify_about_change">preference_notify_about_change</string>
+    <string name="preference_password">password</string>
+    <string name="preference_refresh_rate">refersh</string>
+    <string name="preference_refresh_settings">refresh_settings</string>
+    <string name="preference_show_grade_in_notification">preference_show_grade_in_notification</string>
+    <string name="preference_use_mobile">use_mobile_network</string>
+    <string name="preference_user">user</string>
+    <string name="preferences_about">Über</string>
+    <string name="preferences_about_text">© Christian Würthner (2014)\nAllgemeine Informatik\nHochschule Furtwangen University\n\nSourcecode auf GitHub:\nhttps://github.com/crysxd/Studiportal-Checker</string>
+    <string name="preferences_login_data_summary">Trage hier deine HFU-Login Daten ein</string>
+    <string name="preferences_login_data_title">Login Daten</string>
+    <string name="preferences_logout_title">Ausloggen</string>
+    <string name="preferences_notification">Benachrichtigung</string>
+    <string name="preferences_notify_about_change_summary">Bei Änderungen im Studiportal wird eine Benachrichtigung angezeigt</string>
+    <string name="preferences_notify_about_change_title">Über Noten benachrichtigen</string>
+    <string name="preferences_other_title">Sonstiges</string>
+    <string name="preferences_refresh_on_mobile">Über Mobilfunknetz aktualisieren</string>
+    <string name="preferences_refresh_on_mobile_summary">Für die Aktualisierung über Mobilfunk können Gebühren anfallen</string>
+    <string name="preferences_refresh_time">Aktualisierungsintervall</string>
+    <string name="preferences_refresh_title">Aktualisierung</string>
+    <string name="preferences_show_grade_summary">Neue Noten werden direkt in der Benachrichtigung angezeigt</string>
+    <string name="preferences_show_grade_title">Note in Benachrichtigung</string>
+    <string name="text_activity_login_title">Studiportal Login</string>
+    <string name="text_an">Angemeldet</string>
+    <string name="text_attempt">Versuch</string>
+    <string name="text_be">Bestanden</string>
+    <string name="text_bonus">Bonus</string>
+    <string name="text_cancel">Abbrechen</string>
+    <string name="text_check_login">Überprüfe Login-Daten</string>
+    <string name="text_checking_update">Nach Änderungen suchen…</string>
+    <string name="text_close">Schließen</string>
+    <string name="text_connecting">Verbinden…</string>
+    <string name="text_ects">ECTS</string>
+    <string name="text_en">Endgültig nicht bestanden</string>
+    <string name="text_enter_user_password">Du musst deinen Login-Daten eingeben, bevor du dich anmelden kannst.</string>
+    <string name="text_error">Fehler</string>
+    <string name="text_gr">Genehmigter Rücktritt</string>
+    <string name="text_grade">Note</string>
+    <string name="text_k">Krankheit</string>
+    <string name="text_last_updated">Letzte Aktualisierung: </string>
+    <string name="text_logging_in">Einloggen…</string>
+    <string name="text_logging_out">Ausloggen…</string>
+    <string name="text_login">Einloggen</string>
+    <string name="text_logout_dialog">Willst du dich wirklich ausloggen?</string>
+    <string name="text_malus">Malus</string>
+    <string name="text_nb">Nicht bestanden</string>
+    <string name="text_new_data_detail">Berühren, um Studiportal zu öffnen</string>
+    <string name="text_new_data_title">Neue Noten eingetragen</string>
+    <string name="text_no_change">Keine Änderung</string>
+    <string name="text_no_ects">Keine ECTS</string>
+    <string name="text_note">Vermerk</string>
+    <string name="text_password">Passwort</string>
+    <string name="text_placeholder">Lorem ipsum</string>
+    <string name="text_practical_work">Praktikum / Vorleistung</string>
+    <string name="text_refresh">Überprüfe Studiportal</string>
+    <string name="text_sa">Studium abgebrochen</string>
+    <string name="text_search_hint">Prüfungsname</string>
+    <string name="text_search_result">Suchergebnisse</string>
+    <string name="text_semester">Semester</string>
+    <string name="text_show_password">Passwort anzeigen</string>
+    <string name="text_state">Status</string>
+    <string name="text_state_resignated">Zurückgetreten</string>
+    <string name="text_touch_to_show_grade">Berühren, um Note zu sehen</string>
+    <string name="text_u">Unentschuldigter Rücktritt</string>
+    <string name="text_user_name">HFU Benutzername</string>
+    <string name="text_vf">Prüfungsvorleistung fehlt</string>
+    <!-- From: file:/Users/wuerthnc/AndroidstudioProjects/Studiportal_Checker/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+
+
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="MenuHeaderFont">
+        <item name="android:textSize">17sp</item>
+    </style>
+</resources>

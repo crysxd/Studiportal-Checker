@@ -1,12 +1,13 @@
 package de.hfu.studiportal.view;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.Exam;
 
-public class ExamActivity extends Activity {
+public class ExamActivity extends DialogHostActivity {
 	
 	public static final String ARG_EXAM = "exam";
 	
@@ -16,14 +17,18 @@ public class ExamActivity extends Activity {
 		
 		//Set content View
 		this.setContentView(R.layout.activity_exam);
-		
+
+        //Set up Toolbar
+        Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(bar);
+
 		//Get arg
 		Exam e = (Exam) getIntent().getExtras().get(ExamActivity.ARG_EXAM);
 		
 		//Set Title
-		this.getActionBar().setTitle(e.getName());
-		
-		//Set other information
+        this.getSupportActionBar().setTitle(e.getName());
+
+        //Set other information
 		//If there is a grade
 		if(e.getGrade() != null && e.getGrade().length() > 0) {
 			this.setText(e.getGrade(), R.id.textGrade);

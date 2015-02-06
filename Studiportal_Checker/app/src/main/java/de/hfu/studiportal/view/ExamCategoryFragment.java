@@ -1,7 +1,10 @@
 package de.hfu.studiportal.view;
 
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +14,10 @@ import de.hfu.studiportal.data.ExamCategory;
 
 //Instances of this class are fragments representing a single
 //object in our collection.
-public class ExamCategoryFragment extends ListFragment  {
+public class ExamCategoryFragment extends Fragment {
 	public static final String ARG_CATEGORY = "category";
+
+    public RecyclerView list;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -23,9 +28,14 @@ public class ExamCategoryFragment extends ListFragment  {
 
 		//Save Category
 		ExamCategory c = (ExamCategory) getArguments().get(ARG_CATEGORY);
-		
+
+        //Find list and init
+        this.list = (RecyclerView) rootView.findViewById(R.id.list);
+        this.list.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        this.list.setItemAnimator(new DefaultItemAnimator());
+
 		//Set Adapter
-		this.setListAdapter(new ExamCategoryArrayAdapter(this.getActivity(), c.getAllExams()));
+		this.list.setAdapter(new ExamCategoryArrayAdapter(this.getActivity(), c.getAllExams()));
 		
 		return rootView;
 	}

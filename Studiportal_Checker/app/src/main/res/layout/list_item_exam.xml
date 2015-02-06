@@ -16,11 +16,6 @@
         android:layout_marginRight="@dimen/gap_default"
         android:layout_marginBottom="@dimen/gap_default">
 
-       <!-- android:paddingBottom="2dp"
-        android:paddingLeft="6dp"
-        android:paddingRight="6dp"
-        android:paddingTop="4dp" >-->
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

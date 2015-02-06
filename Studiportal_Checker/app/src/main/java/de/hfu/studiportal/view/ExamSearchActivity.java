@@ -5,17 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
+
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.ExamCategory;
 import de.hfu.studiportal.data.StudiportalData;
 
-public class ExamSearchActivity extends FragmentActivity {
+public class ExamSearchActivity extends DialogHostActivity {
 
 	private StudiportalData studiportalData;
 	private SearchView searchView;
@@ -33,9 +35,16 @@ public class ExamSearchActivity extends FragmentActivity {
 
 		}
 
+        //Build View
+        setContentView(R.layout.activity_exam_search);
+
+        //Set up Toolbar
+        Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(bar);
+
 		//Enable home as up
-		this.getActionBar().setHomeButtonEnabled(true);
-		this.getActionBar().setDisplayHomeAsUpEnabled(true);
+		this.getSupportActionBar().setHomeButtonEnabled(true);
+		this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		handleIntent(getIntent());
 
@@ -56,15 +65,12 @@ public class ExamSearchActivity extends FragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_exam_search, menu);
+		this.getMenuInflater().inflate(R.menu.activity_exam_search, menu);
 
 		// Associate searchable configuration with the SearchView
-		SearchManager searchManager =
-				(SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		this.searchView =
-				(SearchView) menu.findItem(R.id.search).getActionView();
-		this.searchView.setSearchableInfo(
-				searchManager.getSearchableInfo(getComponentName()));
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		this.searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.search));
+        this.searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		this.searchView.setIconified(false);
 
 		if(this.query != null)
@@ -117,7 +123,7 @@ public class ExamSearchActivity extends FragmentActivity {
 			fragment.setArguments(args);
 
 			//Put the fragment
-			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+			getSupportFragmentManager().beginTransaction().replace(R.id.exam_category_fragment, fragment).commit();
 
 		}
 	}

@@ -36,5 +36,5 @@ Icon
 .Trashes
 
 
-Studiportal_Checker/bin/
-Studiportal_Checker/gen/
+Studiportal_Checker/build/
+Studiportal_Checker/app/build/*

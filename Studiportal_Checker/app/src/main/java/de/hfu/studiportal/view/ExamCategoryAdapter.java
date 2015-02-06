@@ -2,6 +2,7 @@ package de.hfu.studiportal.view;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,12 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
 	private final String PRACTICAL_WORK;
 	private final String NOTE;
 	private final String GRADE;
+    private final Drawable IC_AN;
+    private final Drawable IC_EN;
+    private final Drawable IC_NB;
+    private final Drawable IC_BE;
+    private final Drawable IC_RE;
+    private final Typeface TYPEFACE_ROBOTO_LIGHT;
 
     private final List<Exam> objects;
 
@@ -47,8 +54,14 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
 		this.PRACTICAL_WORK = context.getString(R.string.text_practical_work);
 		this.NOTE = context.getString(R.string.text_note);
 		this.GRADE = context.getString(R.string.text_grade);
+        this.IC_AN = context.getResources().getDrawable(R.drawable.ic_an);
+        this.IC_BE = context.getResources().getDrawable(R.drawable.ic_be);
+        this.IC_EN = context.getResources().getDrawable(R.drawable.ic_en);
+        this.IC_NB = context.getResources().getDrawable(R.drawable.ic_nb);
+        this.IC_RE = context.getResources().getDrawable(R.drawable.ic_re);
+        this.TYPEFACE_ROBOTO_LIGHT = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
 
-	}
+    }
 
     @Override
     public int getItemCount() {
@@ -59,7 +72,9 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //Inflate layout and create view holder
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_exam, parent, false);
-        return new ViewHolder(v);
+        ViewHolder h = new ViewHolder(v);
+        h.textViews.get(0).setTypeface(TYPEFACE_ROBOTO_LIGHT);
+        return h;
 
     }
 
@@ -93,10 +108,6 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
 
 		//Set title and exam no
         holder.textViews.get(0).setText(e.getName());
-
-		//Set Thin Typeface
-		Typeface myTypeface = Typeface.createFromAsset(ctx.getAssets(), "fonts/Roboto-Light.ttf");
-        holder.textViews.get(0).setTypeface(myTypeface);
 
 		//Fill Views with data
 		switch(kind) {
@@ -182,16 +193,16 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
 
 		//Set icon
 		switch (e.getStateEnum()) {
-		case AN: holder.imageView.setImageDrawable(ctx.getDrawable(R.drawable.ic_an)); break;
-		case BE: holder.imageView.setImageDrawable(ctx.getDrawable(R.drawable.ic_be)); break;
-		case NB: holder.imageView.setImageDrawable(ctx.getDrawable(R.drawable.ic_nb)); break;
-		case EN: holder.imageView.setImageDrawable(ctx.getDrawable(R.drawable.ic_en)); break;
+		case AN: holder.imageView.setImageDrawable(this.IC_AN); break;
+		case BE: holder.imageView.setImageDrawable(this.IC_BE); break;
+		case NB: holder.imageView.setImageDrawable(this.IC_NB); break;
+		case EN: holder.imageView.setImageDrawable(this.IC_EN); break;
 		case UNDEFINED: holder.imageView.setVisibility(View.GONE); break;
 		}
 
 		//If eis resignated, override icon with flag
 		if(e.isResignated()) {
-            holder.imageView.setImageDrawable(ctx.getDrawable(R.drawable.ic_re));
+            holder.imageView.setImageDrawable(this.IC_RE);
 
 		}
 	}

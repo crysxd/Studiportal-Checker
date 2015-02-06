@@ -35,7 +35,7 @@ public class ExamCategoryFragment extends Fragment {
         this.list.setItemAnimator(new DefaultItemAnimator());
 
 		//Set Adapter
-		this.list.setAdapter(new ExamCategoryArrayAdapter(this.getActivity(), c.getAllExams()));
+		this.list.setAdapter(new ExamCategoryAdapter(this.getActivity(), c.getAllExams()));
 		
 		return rootView;
 	}

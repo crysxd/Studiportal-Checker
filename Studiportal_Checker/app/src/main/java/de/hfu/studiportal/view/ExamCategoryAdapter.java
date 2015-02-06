@@ -17,7 +17,7 @@ import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.Exam;
 import de.hfu.studiportal.data.Seperator;
 
-public class ExamCategoryArrayAdapter extends RecyclerView.Adapter<ExamCategoryArrayAdapter.ViewHolder> {
+public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapter.ViewHolder> {
 
 	private final String BONUS;
 	private final String MALUS;
@@ -33,7 +33,7 @@ public class ExamCategoryArrayAdapter extends RecyclerView.Adapter<ExamCategoryA
 
     private final List<Exam> objects;
 
-	public ExamCategoryArrayAdapter(Context context, List<Exam> objects) {
+	public ExamCategoryAdapter(Context context, List<Exam> objects) {
         this.objects = objects;
 
 		this.BONUS = context.getString(R.string.text_bonus);

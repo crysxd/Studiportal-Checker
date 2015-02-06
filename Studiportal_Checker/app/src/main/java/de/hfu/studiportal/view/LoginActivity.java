@@ -6,6 +6,7 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
 import android.widget.CheckBox;
@@ -23,6 +24,11 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 		
 		//inflate Layout
 		this.setContentView(R.layout.activity_login);
+
+        //Set up Toolbar
+        Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(bar);
+        this.getSupportActionBar().setTitle(this.getString(R.string.text_activity_login_title));
 		
 		//Get SharedPrefs
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);

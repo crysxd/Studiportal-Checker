@@ -33,7 +33,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
         //Set up Toolbar
         Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(bar);
-        this.getSupportActionBar().setTitle("Hallo Welt!");
+        this.getSupportActionBar().setTitle(this.getString(R.string.app_name));
 
 		//Set Up ViewPager
 		viewPager = (ViewPager) findViewById(R.id.pager);

@@ -34,6 +34,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
         Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(bar);
         this.getSupportActionBar().setTitle(this.getString(R.string.app_name));
+        this.getSupportActionBar().setIcon(this.getResources().getDrawable(R.drawable.ic_hfu));
 
 		//Set Up ViewPager
 		viewPager = (ViewPager) findViewById(R.id.pager);

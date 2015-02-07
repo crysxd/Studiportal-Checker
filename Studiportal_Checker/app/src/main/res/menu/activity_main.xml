@@ -3,6 +3,12 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_search"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="@string/menu_search"/>
+    <item
         android:id="@+id/action_open_online"
         android:icon="@drawable/ic_action_web_site"
         android:orderInCategory="100"

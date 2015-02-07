@@ -65,7 +65,7 @@
     <string name="text_search_result">Suchergebnisse</string>
     <string name="text_activity_login_title">Studiportal Login</string>
     <string name="text_activity_preferences_title">Einstellungen</string>
-    <string name="text_search_hint">Prüfung / Konto eingeben</string>
+    <string name="text_search_hint">Prüfungsname</string>
     <string name="preferences_logout_title">Ausloggen</string>
     <string name="preferences_login_data_summary">Trage hier deine HFU-Login Daten ein</string>
     <string name="preferences_login_data_title">Login Daten</string>
@@ -81,7 +81,6 @@
     <string name="preferences_show_grade_summary">Neue Noten werden direkt in der Benachrichtigung angezeigt</string>
     <string name="preferences_notify_about_change_summary">Bei Änderungen im Studiportal wird eine Benachrichtigung angezeigt</string>
     <string name="preferences_notify_about_change_title">Über Noten benachrichtigen</string>
-    <string name="transition_name_search_field">search_field</string>
 
     <string-array name="array_refresh_time">
         <item>1 Stunde</item>

@@ -1,28 +1,26 @@
 package de.hfu.studiportal.view;
 
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
-
-import java.util.concurrent.Executors;
 
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.ExamCategory;
 import de.hfu.studiportal.data.StudiportalData;
 
-public class ExamSearchActivity extends DialogHostActivity implements View.OnClickListener, TextWatcher {
+public class ExamSearchActivity extends DialogHostActivity {
 
 	private StudiportalData studiportalData;
-	private EditText searchView;
-    private ImageButton imageViewBack;
-    private ImageButton imageViewClear;
+	private SearchView searchView;
 	private String query;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,99 +38,93 @@ public class ExamSearchActivity extends DialogHostActivity implements View.OnCli
         //Build View
         setContentView(R.layout.activity_exam_search);
 
-        //Find searchView and focus it after a short delay
-        this.searchView = (EditText) this.findViewById(R.id.searchView);
+        //Set up Toolbar
+        Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(bar);
 
-        //Focus the search field after a delay of 500ms
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+		//Enable home as up
+		this.getSupportActionBar().setHomeButtonEnabled(true);
+		this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-                ExamSearchActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ExamSearchActivity.this.searchView.setFocusable(true);
-                        ExamSearchActivity.this.searchView.setFocusableInTouchMode(true);
-                        ExamSearchActivity.this.searchView.requestFocus();
-
-                    }
-                });
-            }
-        });
-
-        //Add text listsner to searchField
-        this.searchView.addTextChangedListener(this);
-
-        //find back and clear button and apply listener
-        this.imageViewBack = (ImageButton)  this.findViewById(R.id.imageViewBack);
-        this.imageViewClear = (ImageButton) this.findViewById(R.id.imageViewClear);
-        this.imageViewBack.setOnClickListener(this);
-        this.imageViewClear.setOnClickListener(this);
+		handleIntent(getIntent());
 
 	}
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			this.finish();
+			return true;
+			
+		}
+		
+		return super.onOptionsItemSelected(item);
+		
+	}
 
-        //Hide Keybord manually to sync the hide animation with the exit transition
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(this.searchView.getWindowToken(), 0);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		this.getMenuInflater().inflate(R.menu.activity_exam_search, menu);
 
-        //Prepare items
-        this.searchView.setText("");
-        this.searchView.setFocusable(false);
-        this.imageViewBack.setImageResource(R.drawable.abc_ic_search_api_mtrl_alpha);
-        this.imageViewBack.setColorFilter(getResources().getColor(R.color.color_light_text),
-                android.graphics.PorterDuff.Mode.MULTIPLY);
-        this.imageViewClear.setImageResource(R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha);
+		// Associate searchable configuration with the SearchView
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		this.searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.search));
+        this.searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+		this.searchView.setIconified(false);
 
-    }
+		if(this.query != null)
+			this.searchView.setQuery(this.query , false);
 
-	private void performSearch(String query) {
-        ExamCategory result = studiportalData.searchExams(query );
+		//Autosubmit
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String s) {
+				return false;
 
-        //Create fragment
-        ExamCategoryFragment fragment = new ExamCategoryFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ExamCategoryFragment.ARG_CATEGORY, result);
-        fragment.setArguments(args);
+			}
 
-        //Put the fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.exam_category_fragment, fragment).commit();
+			@Override
+			public boolean onQueryTextChange(String s) {
+				Intent i = new Intent();
+				i.putExtra(SearchManager.QUERY, s);
+				i.setAction(Intent.ACTION_SEARCH);
+				ExamSearchActivity.this.handleIntent(i);
+
+				Log.i(getClass().getSimpleName(), "onQueryTextChange()");
+				return false;
+
+			}
+		});
+
+		return super.onCreateOptionsMenu(menu);
 
 	}
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.imageViewBack || this.searchView.getText().length() == 0) {
-            this.onBackPressed();
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		handleIntent(intent);
 
-        } else if(v.getId() == R.id.imageViewClear) {
-            this.searchView.setText("");
-            this.performSearch("");
+	}
 
-        }
-    }
+	private void handleIntent(Intent intent) {
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {	
+			//Search
+			this.query = intent.getStringExtra(SearchManager.QUERY);
+			ExamCategory result = studiportalData.searchExams(this.query );
+			Log.i(getClass().getSimpleName(), "handleIntent()");
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			//Create fragment
+			ExamCategoryFragment fragment = new ExamCategoryFragment();
+			Bundle args = new Bundle();
+			args.putSerializable(ExamCategoryFragment.ARG_CATEGORY, result);
+			//			args.putBoolean(ExamCategoryFragment.ARG_HIDE_SEARCH_BUTTON, true);
+			fragment.setArguments(args);
 
-    }
+			//Put the fragment
+			getSupportFragmentManager().beginTransaction().replace(R.id.exam_category_fragment, fragment).commit();
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        this.performSearch(this.searchView.getText().toString());
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-    }
+		}
+	}
 }

@@ -41,6 +41,7 @@
         <activity
             android:name="de.hfu.studiportal.view.ExamSearchActivity"
             android:label="@string/text_search_result"
+            android:windowSoftInputMode="stateVisible"
             android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

@@ -64,6 +64,7 @@
     <string name="text_no_change">Keine Änderung</string>
     <string name="text_search_result">Suchergebnisse</string>
     <string name="text_activity_login_title">Studiportal Login</string>
+    <string name="text_activity_preferences_title">Einstellungen</string>
     <string name="text_search_hint">Prüfung / Konto eingeben</string>
     <string name="preferences_logout_title">Ausloggen</string>
     <string name="preferences_login_data_summary">Trage hier deine HFU-Login Daten ein</string>

@@ -1,5 +1,13 @@
 package de.hfu.studiportal.data;
 
+import android.content.SharedPreferences;
+import android.util.Base64;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -9,14 +17,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import android.content.SharedPreferences;
-import android.util.Base64;
 
 public class StudiportalData implements Serializable {
 
@@ -65,23 +65,20 @@ public class StudiportalData implements Serializable {
 		
 		//Iterate over myexasm and compare to same ids
 		for(Exam e : myExams) {
-			//If the Exam is nota seperator
-			if(!(e instanceof Seperator)) {
-				//Find the equivalent exam
-				Exam other = otherInstance.findExam(e.getId());
-				
-				//If there is a other one and it was changed, add it
-				if(other != null && other.getGrade() != null && 
-						!other.getGrade().equals(e.getGrade()) && !doesListContainSubject(e.getName(), changed)) {
-					changed.add(e);
-				}
-				
-				//If there is a other one and it was changed, add it
-				if(other != null && other.getState() != null && 
-						!other.getState().equals(e.getState()) && !doesListContainSubject(e.getName(), changed)) {
-					changed.add(e);
-				}
-			}
+            //Find the equivalent exam
+            Exam other = otherInstance.findExam(e.getId());
+
+            //If there is a other one and it was changed, add it
+            if(other != null && other.getGrade() != null &&
+                    !other.getGrade().equals(e.getGrade()) && !doesListContainSubject(e.getName(), changed)) {
+                changed.add(e);
+            }
+
+            //If there is a other one and it was changed, add it
+            if(other != null && other.getState() != null &&
+                    !other.getState().equals(e.getState()) && !doesListContainSubject(e.getName(), changed)) {
+                changed.add(e);
+            }
 		}
 		
 		//return all changed
@@ -218,7 +215,6 @@ public class StudiportalData implements Serializable {
 		
 		//If no name is set, skip this category, it's just a gap row (represented by Seperator)
 		if(name.length() == 0) {
-			current.addExam(new Seperator());
 			throw new RuntimeException();
 			
 		}

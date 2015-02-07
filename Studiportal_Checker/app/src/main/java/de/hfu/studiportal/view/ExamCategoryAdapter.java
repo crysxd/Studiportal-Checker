@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +15,6 @@ import java.util.List;
 
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.Exam;
-import de.hfu.studiportal.data.Seperator;
 
 public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapter.ViewHolder> {
 
@@ -86,22 +84,10 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
         //Save context
         Context ctx = holder.itemView.getContext();
 
-		//If e is a seperator hide all views, if not show them all
-		if(e instanceof Seperator) {
-			holder.itemView.setVisibility(View.GONE);
-            holder.itemView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 60));
+        //Make all text views visible again
+        for(TextView v : holder.textViews)
+            v.setVisibility(View.VISIBLE);
 
-			return;
-
-		} else {
-            holder.itemView.setVisibility(View.VISIBLE);
-            holder.itemView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-
-            holder.itemView.setVisibility(View.VISIBLE);
-			for(TextView v : holder.textViews)
-				v.setVisibility(View.VISIBLE);
-
-		}
 
 		//Get Kind
 		Exam.Kind kind = e.getKindEnum();

@@ -6,11 +6,10 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
+
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.network.LoginException;
 import de.hfu.studiportal.network.LoginVerifactionTask;
@@ -24,11 +23,6 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 		
 		//inflate Layout
 		this.setContentView(R.layout.activity_login);
-
-        //Set up Toolbar
-        Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
-        this.setSupportActionBar(bar);
-        this.getSupportActionBar().setTitle(this.getString(R.string.text_activity_login_title));
 		
 		//Get SharedPrefs
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -51,12 +45,7 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 		this.dismiss();
 		
 	}
-	
-	public void cancel(View v) {
-		this.finish();
-		
-	}
-	
+
 	public void checkEnteredData(View v) {
 		if(this.getEnteredPassword().length() == 0 || this.getEnteredUsername().length() == 0) {
 			this.showDialog(getResources().getString(R.string.text_error), getResources().getString(R.string.text_enter_user_password));
@@ -108,20 +97,9 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 
 		}
 	}
-	
-	public void toggleShowPassword(View v) {
-		CheckBox b = (CheckBox) v;
-		EditText et = (EditText) findViewById(R.id.editTextPassword);
-		
-		if(b.isChecked()) {
-			et.setInputType(InputType.TYPE_CLASS_TEXT);
-			
-		} else {
-			et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-		}
-		
-		et.setTypeface(Typeface.DEFAULT);
-
-	}
+    @Override
+    public void onBackPressed() {
+        //Prevent user from going back
+    }
 }

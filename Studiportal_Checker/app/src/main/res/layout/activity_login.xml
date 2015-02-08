@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:local="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="2dp"
-        local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_activity_background"
-        android:orientation="vertical" >
+    android:background="@color/color_main_style">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/gap_default"
-            android:orientation="vertical" >
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:id="@+id/linearLayout">
 
             <EditText
                 android:id="@+id/editTextUser"
@@ -33,8 +20,10 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/text_user_name"
-                android:inputType="text" >
-
+                android:inputType="textNoSuggestions"
+                android:textColor="@color/color_white"
+                android:backgroundTint="@color/color_white"
+                android:textColorHint="@color/color_text_hint">
                 <requestFocus />
             </EditText>
 
@@ -44,14 +33,11 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/text_password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@color/color_white"
+                android:backgroundTint="@color/color_white"
+                android:textColorHint="@color/color_text_hint"/>
 
-            <CheckBox
-                android:id="@+id/checkBox1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="toggleShowPassword"
-                android:text="@string/text_show_password" />
 
             <Button
                 android:id="@+id/button1"
@@ -59,15 +45,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_default"
                 android:onClick="checkEnteredData"
-                android:text="@string/text_login" />
+                android:text="@string/text_login"
+                android:textColor="@color/color_white"
+                android:backgroundTint="@color/color_white"
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="cancel"
-                android:text="@string/text_cancel" />
-        </LinearLayout>
+                android:background="#00000000"/>
+    </LinearLayout>
 
-    </ScrollView>
-</LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/ic_hfu_big"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:layout_above="@+id/linearLayout" />
+
+</RelativeLayout>

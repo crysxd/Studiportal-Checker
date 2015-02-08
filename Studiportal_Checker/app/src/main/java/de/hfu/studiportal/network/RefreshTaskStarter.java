@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +32,7 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 			} else {
                 //Wifi is off or we are not allowed to use cellular. Set the overdue flag to signalised the upate is delayed
                 getSharedPreferences(context).edit().putBoolean(context.getString(R.string.preference_refresh_is_overdue), true).commit();
-                Log.e("OVERDUE", "UPDATE IS DELAYED!");
+
             }
 		} 
 

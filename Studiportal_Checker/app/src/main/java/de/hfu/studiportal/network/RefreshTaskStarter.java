@@ -72,14 +72,13 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 		SharedPreferences sp = getSharedPreferences(context);
 		String user = sp.getString(context.getResources().getString(R.string.preference_user), "");
 		String password = sp.getString(context.getResources().getString(R.string.preference_password), "");
-		if(user.length() == 0 || password.length() == 0) {
+		if((user.length() == 0 || password.length() == 0) && context instanceof Activity) {
 			Intent i = new Intent(context, LoginActivity.class);
 			i.putExtra(context.getResources().getString(R.string.extra_start_on_success), new Intent(context, MainActivity.class));
 			context.startActivity(i);
 
 			//Quit the old Activity to prevent going back
-			if(context instanceof Activity)
-				((Activity) context).finish();
+			((Activity) context).finish();
 
 			return;
 

@@ -6,10 +6,6 @@
         android:title="@string/preferences_login_data_title" >
         <Preference
             android:inputType="text"
-            android:key="@string/preference_login"
-            android:title="@string/text_activity_login_title" />
-        <Preference
-            android:inputType="text"
             android:key="@string/preference_logout"
             android:title="@string/preferences_logout_title" />
     </PreferenceCategory>

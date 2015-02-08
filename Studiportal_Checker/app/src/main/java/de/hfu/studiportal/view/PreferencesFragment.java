@@ -2,7 +2,6 @@ package de.hfu.studiportal.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -39,18 +38,6 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 		PreferenceManager.setDefaultValues(this.getActivity(), R.xml.preferences, false);
 		PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
 
-		Preference login = this.findPreference(getResources().getString(R.string.preference_login));
-		login.setOnPreferenceClickListener (new OnPreferenceClickListener() {
-
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Intent i = new Intent(getActivity(), LoginActivity.class);
-				getActivity().startActivity(i);
-				return true;
-
-			}
-		});
-
 		Preference logout = this.findPreference(getResources().getString(R.string.preference_logout));
 		logout.setOnPreferenceClickListener (new OnPreferenceClickListener() {
 
@@ -77,6 +64,7 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 
 						//Restart refresh task, will cause loginActivity to show up
 						RefreshTaskStarter.startRefreshTask(getActivity());
+                        PreferencesFragment.this.getActivity().finish();
 
 					}
 				});
@@ -136,8 +124,9 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 		//Display username
 		key = getResources().getString(R.string.preference_user);
 		String username = PreferenceManager.getDefaultSharedPreferences(this.getActivity()).getString(key, "");
-		p = this.findPreference(getResources().getString(R.string.preference_login));
+		p = this.findPreference(getResources().getString(R.string.preference_logout));
 		p.setSummary(username);
+
 	}
 
 	@Override

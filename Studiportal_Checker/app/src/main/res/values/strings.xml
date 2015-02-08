@@ -10,7 +10,6 @@
     <string name="preference_show_grade_in_notification">preference_show_grade_in_notification</string>
     <string name="preference_user">user</string>
     <string name="preference_use_mobile">use_mobile_network</string>
-    <string name="preference_login">login</string>
     <string name="preference_logout">logout</string>
     <string name="preference_password">password</string>
     <string name="preference_last_studiportal_data">last_studiportal_data</string>

@@ -15,6 +15,7 @@
     <string name="preference_last_studiportal_data">last_studiportal_data</string>
     <string name="preference_refresh_settings">refresh_settings</string>
     <string name="preference_last_check">last_check</string>
+    <string name="preference_refresh_is_overdue">refresh_overdue</string>
     <string name="extra_start_on_success">start_on_success</string>
     <string name="exception_no_user_password">Benutzer oder Passwort nicht eingetragen</string>
     <string name="exception_wrong_user_password">Benutzer oder Passwort falsch</string>

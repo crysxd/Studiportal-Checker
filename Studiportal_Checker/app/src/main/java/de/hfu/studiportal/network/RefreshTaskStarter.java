@@ -1,7 +1,5 @@
 package de.hfu.studiportal.network;
 
-import java.util.concurrent.TimeUnit;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -11,6 +9,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
+import java.util.concurrent.TimeUnit;
+
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.view.LoginActivity;
 import de.hfu.studiportal.view.MainActivity;
@@ -21,19 +23,33 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-
+        //If the Broadcast CHECK_FOR_UPDATE arrives, let's check
 		if (intent.getAction().equals(CHECK_FOR_UPDATES)) {
+            //Only check if wifi is enabled or we are allowed to check over cellular
 			if(getWifiManager(context).isWifiEnabled() || 
-					getSharedPreferences(context).getBoolean(context.getResources().getString(R.string.preference_use_mobile), false)) {
+					getSharedPreferences(context).getBoolean(context.getResources().getString(R.string.preference_use_mobile), true)) {
 				new RefreshTask(context).execute();
 
-			}
+			} else {
+                //Wifi is off or we are not allowed to use cellular. Set the overdue flag to signalised the upate is delayed
+                getSharedPreferences(context).edit().putBoolean(context.getString(R.string.preference_refresh_is_overdue), true).commit();
+                Log.e("OVERDUE", "UPDATE IS DELAYED!");
+            }
 		} 
-		
+
+        //init after reboot
 		if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) { 
 			startRefreshTask(context);
 
 		}
+
+        //If the Network state changed and Wifi is now on and the last update is delayed -> update and reset overdue flag
+        if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION) && getWifiManager(context).isWifiEnabled() &&
+        getSharedPreferences(context).getBoolean(context.getResources().getString(R.string.preference_refresh_is_overdue), false)) {
+            getSharedPreferences(context).edit().putBoolean(context.getString(R.string.preference_refresh_is_overdue), false).commit();
+            new RefreshTask(context).execute();
+
+        }
 	}
 	
 	public static PendingIntent createPendingIntent(Context context) {

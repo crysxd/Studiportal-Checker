@@ -13,6 +13,7 @@ import android.widget.EditText;
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.network.LoginException;
 import de.hfu.studiportal.network.LoginVerifactionTask;
+import de.hfu.studiportal.network.NoChangeException;
 import de.hfu.studiportal.network.RefreshTask;
 
 public class LoginActivity extends DialogHostActivity implements DialogHost {
@@ -92,7 +93,7 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 		if(e instanceof LoginException) {
 			this.showDialog(getString(R.string.text_error), getString(R.string.exception_wrong_user_password_long));
 
-		} else {
+		} else if(!(e instanceof NoChangeException)) {
 			super.showErrorDialog(e);
 
 		}

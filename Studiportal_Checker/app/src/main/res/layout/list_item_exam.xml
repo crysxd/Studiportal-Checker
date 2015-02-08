@@ -14,7 +14,7 @@
         card_view:cardCornerRadius="2dp"
         android:layout_marginLeft="@dimen/gap_default"
         android:layout_marginRight="@dimen/gap_default"
-        android:layout_marginBottom="@dimen/gap_default">
+        android:layout_marginBottom="7dp">
 
         <RelativeLayout
             android:layout_width="match_parent"

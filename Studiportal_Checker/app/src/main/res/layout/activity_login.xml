@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_main_style">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:orientation="vertical"
-            android:layout_centerInParent="true"
-            android:id="@+id/linearLayout">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/editTextUser"
@@ -23,9 +27,13 @@
                 android:inputType="textNoSuggestions"
                 android:textColor="@color/color_white"
                 android:backgroundTint="@color/color_white"
-                android:textColorHint="@color/color_text_hint">
-                <requestFocus />
-            </EditText>
+                android:textColorHint="@color/color_text_hint" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/editTextPassword"
@@ -36,20 +44,20 @@
                 android:inputType="textPassword"
                 android:textColor="@color/color_white"
                 android:backgroundTint="@color/color_white"
-                android:textColorHint="@color/color_text_hint"/>
+                android:textColorHint="@color/color_text_hint" />
+        </android.support.design.widget.TextInputLayout>
 
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_default"
+            android:onClick="checkEnteredData"
+            android:text="@string/text_login"
+            android:textColor="@color/color_white"
+            android:backgroundTint="@color/color_white"
 
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_default"
-                android:onClick="checkEnteredData"
-                android:text="@string/text_login"
-                android:textColor="@color/color_white"
-                android:backgroundTint="@color/color_white"
-
-                android:background="#00000000"/>
+            android:background="#00000000" />
     </LinearLayout>
 
     <ImageView

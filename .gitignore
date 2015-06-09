@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -36,10 +37,10 @@ Icon
 .Trashes
 
 
-Studiportal_Checker/build/
-Studiportal_Checker/app/build/
-Studiportal_Checker/.gradle/
-Studiportal_Checker/.idea/
-Studiportal_Checker/.idea/workspace.xml
-
-Studiportal_Checker/.idea/workspace.xml
+# Android Studio
+.gradle
+local.properties
+.idea/workspace.xml
+.idea/libraries
+.DS_Store
+build

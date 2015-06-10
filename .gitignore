@@ -38,9 +38,11 @@ Icon
 
 
 # Android Studio
-.gradle
-local.properties
-.idea/workspace.xml
-.idea/libraries
-.DS_Store
-build
+*.gradle
+*local.properties
+Studiportal_Checker/.idea/workspace.xml
+*.idea/libraries
+*.DS_Store
+*build
+
+Studiportal_Checker/.idea/workspace.xml

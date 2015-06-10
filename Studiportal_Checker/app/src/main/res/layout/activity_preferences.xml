@@ -18,6 +18,7 @@
     <FrameLayout
         android:id="@+id/preferences_fragment"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"></FrameLayout>
+        android:layout_height="fill_parent"
+        android:foreground="?android:windowContentOverlay"></FrameLayout>
 
 </LinearLayout>

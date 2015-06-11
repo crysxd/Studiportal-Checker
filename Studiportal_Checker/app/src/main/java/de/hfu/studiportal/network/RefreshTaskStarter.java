@@ -84,10 +84,10 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 
 		}
 		
-		//If the polling time less than one hour, reset it to 60 minutes
-		if(TimeUnit.MINUTES.convert(getPauseTime(context), TimeUnit.MILLISECONDS) < 60) {
-			sp.edit().putString(context.getString(R.string.preference_refresh_rate), "60").apply();
-			
+		//If the polling time less than the minimum, reset it to the minimum minutes
+        String minValue = context.getResources().getStringArray(R.array.array_refresh_time_key)[0];
+		if(TimeUnit.MINUTES.convert(getPauseTime(context), TimeUnit.MILLISECONDS) < Integer.parseInt(minValue)) {
+			sp.edit().putString(context.getString(R.string.preference_refresh_rate), minValue).apply();
 		}
 
 		//Everything ok, start service

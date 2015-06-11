@@ -7,29 +7,46 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent" >
 
-        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:local="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:local="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/contentPanel"
+                android:layout_below="@id/toolbar"
+                android:foreground="?android:windowContentOverlay"></FrameLayout>
+
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/buttonSearch"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            android:src="@drawable/abc_ic_search_api_mtrl_alpha"
+            android:layout_marginBottom="@dimen/gap_default"
+            android:layout_marginRight="@dimen/gap_default"
+            android:layout_gravity="bottom|right"
+            app:fabSize="normal" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/contentPanel"
-            android:foreground="?android:windowContentOverlay"></FrameLayout>
 
-    </LinearLayout>
-
+    </android.support.design.widget.CoordinatorLayout>
 
     <LinearLayout
         android:id="@+id/navigation"

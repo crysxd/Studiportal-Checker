@@ -61,7 +61,7 @@
     <string name="text_connecting">Verbinden&#8230;</string>
     <string name="text_logging_out">Ausloggen&#8230;</string>
     <string name="text_checking_update">Nach Änderungen suchen&#8230;</string>
-    <string name="text_no_change">Keine Änderung</string>
+    <string name="text_no_change">Keine neuen Daten</string>
     <string name="text_search_result">Suchergebnisse</string>
     <string name="text_activity_login_title">Studiportal Login</string>
     <string name="text_activity_preferences_title">Einstellungen</string>

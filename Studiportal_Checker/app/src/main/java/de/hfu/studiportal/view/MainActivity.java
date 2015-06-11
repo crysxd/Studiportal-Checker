@@ -23,7 +23,7 @@ import de.hfu.studiportal.network.NoChangeException;
 import de.hfu.studiportal.network.RefreshTask;
 import de.hfu.studiportal.network.RefreshTaskStarter;
 
-public class MainActivity extends DialogHostActivity implements Refreshable, AdapterView.OnItemClickListener {
+public class MainActivity extends DialogHostActivity implements Refreshable, AdapterView.OnItemClickListener, View.OnClickListener {
 
 	private ExamCategoryArrayAdapter examCategoryAdapter;
     private ActionBarDrawerToggle drawerToggle;
@@ -91,6 +91,9 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
         //Add item click listener
         this.examCategoryList.setOnItemClickListener(this);
 
+        //Add click listener to search button (fab)
+        this.findViewById(R.id.buttonSearch).setOnClickListener(this);
+
         //Set Up View
 		this.onRefresh();
 		
@@ -126,6 +129,10 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
+        if (this.drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
 		if(item.getItemId() == R.id.action_refresh) {
 			new RefreshTask(this).execute();
 
@@ -147,13 +154,6 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 			return true;
 		}
 
-        if(item.getItemId() == R.id.action_search) {
-            Intent i = new Intent(this, ExamSearchActivity.class);
-            this.startActivity(i);
-
-            return true;
-        }
-
 		return super.onOptionsItemSelected(item);
 
 	}
@@ -163,7 +163,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 
 		if(e instanceof NoChangeException) {
 			//No change
-            Snackbar.make(this.drawerLayout, getResources().getString(R.string.text_no_change), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(this.findViewById(R.id.coordinatorLayout), getResources().getString(R.string.text_no_change), Snackbar.LENGTH_LONG).show();
 
 		}else {
 			super.showErrorDialog(e);
@@ -224,7 +224,14 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
         //Hide drawer
         this.drawerLayout.closeDrawers();
 
-        showErrorDialog(new NoChangeException());
+    }
 
+    @Override
+    public void onClick(View v) {
+        if(v == this.findViewById(R.id.buttonSearch)) {
+            Intent i = new Intent(this, ExamSearchActivity.class);
+            this.startActivity(i);
+
+        }
     }
 }

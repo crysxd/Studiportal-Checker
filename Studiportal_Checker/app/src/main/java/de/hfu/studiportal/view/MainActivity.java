@@ -1,24 +1,36 @@
 package de.hfu.studiportal.view;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import de.hfu.funfpunktnull.R;
+import de.hfu.studiportal.data.ExamCategory;
 import de.hfu.studiportal.network.NoChangeException;
 import de.hfu.studiportal.network.RefreshTask;
 import de.hfu.studiportal.network.RefreshTaskStarter;
 
-public class MainActivity extends DialogHostActivity implements Refreshable {
+public class MainActivity extends DialogHostActivity implements Refreshable, AdapterView.OnItemClickListener {
 
-	private ExamCategoryPagerAdapter pagerAdapter;
-	private ViewPager viewPager;
+	private ExamCategoryArrayAdapter examCategoryAdapter;
+    private ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout drawerLayout;
 	private boolean isDestroyed = false;
+    private ListView examCategoryList;
+    private Integer selectedCategory = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +40,74 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
 		RefreshTaskStarter.startRefreshTask(this);
 
 		//Build View
-		setContentView(R.layout.activity_main);
+		this.setContentView(R.layout.activity_main);
 
         //Set up Toolbar
         Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(bar);
         this.getSupportActionBar().setTitle(this.getString(R.string.app_name));
-        this.getSupportActionBar().setIcon(this.getResources().getDrawable(R.drawable.ic_hfu));
 
-		//Set Up ViewPager
-		viewPager = (ViewPager) findViewById(R.id.pager);
+        //Display user name
+        String user = PreferenceManager.getDefaultSharedPreferences(this).getString(this.getString(R.string.preference_user), "");
+        TextView userView = (TextView) this.findViewById(R.id.textViewUser);
+        userView.setText(user);
+
+        //Set Up Navigation Drawer
+        this.drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        //Set up drawer toggle which will be put in the left side of the ActionBar
+        this.drawerToggle = new ActionBarDrawerToggle(
+                this,              /* host Activity */
+                drawerLayout,      /* DrawerLayout object */
+                R.string.app_name, /* "open drawer" description */
+                R.string.app_name  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View view) {
+                super.onDrawerClosed(view);
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        this.drawerLayout.setDrawerListener(this.drawerToggle);
+
+        //Setup the ActionBar for the DrawerToggle
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+
+        //Create ExamCategoryAdapter
+        this.examCategoryAdapter = new ExamCategoryArrayAdapter(this, this);
+
+        //Find exam category list, set adapter
+        this.examCategoryList = (ListView) this.findViewById(R.id.examCategoryList);
+        this.examCategoryList.setAdapter(this.examCategoryAdapter);
+
+        //Add item click listener
+        this.examCategoryList.setOnItemClickListener(this);
+
+        //Set Up View
 		this.onRefresh();
 		
 	}
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        this.drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        this.drawerToggle.onConfigurationChanged(newConfig);
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,17 +187,42 @@ public class MainActivity extends DialogHostActivity implements Refreshable {
 	public synchronized void onRefresh() {
 		if(this.isDestroyed)
 			return;
-		
-		int selectedPage = 0;
-		
-		if(this.viewPager != null)
-			selectedPage = this.viewPager.getCurrentItem();
-			
-		pagerAdapter = new ExamCategoryPagerAdapter(getSupportFragmentManager(), this, this);
-		this.viewPager.setAdapter(this.pagerAdapter);
-		
-		viewPager.setCurrentItem(selectedPage);
-		
+
+        //Update fragment
+        this.showCategory(this.selectedCategory);
+
 	}
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //Save the selected Category
+        this.selectedCategory = position;
+
+        //Update fragment
+        this.showCategory(this.selectedCategory);
+
+    }
+
+    private void showCategory(int categoryIndex) {
+        //Create Fragment
+        Fragment fragment = new ExamCategoryFragment();
+        Bundle args = new Bundle();
+
+        //Fetch Category
+        ExamCategory category = examCategoryAdapter.getCategory(categoryIndex);
+
+        // Our object is just an integer :-P
+        args.putSerializable(ExamCategoryFragment.ARG_CATEGORY, category);
+        fragment.setArguments(args);
+
+        //Set Fragment
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.contentPanel, fragment).commit();
+
+        //Set title
+        this.getSupportActionBar().setTitle(category.getCategoryName());
+
+        //Hide drawer
+        this.drawerLayout.closeDrawers();
+
+    }
 }

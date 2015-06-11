@@ -100,6 +100,7 @@
     </string-array>
 
     <dimen name="gap_default">10dp</dimen>
+    <dimen name="gap_default_double">20dp</dimen>
 
     <color name="color_main_style">#83B81A</color>
     <color name="color_main_style_dark">#ff668f15</color>
@@ -109,5 +110,6 @@
     <color name="color_white">#ffffff</color>
     <color name="color_text_hint">#55000000</color>
     <color name="color_light_text">#aaa</color>
+    <color name="text_shadow">#7F000000</color>
 
 </resources>

@@ -1,8 +1,11 @@
 package de.hfu.studiportal.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +43,12 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
 
     private final List<Exam> objects;
 
+    private int animationStep = 0;
+
 	public ExamCategoryAdapter(Context context, List<Exam> objects) {
         this.objects = objects;
+
+        this.animationStep = this.objects.size();
 
 		this.BONUS = context.getString(R.string.text_bonus);
 		this.MALUS = context.getString(R.string.text_malus);
@@ -65,7 +72,7 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
 
     @Override
     public int getItemCount() {
-        return this.objects.size();
+        return animationStep;
     }
 
     @Override
@@ -220,5 +227,69 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<ExamCategoryAdapte
             imageView = (ImageView) itemView.findViewById(R.id.imageViewState);
 
         }
+    }
+
+    public void animateIn(final Activity activity, final RecyclerView recyclerView) {
+        //Reset
+        this.animationStep = 0;
+        this.notifyDataSetChanged();
+
+        //Create handler
+        HandlerThread sWorkerThread = new HandlerThread("WeatherWidgetProvider-worker");
+        sWorkerThread.start();
+        Handler h = new Handler(sWorkerThread.getLooper());
+
+        //Run animation
+        h.post(new Runnable() {
+            @Override
+            public void run() {
+                //Fetch the size of available items
+                final int max = ExamCategoryAdapter.this.objects.size();
+
+                //Make at most 20 animation steps (more items wont be visible), but not more then items available
+                for(int i=0; i<20 && i<=max; i++) {
+                    final int I = i;
+
+                    //Run UI Thread
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Animate in
+                            ExamCategoryAdapter.this.animationStep = I+1 < max ? I+1 : I;
+                            ExamCategoryAdapter.this.notifyItemInserted(I);
+                        }
+                    });
+
+                    //Sleep 40ms before inserting the next item
+                    try {
+                        Thread.sleep(40);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+
+                    }
+                }
+
+
+                //Sleep the time the entry animation takes
+                try {
+                    Thread.sleep(recyclerView.getItemAnimator().getAddDuration());
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+
+                }
+
+                //Make the rest of the items available, this will be off-screen
+                activity.runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       ExamCategoryAdapter.this.animationStep = ExamCategoryAdapter.this.objects.size();
+                       ExamCategoryAdapter.this.notifyDataSetChanged();
+
+                   }
+               });
+            }
+        });
     }
 }

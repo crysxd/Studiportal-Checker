@@ -2,15 +2,16 @@ package de.hfu.studiportal.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.ExamCategory;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 //Instances of this class are fragments representing a single
 //object in our collection.
@@ -30,11 +31,15 @@ public class ExamCategoryFragment extends Fragment {
         //Find list and init
         RecyclerView list = (RecyclerView) rootView.findViewById(R.id.list);
         list.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        list.setItemAnimator(new DefaultItemAnimator());
+        list.setItemAnimator(new SlideInUpAnimator());
 
 		//Set Adapter
-		list.setAdapter(new ExamCategoryAdapter(this.getActivity(), c.getAllExams()));
-		
+        ExamCategoryAdapter adapter = new ExamCategoryAdapter(this.getActivity(), c.getAllExams());
+		list.setAdapter(adapter);
+
+        //Animate Entry
+        adapter.animateIn(this.getActivity(), list);
+
 		return rootView;
 	}
 }

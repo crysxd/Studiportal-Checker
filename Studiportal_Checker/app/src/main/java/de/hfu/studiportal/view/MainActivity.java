@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.data.ExamCategory;
@@ -163,7 +163,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 
 		if(e instanceof NoChangeException) {
 			//No change
-			Toast.makeText(MainActivity.this, getResources().getString(R.string.text_no_change), Toast.LENGTH_SHORT).show();
+            Snackbar.make(this.drawerLayout, getResources().getString(R.string.text_no_change), Snackbar.LENGTH_LONG).show();
 
 		}else {
 			super.showErrorDialog(e);
@@ -223,6 +223,8 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 
         //Hide drawer
         this.drawerLayout.closeDrawers();
+
+        showErrorDialog(new NoChangeException());
 
     }
 }

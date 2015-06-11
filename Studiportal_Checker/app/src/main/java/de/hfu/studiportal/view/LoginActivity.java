@@ -76,12 +76,10 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 		
 		//Start the new activity if available
 		Bundle extras = (Bundle) getIntent().getExtras();
-		
-		if(extras != null) {
-			Intent startOnSuccess = (Intent) extras.get(getResources().getString(R.string.extra_start_on_success));
-			if(startOnSuccess != null)
-				this.startActivity(startOnSuccess);
-		}
+
+		//Forward to MainActivity
+		Intent i = new Intent(this, MainActivity.class);
+		this.startActivity(i);
 		
 
 		//finish this
@@ -98,9 +96,4 @@ public class LoginActivity extends DialogHostActivity implements DialogHost {
 
 		}
 	}
-
-    @Override
-    public void onBackPressed() {
-        //Prevent user from going back
-    }
 }

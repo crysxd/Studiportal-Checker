@@ -2,6 +2,7 @@ package de.hfu.studiportal.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -60,11 +61,16 @@ public class PreferencesFragment extends PreferenceFragment implements OnSharedP
 						Editor sp = PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
 						sp.putString(getResources().getString(R.string.preference_last_studiportal_data), "");
 						sp.putString(getResources().getString(R.string.preference_password), "");
-						sp.apply();		
+						sp.putString(getResources().getString(R.string.preference_last_studiportal_data), "");
+						sp.apply();
 
-						//Restart refresh task, will cause loginActivity to show up
-						RefreshTaskStarter.startRefreshTask(getActivity());
-                        PreferencesFragment.this.getActivity().finish();
+						//Go to Login Activity
+						Intent i = new Intent(PreferencesFragment.this.getActivity(), LoginActivity.class);
+						i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+						PreferencesFragment.this.getActivity().startActivity(i);
+
+						//Finish Activity
+						PreferencesFragment.this.getActivity().finish();
 
 					}
 				});

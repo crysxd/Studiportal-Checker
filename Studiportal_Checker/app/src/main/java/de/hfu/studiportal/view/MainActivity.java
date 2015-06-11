@@ -1,6 +1,7 @@
 package de.hfu.studiportal.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,21 +37,29 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//Start Background Service
-		RefreshTaskStarter.startRefreshTask(this);
+        //If the user is empty, forward to LoginActivity
+        if(!this.isLoggedIn()) {
+            Intent i = new Intent(this, LoginActivity.class);
+            this.startActivity(i);
+            this.finish();
+            return;
+        }
 
 		//Build View
 		this.setContentView(R.layout.activity_main);
+
+        //Load user name and password
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String user = prefs.getString(this.getString(R.string.preference_user), "");
+
+        //Set username
+        TextView userView = (TextView) this.findViewById(R.id.textViewUser);
+        userView.setText(user);
 
         //Set up Toolbar
         Toolbar bar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(bar);
         this.getSupportActionBar().setTitle(this.getString(R.string.app_name));
-
-        //Display user name
-        String user = PreferenceManager.getDefaultSharedPreferences(this).getString(this.getString(R.string.preference_user), "");
-        TextView userView = (TextView) this.findViewById(R.id.textViewUser);
-        userView.setText(user);
 
         //Set Up Navigation Drawer
         this.drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,7 +105,9 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 
         //Set Up View
 		this.onRefresh();
-		
+
+        //Start Background Service
+        RefreshTaskStarter.startRefreshTask(this);
 	}
 
     @Override
@@ -203,13 +214,29 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 
     }
 
+
+    private boolean isLoggedIn() {
+        //Load user and password
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String user = prefs.getString(this.getString(R.string.preference_user), "");
+        String password = prefs.getString(this.getString(R.string.preference_password), "");
+
+        //If the user is empty, forward to LoginActivity
+        return user.length() != 0 &&  password.length() != 0;
+    }
+
     private void showCategory(int categoryIndex) {
+        //Check if at least one category is available or the activity was destroyed, cancel if not
+        if(this.examCategoryAdapter.getCount() == 0 || this.isDestroyed || !this.isLoggedIn()) {
+            return;
+        }
+
         //Create Fragment
         Fragment fragment = new ExamCategoryFragment();
         Bundle args = new Bundle();
 
         //Fetch Category
-        ExamCategory category = examCategoryAdapter.getCategory(categoryIndex);
+        ExamCategory category = this.examCategoryAdapter.getCategory(categoryIndex);
 
         // Our object is just an integer :-P
         args.putSerializable(ExamCategoryFragment.ARG_CATEGORY, category);

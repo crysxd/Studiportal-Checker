@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import de.hfu.funfpunktnull.R;
 import de.hfu.studiportal.view.LoginActivity;
-import de.hfu.studiportal.view.MainActivity;
 
 public class RefreshTaskStarter extends BroadcastReceiver {
 
@@ -74,7 +73,7 @@ public class RefreshTaskStarter extends BroadcastReceiver {
 		String password = sp.getString(context.getResources().getString(R.string.preference_password), "");
 		if((user.length() == 0 || password.length() == 0) && context instanceof Activity) {
 			Intent i = new Intent(context, LoginActivity.class);
-			i.putExtra(context.getResources().getString(R.string.extra_start_on_success), new Intent(context, MainActivity.class));
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(i);
 
 			//Quit the old Activity to prevent going back

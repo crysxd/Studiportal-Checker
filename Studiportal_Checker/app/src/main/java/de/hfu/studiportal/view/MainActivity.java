@@ -90,12 +90,8 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setHomeButtonEnabled(true);
 
-        //Create ExamCategoryAdapter
-        this.examCategoryAdapter = new ExamCategoryArrayAdapter(this, this);
-
-        //Find exam category list, set adapter
+        //Find exam category list
         this.examCategoryList = (ListView) this.findViewById(R.id.examCategoryList);
-        this.examCategoryList.setAdapter(this.examCategoryAdapter);
 
         //Add item click listener
         this.examCategoryList.setOnItemClickListener(this);
@@ -199,10 +195,16 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 		if(this.isDestroyed)
 			return;
 
+        //Create ExamCategoryAdapter
+        this.examCategoryAdapter = new ExamCategoryArrayAdapter(this, this);
+
+        //Set adapter
+        this.examCategoryList.setAdapter(this.examCategoryAdapter);
+        
         //Update fragment
         this.showCategory(this.selectedCategory);
 
-	}
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

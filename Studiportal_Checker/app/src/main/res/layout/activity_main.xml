@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
+                android:elevation="@dimen/toolbar_elevation"
                 local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -29,8 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/contentPanel"
-                android:layout_below="@id/toolbar"
-                android:foreground="?android:windowContentOverlay"/>
+                android:layout_below="@id/toolbar" />
 
         </RelativeLayout>
 
@@ -42,9 +42,9 @@
             android:layout_marginBottom="@dimen/fap_margin"
             android:layout_marginRight="@dimen/fap_margin"
             android:layout_gravity="bottom|right"
-            android:elevation="4dp"
+            android:elevation="8dp"
             app:borderWidth="0dp"
-            app:elevation="4dp"
+            app:elevation="8dp"
             app:fabSize="normal" />
 
 

@@ -38,9 +38,9 @@ Icon
 
 
 # Android Studio
-*.gradle
 *local.properties
-*.idea/*
-*.DS_Store
+*.iea*
 *build
-Studiportal_Checker/Studiportal_Checker.iml
+*.iml
+
+Studiportal_Checker/.idea/*

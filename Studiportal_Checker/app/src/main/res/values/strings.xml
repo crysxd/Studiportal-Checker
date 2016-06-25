@@ -98,8 +98,9 @@
         <item>525948766</item>
     </string-array>
 
-    <dimen name="gap_default">10dp</dimen>
-    <dimen name="gap_default_double">20dp</dimen>
+    <dimen name="gap_default">16dp</dimen>
+    <dimen name="gap_default_double">32dp</dimen>
+    <dimen name="fap_margin">10dp</dimen>
 
     <color name="color_main_style">#83B81A</color>
     <color name="color_main_style_dark">#ff668f15</color>

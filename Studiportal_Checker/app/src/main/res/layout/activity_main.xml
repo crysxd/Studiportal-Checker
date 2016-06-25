@@ -30,7 +30,7 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/contentPanel"
                 android:layout_below="@id/toolbar"
-                android:foreground="?android:windowContentOverlay"></FrameLayout>
+                android:foreground="?android:windowContentOverlay"/>
 
         </RelativeLayout>
 
@@ -39,8 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/abc_ic_search_api_mtrl_alpha"
-            android:layout_marginBottom="@dimen/gap_default_double"
-            android:layout_marginRight="@dimen/gap_default_double"
+            android:layout_marginBottom="@dimen/fap_margin"
+            android:layout_marginRight="@dimen/fap_margin"
             android:layout_gravity="bottom|right"
             android:elevation="4dp"
             app:borderWidth="0dp"

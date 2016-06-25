@@ -8,6 +8,8 @@ android {
         applicationId "de.hfu.funfpunktnull"
         minSdkVersion 14
         targetSdkVersion 21
+        versionCode 19
+        versionName "2.5.0"
     }
 
     buildTypes {

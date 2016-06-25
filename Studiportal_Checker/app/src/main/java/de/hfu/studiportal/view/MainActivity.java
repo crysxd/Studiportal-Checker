@@ -245,7 +245,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
         fragment.setArguments(args);
 
         //Set Fragment
-        this.getSupportFragmentManager().beginTransaction().replace(R.id.contentPanel, fragment).commit();
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.contentPanel, fragment).commitAllowingStateLoss();
 
         //Set title
         this.getSupportActionBar().setTitle(category.getCategoryName());

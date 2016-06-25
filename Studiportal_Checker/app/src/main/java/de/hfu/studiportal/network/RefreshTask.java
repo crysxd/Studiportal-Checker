@@ -1,5 +1,6 @@
 package de.hfu.studiportal.network;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 
 	private final String URL_LOGIN = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=1&category=auth.login&startpage=portal.vm&breadCrumbSource=portal";
 	private final String URL_LOGOUT = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=user&type=4&re=last&category=auth.logout&breadCrumbSource=portal";
+	private final String URL_FETCH_ASI = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=change&type=1&moduleParameter=studyPOSMenu&nextdir=change&next=menu.vm&subdir=applications&xml=menu&purge=y&navigationPosition=functions%2CstudyPOSMenu&breadcrumb=studyPOSMenu&topitem=functions&subitem=studyPOSMenu";
 	private final String URL_OBSERVE = "https://studi-portal.hs-furtwangen.de/qisserver/rds?state=htmlbesch&moduleParameter=Student&menuid=notenspiegel&breadcrumb=notenspiegel&breadCrumbSource=menu&asi=%s";
 
 	private final String USER_NAME;
@@ -80,7 +82,10 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 				//Login
 				this.showProgressDialog(this.getStringResource(R.string.text_logging_in));
 				Log.i(this.getClass().getSimpleName(), this.getStringResource(R.string.text_logging_in));
-				String asi = this.login(client);
+				this.login(client);
+
+				// Fetch asi
+				String asi = this.getAsi(client);
 
 				//Check for change
 				this.showProgressDialog(this.getStringResource(R.string.text_checking_update));
@@ -149,7 +154,7 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	}
 
 
-	private String login(HttpClient client) throws Exception {
+	private void login(HttpClient client) throws Exception {
 
 		//Check Preference
 		if(this.PASSWORD.length() == 0 || this.USER_NAME.length() == 0)
@@ -170,12 +175,23 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 			throw new LoginException(getStringResource(R.string.exception_wrong_user_password));
 
 		}
+	}
+
+	private String getAsi(HttpClient client) throws Exception {
+		//Load page (aka log in)
+		String response = this.sendPost(client, this.URL_FETCH_ASI, new ArrayList<NameValuePair>());
 
 		//Find asi
-		int start = response.indexOf(";asi=") + ";asi=".length();
+        int asiLength = ";asi=".length();
+		int start = response.indexOf(";asi=") + asiLength;
 		int end = response.indexOf("\"", start);
 
+        if(start == asiLength) {
+            throw new IOException("asi could not be extracted");
+        }
+
 		return response.substring(start, end);
+
 	}
 
 	private boolean checkDataChange(HttpClient client, String asi) throws Exception {

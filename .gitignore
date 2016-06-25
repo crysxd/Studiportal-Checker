@@ -40,9 +40,7 @@ Icon
 # Android Studio
 *.gradle
 *local.properties
-Studiportal_Checker/.idea/workspace.xml
-*.idea/libraries
+*.idea/*
 *.DS_Store
 *build
-
-Studiportal_Checker/.idea/workspace.xml
+Studiportal_Checker/Studiportal_Checker.iml

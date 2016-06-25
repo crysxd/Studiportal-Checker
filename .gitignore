@@ -44,3 +44,5 @@ Icon
 *.iml
 
 Studiportal_Checker/.idea/*
+
+Studiportal_Checker/.gradle/*

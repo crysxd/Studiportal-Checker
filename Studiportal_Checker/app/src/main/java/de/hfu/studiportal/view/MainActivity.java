@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +35,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 	private boolean isDestroyed = false;
     private ListView examCategoryList;
     private Integer selectedCategory = 0;
+    private boolean buttonSearchRaised = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +134,22 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 	protected void onResume() {
 		super.onResume();
 		this.cancelProgressDialog();
+
+        if(buttonSearchRaised) {
+            return;
+        }
+
+        buttonSearchRaised = true;
+
+        View adBanner = findViewById(R.id.adBanner);
+        adBanner.setOnClickListener(this);
+        View buttonSearch = findViewById(R.id.buttonSearch);
+
+        adBanner.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+
+        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) buttonSearch.getLayoutParams();
+        lp.bottomMargin += adBanner.getMeasuredHeight();
+        buttonSearch.setLayoutParams(lp);
 
 	}
 
@@ -259,6 +279,11 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
     public void onClick(View v) {
         if(v == this.findViewById(R.id.buttonSearch)) {
             Intent i = new Intent(this, ExamSearchActivity.class);
+            this.startActivity(i);
+
+        } else if (v.getId() == R.id.adBanner) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("https://www.savedroid.de/?utm_source=mobil&utm_medium=application&utm_campaign=studiportal"));
             this.startActivity(i);
 
         }

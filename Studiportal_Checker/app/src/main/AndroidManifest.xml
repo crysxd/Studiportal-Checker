@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="de.hfu.studiportal.view.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +24,8 @@
         </activity>
         <activity
             android:name="de.hfu.studiportal.view.LoginActivity"
-            android:label="@string/text_activity_login_title" >
+            android:label="@string/text_activity_login_title"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="de.hfu.studiportal.view.PreferencesActivity"
@@ -31,12 +33,14 @@
         </activity>
         <activity
             android:name="de.hfu.studiportal.view.ExamActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="de.hfu.studiportal.view.ExamSearchActivity"
             android:label="@string/text_search_result"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

@@ -82,7 +82,7 @@
     <string name="preferences_notify_about_change_title">Über Noten benachrichtigen</string>
 
     <string-array name="array_refresh_time">
-        <item>2 Stunde</item>
+        <item>2 Stunden</item>
         <item>3 Stunden</item>
         <item>6 Stunden</item>
         <item>12 Stunden</item>

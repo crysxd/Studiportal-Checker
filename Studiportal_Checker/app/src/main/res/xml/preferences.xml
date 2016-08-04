@@ -15,11 +15,6 @@
             android:key="@string/preference_notify_about_change"
             android:summary="@string/preferences_notify_about_change_summary"
             android:title="@string/preferences_notify_about_change_title" />
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/preference_show_grade_in_notification"
-            android:summary="@string/preferences_show_grade_summary"
-            android:title="@string/preferences_show_grade_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_refresh_title" >
         <ListPreference

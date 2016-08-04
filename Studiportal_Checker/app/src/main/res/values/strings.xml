@@ -7,7 +7,6 @@
     <string name="menu_search">Prüfung suchen</string>
     <string name="preference_notify_about_change">preference_notify_about_change</string>
     <string name="preference_refresh_rate">refersh</string>
-    <string name="preference_show_grade_in_notification">preference_show_grade_in_notification</string>
     <string name="preference_user">user</string>
     <string name="preference_use_mobile">use_mobile_network</string>
     <string name="preference_logout">logout</string>
@@ -76,8 +75,6 @@
     <string name="preferences_about_text">&#169; Christian Würthner (2014)\nAllgemeine Informatik\nHochschule Furtwangen University\n\nSourcecode auf GitHub:\nhttps://github.com/crysxd/Studiportal-Checker</string>
     <string name="preferences_other_title">Sonstiges</string>
     <string name="preferences_notification">Benachrichtigung</string>
-    <string name="preferences_show_grade_title">Note in Benachrichtigung</string>
-    <string name="preferences_show_grade_summary">Neue Noten werden direkt in der Benachrichtigung angezeigt</string>
     <string name="preferences_notify_about_change_summary">Bei Änderungen im Studiportal wird eine Benachrichtigung angezeigt</string>
     <string name="preferences_notify_about_change_title">Über Noten benachrichtigen</string>
 

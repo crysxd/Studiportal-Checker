@@ -289,8 +289,6 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 	}
 
 	private void notifyAboutChange(List<Exam> changed) {
-		boolean showGrade = this.getSharedPreferences().getBoolean(
-				this.getStringResource(R.string.preference_show_grade_in_notification), true);
 		boolean notifyAboutChange = this.getSharedPreferences().getBoolean(
 				this.getStringResource(R.string.preference_notify_about_change), true);
 		
@@ -300,23 +298,8 @@ public class RefreshTask extends AsyncTask<Void, Void, Exception> {
 		for(Exam e: changed) {
 			Intent intent = new Intent(this.getContext(), ExamActivity.class);
 			intent.putExtra(ExamActivity.ARG_EXAM, e);
-			String subtitle = null;
-			
-			if(showGrade) {
- 				if(e.getGrade() != null && e.getGrade().length() > 0) {
- 					subtitle = String.format("%s - %s", e.getGrade(), e.getStateName(this.getContext()));
-
- 				} else {
- 					subtitle = e.getStateName(this.getContext());
- 					
- 				}
-			} else {
-				subtitle = this.getStringResource(R.string.text_touch_to_show_grade);
-				
-			}
-			
+			String subtitle = this.getStringResource(R.string.text_touch_to_show_grade);
 			this.showNotification(e.getName(), subtitle, e.getId(), intent);
-
 
 		}
 	}

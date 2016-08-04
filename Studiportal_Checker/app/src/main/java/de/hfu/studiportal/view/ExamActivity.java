@@ -64,7 +64,7 @@ public class ExamActivity extends DialogHostActivity {
 				ad.setImageResource(R.drawable.add_01);
                 campain = "ad_01";
 
-			} else if(e.getGrade().startsWith("3") || e.getGrade().startsWith("4")) {
+			} else if(e.getGrade().startsWith("5")) {
 				ad.setImageResource(R.drawable.add_02);
                 campain = "ad_02";
 

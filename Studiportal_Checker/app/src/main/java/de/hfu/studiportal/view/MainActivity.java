@@ -283,7 +283,7 @@ public class MainActivity extends DialogHostActivity implements Refreshable, Ada
 
         } else if (v.getId() == R.id.adBanner) {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("https://play.google.com/store/apps/details?id=de.savedroid&hl=de&referrer=utm_source%3DStudiportal%26utm_medium%3DBanner%26utm_campaign%3Doverview"));
+            i.setData(Uri.parse("https://www.savedroid.de/?utm_source=mobil&utm_medium=application&utm_campaign=studiportal"));
             this.startActivity(i);
 
         }

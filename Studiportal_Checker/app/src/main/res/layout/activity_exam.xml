@@ -19,55 +19,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_activity_background"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/gap_default" >
 
-        <LinearLayout
+        <View
+            android:id="@+id/view1"
             android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/gap_default"
+            android:background="@color/color_main_style" />
+
+        <TextView
+            android:id="@+id/textGrade"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_above="@+id/imageViewAd"
+            android:layout_above="@+id/view1"
+            android:layout_centerHorizontal="true"
+            android:text="@string/text_placeholder"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view1"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/ic_be"
+            android:text="@string/text_placeholder"
             android:gravity="center"
-            android:layout_alignParentTop="true">
-
-            <TextView
-                android:id="@+id/textGrade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_placeholder"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="50sp"
-                android:textStyle="bold" />
-
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_centerVertical="true"
-                android:layout_margin="@dimen/gap_default"
-                android:background="@color/color_main_style" />
-
-            <TextView
-                android:id="@+id/textState"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_be"
-                android:text="@string/text_placeholder"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imageViewAd"
-            android:src="@drawable/add_01"
-            android:adjustViewBounds="true"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </RelativeLayout>
 </LinearLayout>
